@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<!-- Zoom permitido (WCAG 1.4.4) + respeta el notch del iPhone -->
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f6f6f3">
+<title>BYD Tlalnepantla | Autos eléctricos e híbridos</title>
+<meta name="description" content="Distribuidor autorizado BYD en Tlalnepantla, Edo. de México. Precios, autonomía y mensualidad calculada al momento. Dolphin, Yuan Plus, Seal, Song Pro y Shark.">
+<meta property="og:title" content="BYD Tlalnepantla | Autos eléctricos e híbridos">
+<meta property="og:description" content="Ve la mensualidad antes de dar tus datos.">
+<meta property="og:locale" content="es_MX">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AutoDealer",
+  "name": "BYD Tlalnepantla",
+  "description": "Distribuidor autorizado BYD en Tlalnepantla, Estado de México.",
+  "telephone": "+52-55-0000-0000",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Av. Sor Juana Inés de la Cruz",
+    "addressLocality": "Tlalnepantla de Baz",
+    "addressRegion": "Estado de México",
+    "addressCountry": "MX"
+  },
+  "brand": { "@type": "Brand", "name": "BYD" }
+}
+</script>
+
+<style>
+:root{
+  --tinta:#111820;
+  --papel:#f6f6f3;
+  --menta:#3de0ae;
+  --borde:rgba(17,24,32,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--papel);color:var(--tinta);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;
+  -webkit-font-smoothing:antialiased;line-height:1.5;
+}
+.wrap{max-width:1024px;margin:0 auto;padding:0 16px}
+.num{font-variant-numeric:tabular-nums}
+button,input{font:inherit;color:inherit}
+button{background:none;border:0;cursor:pointer}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--tinta);outline-offset:2px;border-radius:8px}
+
+/* ── Nav ── */
+nav{position:sticky;top:0;z-index:30;background:rgba(246,246,243,.92);
+    backdrop-filter:blur(12px);border-bottom:1px solid var(--borde)}
+.navrow{display:flex;align-items:center;justify-content:space-between;min-height:56px}
+.marca{font-size:13px;font-weight:600;letter-spacing:.14em}
+.navlinks{display:none;gap:24px;font-size:14px;color:rgba(17,24,32,.65)}
+.navmenu{display:block;padding:8px;margin-right:-8px;font-size:22px;line-height:1}
+.movil{display:none;border-top:1px solid var(--borde);padding:4px 16px}
+.movil.abierto{display:block}
+.movil a,.movil button{display:block;width:100%;text-align:left;padding:14px 0;font-size:16px}
+@media(min-width:640px){.navlinks{display:flex}.navmenu{display:none}.movil{display:none!important}}
+
+/* ── Hero ── */
+header{padding:56px 0 40px}
+.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.22em;
+         color:rgba(17,24,32,.4);margin-bottom:20px}
+h1{font-size:clamp(3rem,11vw,7rem);font-weight:600;letter-spacing:-.04em;
+   line-height:.9;margin-bottom:24px}
+h1 .tenue{color:rgba(17,24,32,.3)}
+.intro{color:rgba(17,24,32,.6);max-width:32rem;font-size:18px;line-height:1.6}
+
+/* ── Tarjetas ── */
+.grid2{display:grid;gap:12px}
+@media(min-width:640px){.grid2{grid-template-columns:1fr 1fr}}
+.card{background:#fff;border:1px solid var(--borde);border-radius:24px;padding:24px;
+      text-align:left;width:100%;transition:border-color .18s}
+.card:hover{border-color:rgba(17,24,32,.22)}
+.card-alto{display:flex;flex-direction:column}
+.label{font-size:11px;text-transform:uppercase;letter-spacing:.16em;
+       color:rgba(17,24,32,.4);margin-bottom:6px}
+.modelo{font-size:21px;font-weight:600;letter-spacing:-.02em;line-height:1.2}
+.modelo span{font-weight:400;color:rgba(17,24,32,.4)}
+.precio-row{display:flex;align-items:baseline;justify-content:space-between;margin-top:16px}
+.precio{font-weight:500}
+.desde{font-size:12px;color:rgba(17,24,32,.45)}
+
+/* ── Calculadora ── */
+.calc{background:var(--tinta);color:#fff;border-radius:24px;padding:26px}
+.calc h2{font-size:11px;text-transform:uppercase;letter-spacing:.2em;
+         color:rgba(255,255,255,.45);font-weight:400}
+.calc-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+.tasa{font-size:11px;color:rgba(255,255,255,.4)}
+.pago{display:flex;align-items:baseline;gap:8px;margin-bottom:28px}
+.pago b{font-size:clamp(2.75rem,9vw,3.75rem);font-weight:600;letter-spacing:-.03em}
+.pago i{font-style:normal;font-size:14px;color:rgba(255,255,255,.45)}
+.fila{display:flex;justify-content:space-between;font-size:14px;margin-bottom:10px}
+.fila .k{color:rgba(255,255,255,.65)}
+.fila .v{font-weight:500}
+.fila .v em{font-style:normal;color:rgba(255,255,255,.35)}
+input[type=range]{width:100%;height:6px;border-radius:99px;appearance:none;
+  -webkit-appearance:none;background:rgba(255,255,255,.15);accent-color:var(--menta)}
+.plazos{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:10px}
+.plazos button{min-height:46px;border-radius:12px;font-size:14px;
+  background:rgba(255,255,255,.1);color:rgba(255,255,255,.65);transition:background .15s}
+.plazos button:hover{background:rgba(255,255,255,.2)}
+.plazos button[aria-pressed=true]{background:var(--menta);color:var(--tinta);font-weight:600}
+.resumen{border-top:1px solid rgba(255,255,255,.1);padding-top:16px;margin-top:24px}
+.resumen .fila{color:rgba(255,255,255,.55);margin-bottom:6px}
+.cta-blanco{display:flex;align-items:center;justify-content:center;gap:8px;
+  min-height:50px;border-radius:12px;background:#fff;color:var(--tinta);
+  font-weight:500;margin-top:24px}
+.legal{font-size:11px;color:rgba(255,255,255,.3);margin-top:16px;line-height:1.5}
+
+/* ── Filtros ── */
+section{padding:56px 0}
+h2.titulo{font-size:clamp(1.75rem,5vw,2.25rem);font-weight:600;
+          letter-spacing:-.03em;margin-bottom:24px}
+.buscador{position:relative;margin-bottom:16px}
+.buscador input{width:100%;min-height:50px;padding:0 16px 0 44px;border-radius:16px;
+  border:1px solid rgba(17,24,32,.1);background:#fff;font-size:16px}
+.buscador svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);
+  color:rgba(17,24,32,.3)}
+.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:8px;margin:0 -16px 20px;
+  padding-left:16px;padding-right:16px;-webkit-overflow-scrolling:touch}
+.chips button{padding:0 16px;min-height:42px;border-radius:99px;font-size:14px;
+  white-space:nowrap;background:#fff;border:1px solid rgba(17,24,32,.1);
+  color:rgba(17,24,32,.7)}
+.chips button[aria-pressed=true]{background:var(--tinta);color:#fff;border-color:var(--tinta)}
+.slider-precio{display:block;margin-bottom:28px}
+.slider-precio .fila{color:rgba(17,24,32,.6)}
+.slider-precio input[type=range]{background:rgba(17,24,32,.1);accent-color:var(--tinta)}
+.conteo{font-size:14px;color:rgba(17,24,32,.45);margin-bottom:16px}
+.vacio{background:#fff;border:1px solid var(--borde);border-radius:24px;
+  padding:48px 24px;text-align:center}
+.vacio p{color:rgba(17,24,32,.6);font-size:14px;margin-bottom:16px}
+.vacio button{font-size:14px;font-weight:500;text-decoration:underline;text-underline-offset:4px}
+
+/* ── Ficha ── */
+.ficha{display:none}
+.ficha.activa{display:block}
+.barra-volver{position:sticky;top:0;z-index:20;background:rgba(246,246,243,.92);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--borde)}
+.barra-volver button{display:flex;align-items:center;gap:6px;min-height:52px;
+  padding:0 16px;font-size:14px}
+.ficha-wrap{max-width:768px;margin:0 auto;padding:0 16px 112px}
+.retrato{background:#fff;border:1px solid var(--borde);border-radius:24px;
+  padding:40px 24px;margin:16px 0 28px}
+.ficha h1{font-size:clamp(2.75rem,10vw,3.75rem);letter-spacing:-.035em;line-height:.92;margin-bottom:6px}
+.version{font-size:18px;color:rgba(17,24,32,.45)}
+.claim{color:rgba(17,24,32,.65);margin-top:16px;line-height:1.6}
+.precio-grande{font-size:24px;font-weight:500;margin-top:20px}
+.specs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:28px 0 16px}
+.spec{background:#fff;border:1px solid var(--borde);border-radius:16px;padding:16px}
+.spec .v{font-size:18px;font-weight:500;line-height:1.2;margin-top:12px}
+.spec .k{font-size:11px;color:rgba(17,24,32,.45);margin-top:4px}
+.carga{background:#fff;border:1px solid var(--borde);border-radius:16px;padding:16px;
+  display:flex;align-items:center;gap:12px;font-size:14px;
+  color:rgba(17,24,32,.65);margin-bottom:28px}
+.incluye{background:#fff;border:1px solid var(--borde);border-radius:24px;padding:24px;margin-top:28px}
+.incluye h2{font-size:14px;font-weight:500;margin-bottom:16px}
+.incluye li{display:flex;gap:10px;font-size:14px;color:rgba(17,24,32,.7);
+  margin-bottom:10px;list-style:none}
+.barra-fija{position:fixed;bottom:0;left:0;right:0;z-index:20;background:#fff;
+  border-top:1px solid rgba(17,24,32,.08);padding:12px 16px;
+  padding-bottom:calc(12px + env(safe-area-inset-bottom))}
+.barra-fija .inner{max-width:768px;margin:0 auto;display:flex;gap:8px}
+.btn-tel{display:flex;align-items:center;justify-content:center;padding:0 20px;
+  min-height:50px;border-radius:16px;border:1px solid rgba(17,24,32,.1)}
+.btn-principal{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;
+  min-height:50px;border-radius:16px;background:var(--tinta);color:#fff;font-weight:500}
+
+/* ── Sucursal y footer ── */
+.suc-card{background:#fff;border:1px solid var(--borde);border-radius:24px;
+  padding:24px;display:flex;flex-direction:column}
+.suc-card h2{font-size:18px;font-weight:600;letter-spacing:-.02em;margin:16px 0 8px}
+.suc-card p{font-size:14px;color:rgba(17,24,32,.6);line-height:1.6}
+.suc-dato{display:flex;gap:8px;align-items:flex-start;font-size:14px;
+  color:rgba(17,24,32,.6);margin-top:16px}
+.suc-link{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;
+  margin-top:20px;text-decoration:underline;text-underline-offset:4px}
+footer{border-top:1px solid var(--borde);padding:40px 0}
+footer p{font-size:12px;color:rgba(17,24,32,.4);line-height:1.6}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* ── Modal de agenda ── */
+.overlay{position:fixed;inset:0;z-index:50;background:rgba(17,24,32,.5);
+  backdrop-filter:blur(4px);display:none;align-items:flex-end;justify-content:center}
+.overlay.abierto{display:flex}
+@media(min-width:640px){.overlay{align-items:center}}
+.modal{background:var(--papel);width:100%;max-width:520px;max-height:92vh;max-height:92dvh;
+  overflow-y:auto;-webkit-overflow-scrolling:touch;border-radius:24px 24px 0 0;
+  padding-bottom:calc(24px + env(safe-area-inset-bottom))}
+@media(min-width:640px){.modal{border-radius:24px;padding-bottom:24px}}
+.modal-head{position:sticky;top:0;background:var(--papel);padding:20px 24px 12px;
+  display:flex;align-items:flex-start;justify-content:space-between;gap:16px;z-index:1}
+.modal-head h2{font-size:24px;font-weight:600;letter-spacing:-.02em;line-height:1.2}
+.modal-head p{font-size:14px;color:rgba(17,24,32,.55);margin-top:4px}
+.cerrar{font-size:22px;line-height:1;padding:6px;margin:-6px -6px 0 0;color:rgba(17,24,32,.45)}
+.modal-body{padding:0 24px}
+.campo{display:block;margin-bottom:18px}
+.campo > span{display:block;font-size:13px;color:rgba(17,24,32,.6);margin-bottom:7px}
+.campo input,.campo select,.campo textarea{width:100%;min-height:50px;padding:12px 14px;
+  border-radius:14px;border:1px solid rgba(17,24,32,.12);background:#fff;font-size:16px}
+.campo textarea{min-height:80px;resize:vertical;line-height:1.5}
+.campo input:invalid:not(:placeholder-shown){border-color:#c2453c}
+.horas{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.horas button{min-height:46px;border-radius:12px;font-size:14px;background:#fff;
+  border:1px solid rgba(17,24,32,.12);color:rgba(17,24,32,.75)}
+.horas button[aria-pressed=true]{background:var(--tinta);color:#fff;border-color:var(--tinta)}
+.horas button:disabled{opacity:.3;cursor:not-allowed}
+.aviso{font-size:13px;color:#8a4a1f;background:#fdf3e7;border:1px solid #f0dcc2;
+  border-radius:12px;padding:12px 14px;margin-bottom:18px;line-height:1.5}
+.error{font-size:13px;color:#c2453c;margin:-8px 0 16px}
+.modal-pie{padding:8px 24px 0;display:flex;flex-direction:column;gap:8px}
+.btn-secundario{display:flex;align-items:center;justify-content:center;gap:8px;
+  min-height:50px;border-radius:16px;border:1px solid rgba(17,24,32,.15);font-weight:500}
+.exito{padding:32px 24px;text-align:center}
+.exito .tick{width:56px;height:56px;border-radius:99px;background:var(--menta);
+  display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
+.exito h3{font-size:22px;font-weight:600;letter-spacing:-.02em;margin-bottom:8px}
+.exito p{font-size:14px;color:rgba(17,24,32,.6);line-height:1.6;margin-bottom:24px}
+.resumen-cita{background:#fff;border:1px solid var(--borde);border-radius:16px;
+  padding:16px;text-align:left;margin-bottom:24px}
+.resumen-cita div{display:flex;justify-content:space-between;font-size:14px;padding:6px 0}
+.resumen-cita .k{color:rgba(17,24,32,.5)}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ HOME ═══════════ -->
+<div id="home">
+  <nav>
+    <div class="wrap navrow">
+      <span class="marca">BYD TLALNEPANTLA</span>
+      <div class="navlinks">
+        <button onclick="irA('modelos')">Modelos</button>
+        <button onclick="irA('sucursal')">Sucursal</button>
+        <a href="tel:+525500000000" style="font-weight:500">55 0000 0000</a>
+      </div>
+      <button class="navmenu" onclick="toggleMenu()" aria-label="Menú" aria-expanded="false" id="btnMenu">☰</button>
+    </div>
+    <div class="movil" id="menuMovil">
+      <button onclick="irA('modelos')">Modelos</button>
+      <button onclick="irA('sucursal')">Sucursal</button>
+      <a href="tel:+525500000000" style="font-weight:500">55 0000 0000</a>
+    </div>
+  </nav>
+
+  <header class="wrap">
+    <div class="eyebrow">Distribuidor autorizado · Edo. de México</div>
+    <h1>Ve la mensualidad<br><span class="tenue">antes de dar tus datos.</span></h1>
+    <p class="intro">Precios, autonomía y pago mensual calculado al momento.
+       Cuando quieras hablar con un asesor, tú decides cuándo.</p>
+  </header>
+
+  <!-- Destacado + calculadora en vivo -->
+  <div class="wrap" style="padding-bottom:16px">
+    <div class="grid2">
+      <button class="card card-alto" onclick="abrirFicha(3)">
+        <div class="label">Más vendida</div>
+        <div style="font-size:28px;font-weight:600;letter-spacing:-.03em;line-height:1.15">Yuan Plus</div>
+        <p style="font-size:14px;color:rgba(17,24,32,.55);margin:8px 0 24px;line-height:1.6">
+          La SUV eléctrica que más se vende en México.</p>
+        <div style="margin-top:auto" id="siluetaHero"></div>
+      </button>
+      <div id="calcHero"></div>
+    </div>
+  </div>
+
+  <!-- Inventario -->
+  <section id="modelos" class="wrap" style="scroll-margin-top:64px">
+    <h2 class="titulo">Modelos disponibles</h2>
+
+    <div class="buscador">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <input id="q" type="search" placeholder="Buscar modelo" oninput="pintarLista()" aria-label="Buscar modelo">
+    </div>
+
+    <div class="chips" id="chips"></div>
+
+    <label class="slider-precio">
+      <span class="fila"><span>Precio hasta</span>
+        <span class="v num" id="lblPrecio">$1,000,000</span></span>
+      <input type="range" id="precioMax" min="300000" max="1000000" step="20000" value="1000000"
+             oninput="pintarLista()" aria-label="Precio máximo">
+    </label>
+
+    <div class="conteo num" id="conteo"></div>
+    <div class="grid2" id="lista"></div>
+  </section>
+
+  <!-- Sucursal -->
+  <section id="sucursal" class="wrap" style="padding-top:0;scroll-margin-top:64px">
+    <div class="grid2">
+      <div class="suc-card">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:rgba(17,24,32,.3)">
+          <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        <h2>BYD Tlalnepantla</h2>
+        <p>Av. Sor Juana Inés de la Cruz, Tlalnepantla de Baz, Edo. Méx.</p>
+        <div class="suc-dato">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:2px;color:rgba(17,24,32,.3)">
+            <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          Lun a Sáb 9:00–19:00 · Dom 11:00–16:00
+        </div>
+        <a class="suc-link" href="tel:+525500000000">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+          55 0000 0000
+        </a>
+      </div>
+
+      <div class="suc-card">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:rgba(17,24,32,.3)">
+          <path d="M14.7 6.3a4 4 0 0 0 5 5l-9.4 9.4a2.1 2.1 0 0 1-3-3Z"/></svg>
+        <h2>Taller de servicio</h2>
+        <p>Técnicos certificados por BYD y refacciones originales.
+           Agenda tu cita y te confirmamos el mismo día.</p>
+        <button class="btn-principal" style="margin-top:auto" onclick="abrirAgenda('servicio')">
+          Agendar cita de servicio</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <p style="margin-bottom:8px">BYD Tlalnepantla · Av. Sor Juana Inés de la Cruz, Tlalnepantla de Baz, Edo. Méx.</p>
+      <p>Precios en pesos mexicanos, sujetos a cambio sin previo aviso. Imágenes ilustrativas.</p>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════ FICHA ═══════════ -->
+<div id="ficha" class="ficha"></div>
+
+<!-- ═══════════ MODAL DE AGENDA ═══════════ -->
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="tituloAgenda">
+  <div class="modal" id="modal"></div>
+</div>
+
+<script>
+/* ═══════════ DATOS ═══════════
+   Para actualizar el catálogo, edita solo este arreglo. */
+const CATALOGO = [
+  {id:1,modelo:"Dolphin Mini",version:"GS",anio:2026,precio:358800,carroceria:"Hatchback",tipo:"BEV",
+   autonomia:380,bateria:38,potencia:95,ceroCien:10.9,carga:"30 min (30–80%)",color:"#7ED8C3",
+   claim:"El eléctrico más accesible del país."},
+  {id:2,modelo:"Dolphin",version:"GL",anio:2026,precio:469900,carroceria:"Hatchback",tipo:"BEV",
+   autonomia:427,bateria:44.9,potencia:174,ceroCien:7.0,carga:"29 min (30–80%)",color:"#93AEE0",
+   claim:"Cabina de sedán en tamaño de ciudad."},
+  {id:3,modelo:"Yuan Plus",version:"GS",anio:2026,precio:599900,carroceria:"SUV",tipo:"BEV",
+   autonomia:510,bateria:60.5,potencia:204,ceroCien:7.3,carga:"28 min (30–80%)",color:"#C6CBD2",
+   claim:"La SUV eléctrica que más se vende en México."},
+  {id:4,modelo:"Seal",version:"GS",anio:2026,precio:749900,carroceria:"Sedán",tipo:"BEV",
+   autonomia:570,bateria:82.5,potencia:313,ceroCien:5.9,carga:"26 min (30–80%)",color:"#27374F",
+   claim:"Tracción trasera y 570 km reales."},
+  {id:5,modelo:"Song Pro",version:"DM-i",anio:2026,precio:679900,carroceria:"SUV",tipo:"PHEV",
+   autonomia:1100,bateria:18.3,potencia:235,ceroCien:7.9,carga:"Enchufe casero 220V",color:"#B3C0A8",
+   claim:"1,100 km sin buscar cargador."},
+  {id:6,modelo:"Shark",version:"GL",anio:2026,precio:919900,carroceria:"Pickup",tipo:"PHEV",
+   autonomia:840,bateria:29.6,potencia:430,ceroCien:5.7,carga:"Enchufe casero 220V",color:"#454F5B",
+   claim:"430 hp y toma de corriente en la caja."},
+];
+
+const TEL = "525500000000";
+const TASA = 13.9;                       // % anual
+const PLAZOS = [24,36,48,60,72];
+const CARROCERIAS = ["Todos","Hatchback","Sedán","SUV","Pickup"];
+
+/* ═══════════ UTILIDADES ═══════════ */
+const mxn = n => new Intl.NumberFormat("es-MX",
+  {style:"currency",currency:"MXN",maximumFractionDigits:0}).format(n);
+
+/* Amortización francesa: la mensualidad real */
+function mensualidad(precio, enganche, tasaAnual, meses){
+  const P = precio - enganche;
+  if (P <= 0) return 0;
+  const i = tasaAnual / 12 / 100;
+  return i === 0 ? P/meses : (P*i)/(1 - Math.pow(1+i, -meses));
+}
+
+const wa = msg => `https://wa.me/${TEL}?text=${encodeURIComponent(msg)}`;
+
+/* Siluetas SVG: cero peso de imagen, cero foto de stock */
+const PERFILES = {
+  Hatchback:"M14 60 L24 42 Q30 32 46 31 L86 31 Q100 32 108 45 L134 51 Q146 54 146 63 L146 69 L14 69 Z",
+  "Sedán"  :"M10 60 L22 43 Q28 32 46 31 L94 31 Q110 32 120 45 L144 52 Q154 55 154 64 L154 69 L10 69 Z",
+  SUV      :"M12 58 L22 38 Q28 28 46 27 L98 27 Q114 28 124 41 L146 48 Q156 51 156 61 L156 69 L12 69 Z",
+  Pickup   :"M10 58 L20 38 Q26 28 44 27 L80 27 Q92 28 98 41 L98 49 L152 49 Q160 51 160 61 L160 69 L10 69 Z",
+};
+function silueta(v, ancho="100%"){
+  return `<svg viewBox="0 0 172 80" style="width:${ancho};max-width:240px;display:block"
+    role="img" aria-label="Perfil ${v.carroceria}">
+    <path d="${PERFILES[v.carroceria]}" fill="${v.color}"/>
+    <circle cx="46" cy="69" r="11" fill="#111820"/><circle cx="46" cy="69" r="4.5" fill="${v.color}"/>
+    <circle cx="126" cy="69" r="11" fill="#111820"/><circle cx="126" cy="69" r="4.5" fill="${v.color}"/>
+  </svg>`;
+}
+
+/* ═══════════ CALCULADORA ═══════════ */
+const estado = {}; // { [autoId]: {pct, meses} }
+
+function calcHTML(v, destino, compacta){
+  const st = estado[v.id] || (estado[v.id] = {pct:30, meses:48});
+  const enganche = Math.round(v.precio * st.pct / 100);
+  const pago = mensualidad(v.precio, enganche, TASA, st.meses);
+
+  return `<section class="calc">
+    <div class="calc-top">
+      <h2>Tu mensualidad</h2>
+      <span class="tasa num">${TASA}% anual</span>
+    </div>
+    <div class="pago"><b class="num">${mxn(pago)}</b><i>/ mes</i></div>
+
+    <label style="display:block;margin-bottom:24px">
+      <span class="fila"><span class="k">Enganche</span>
+        <span class="v num">${mxn(enganche)} <em>· ${st.pct}%</em></span></span>
+      <input type="range" min="10" max="60" step="5" value="${st.pct}"
+        aria-label="Porcentaje de enganche"
+        oninput="setPct(${v.id}, this.value, '${destino}', ${compacta})">
+    </label>
+
+    <div>
+      <div class="fila"><span class="k">Plazo en meses</span></div>
+      <div class="plazos">
+        ${PLAZOS.map(p => `<button aria-pressed="${st.meses===p}"
+          onclick="setMeses(${v.id}, ${p}, '${destino}', ${compacta})">${p}</button>`).join("")}
+      </div>
+    </div>
+
+    ${compacta ? "" : `<div class="resumen">
+      <div class="fila"><span>Monto a financiar</span><span class="num">${mxn(v.precio-enganche)}</span></div>
+      <div class="fila"><span>Costo total del crédito</span><span class="num">${mxn(pago*st.meses+enganche)}</span></div>
+    </div>`}
+
+    <a class="cta-blanco" href="${wa(`Hola, me interesa el ${v.modelo} ${v.version}. Vi una mensualidad de ${mxn(pago)} a ${st.meses} meses.`)}">
+      Mandar esta cotización</a>
+
+    <p class="legal">Cálculo informativo. La tasa final la define la institución
+       financiera según tu perfil crediticio.</p>
+  </section>`;
+}
+
+function repintarCalc(id, destino, compacta){
+  const v = CATALOGO.find(x => x.id === id);
+  document.getElementById(destino).innerHTML = calcHTML(v, destino, compacta);
+}
+function setPct(id, val, destino, compacta){
+  estado[id].pct = Number(val);
+  repintarCalc(id, destino, compacta);
+}
+function setMeses(id, val, destino, compacta){
+  estado[id].meses = Number(val);
+  repintarCalc(id, destino, compacta);
+}
+
+/* ═══════════ LISTA CON FILTROS ═══════════ */
+let carroceriaActiva = "Todos";
+
+function pintarChips(){
+  document.getElementById("chips").innerHTML = CARROCERIAS.map(c =>
+    `<button aria-pressed="${c===carroceriaActiva}" onclick="setCarroceria('${c}')">${c}</button>`
+  ).join("");
+}
+function setCarroceria(c){ carroceriaActiva = c; pintarChips(); pintarLista(); }
+
+function limpiarFiltros(){
+  carroceriaActiva = "Todos";
+  document.getElementById("q").value = "";
+  document.getElementById("precioMax").value = 1000000;
+  pintarChips(); pintarLista();
+}
+
+function pintarLista(){
+  const q = document.getElementById("q").value.trim().toLowerCase();
+  const max = Number(document.getElementById("precioMax").value);
+  document.getElementById("lblPrecio").textContent = mxn(max);
+
+  const res = CATALOGO.filter(v =>
+    (carroceriaActiva === "Todos" || v.carroceria === carroceriaActiva) &&
+    v.precio <= max &&
+    `${v.modelo} ${v.version}`.toLowerCase().includes(q)
+  );
+
+  document.getElementById("conteo").textContent =
+    `${res.length} ${res.length === 1 ? "modelo" : "modelos"}`;
+
+  document.getElementById("lista").innerHTML = res.length === 0
+    ? `<div class="vacio" style="grid-column:1/-1">
+         <p>Ningún modelo entra en ese rango.</p>
+         <button onclick="limpiarFiltros()">Quitar filtros</button></div>`
+    : res.map(v => `
+      <button class="card" onclick="abrirFicha(${v.id})">
+        ${silueta(v)}
+        <div class="label" style="margin-top:20px">
+          ${v.tipo === "BEV" ? "Eléctrico" : "Híbrido"} · ${v.autonomia} km</div>
+        <div class="modelo">${v.modelo} <span>${v.version}</span></div>
+        <div class="precio-row">
+          <span class="precio num">${mxn(v.precio)}</span>
+          <span class="desde num">desde ${mxn(mensualidad(v.precio, v.precio*0.3, TASA, 72))}/mes ›</span>
+        </div>
+      </button>`).join("");
+}
+
+/* ═══════════ FICHA ═══════════ */
+function abrirFicha(id){
+  const v = CATALOGO.find(x => x.id === id);
+  const ic = 'width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:rgba(17,24,32,.3)"';
+
+  document.getElementById("ficha").innerHTML = `
+    <div class="barra-volver">
+      <button onclick="cerrarFicha()">‹ Todos los modelos</button>
+    </div>
+    <div class="ficha-wrap">
+      <div class="retrato">${silueta(v, "100%")}</div>
+
+      <div class="eyebrow" style="margin-bottom:8px">
+        ${v.tipo === "BEV" ? "100% eléctrico" : "Híbrido enchufable"} · ${v.anio}</div>
+      <h1>${v.modelo}</h1>
+      <div class="version">${v.version}</div>
+      <p class="claim">${v.claim}</p>
+      <div class="precio-grande num">${mxn(v.precio)}</div>
+
+      <div class="specs">
+        <div class="spec"><svg ${ic}><path d="M15 7h1a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-1"/><path d="M6 7H3v10h3"/><path d="M6 7h9v10H6z"/></svg>
+          <div class="v num">${v.autonomia} km</div>
+          <div class="k">${v.tipo === "BEV" ? "Autonomía" : "Autonomía combinada"}</div></div>
+        <div class="spec"><svg ${ic}><path d="M13 2 4.1 12.8a1 1 0 0 0 .8 1.6H11l-1 7.6 8.9-10.8a1 1 0 0 0-.8-1.6H12Z"/></svg>
+          <div class="v num">${v.potencia} hp</div><div class="k">Potencia</div></div>
+        <div class="spec"><svg ${ic}><path d="m12 14 4-4"/><path d="M3.3 17a9 9 0 1 1 17.4 0"/></svg>
+          <div class="v num">${v.ceroCien} s</div><div class="k">0 a 100 km/h</div></div>
+      </div>
+
+      <div class="carga">
+        <svg ${ic} style="flex-shrink:0"><path d="M15 7h1a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-1"/><path d="M6 7H3v10h3"/><path d="M6 7h9v10H6z"/></svg>
+        Carga rápida: <span style="color:var(--tinta)">${v.carga}</span>
+      </div>
+
+      <div id="calcFicha"></div>
+
+      <div class="incluye">
+        <h2>Cada unidad incluye</h2>
+        <ul>
+          ${["Garantía de 6 años o 150,000 km",
+             "Batería Blade con garantía de 8 años",
+             "Cargador de pared con instalación",
+             "Primeros 3 servicios sin costo"].map(t =>
+            `<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" style="flex-shrink:0;margin-top:2px;color:rgba(17,24,32,.25)">
+               <path d="M20 6 9 17l-5-5"/></svg>${t}</li>`).join("")}
+        </ul>
+      </div>
+    </div>
+
+    <div class="barra-fija">
+      <div class="inner">
+        <a class="btn-tel" href="tel:+${TEL}" aria-label="Llamar a la sucursal">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+        </a>
+        <button class="btn-principal" onclick="abrirAgenda('manejo', ${v.id})">
+          Agendar prueba de manejo</button>
+      </div>
+    </div>`;
+
+  document.getElementById("calcFicha").innerHTML = calcHTML(v, "calcFicha", false);
+  document.getElementById("home").style.display = "none";
+  document.getElementById("ficha").classList.add("activa");
+  window.scrollTo(0, 0);
+  history.pushState({ficha: id}, "", "#" + v.modelo.toLowerCase().replace(/ /g, "-"));
+}
+
+function cerrarFicha(){
+  document.getElementById("ficha").classList.remove("activa");
+  document.getElementById("home").style.display = "block";
+  history.pushState({}, "", location.pathname);
+}
+
+/* El botón "atrás" del iPhone cierra la ficha */
+window.addEventListener("popstate", e => {
+  if (e.state && e.state.ficha) abrirFicha(e.state.ficha);
+  else {
+    document.getElementById("ficha").classList.remove("activa");
+    document.getElementById("home").style.display = "block";
+  }
+});
+
+/* ═══════════ NAV ═══════════ */
+function toggleMenu(){
+  const m = document.getElementById("menuMovil");
+  const b = document.getElementById("btnMenu");
+  const abierto = m.classList.toggle("abierto");
+  b.setAttribute("aria-expanded", abierto);
+  b.textContent = abierto ? "✕" : "☰";
+}
+function irA(id){
+  document.getElementById("menuMovil").classList.remove("abierto");
+  document.getElementById("btnMenu").textContent = "☰";
+  document.getElementById(id).scrollIntoView({behavior:"smooth"});
+}
+
+/* ═══════════════════════════════════════════════════════
+   AGENDA DE CITAS
+
+   Sin servidor no hay reserva real: dos personas pueden pedir
+   la misma hora y el sitio no lo sabe. Lo que sí hace:
+   valida el horario de la agencia, arma el .ics para el
+   calendario del cliente y manda la cita estructurada al asesor.
+
+   Cuando quieras reserva de verdad, lo único que cambia es
+   enviarSolicitud(): en vez de abrir WhatsApp, haces un POST
+   a tu endpoint y ahí validas disponibilidad contra la base.
+   ═══════════════════════════════════════════════════════ */
+
+const HORARIO = {
+  1:[9,19], 2:[9,19], 3:[9,19], 4:[9,19], 5:[9,19], 6:[9,19], // Lun–Sáb
+  0:[11,16],                                                   // Domingo
+};
+const DURACION_MIN = { manejo: 45, servicio: 60 };
+
+let cita = { tipo:"manejo", modeloId:3, fecha:"", hora:"", nombre:"", tel:"", notas:"" };
+
+const fechaMin = () => {
+  const d = new Date(); d.setDate(d.getDate() + 1);
+  return d.toISOString().slice(0,10);
+};
+const fechaMax = () => {
+  const d = new Date(); d.setDate(d.getDate() + 60);
+  return d.toISOString().slice(0,10);
+};
+
+/* Parseo local: "2026-08-03" no debe caer al día anterior por UTC */
+function aFechaLocal(iso, h = 0, m = 0){
+  const [a,me,d] = iso.split("-").map(Number);
+  return new Date(a, me-1, d, h, m);
+}
+
+function horasDisponibles(iso){
+  if (!iso) return [];
+  const dia = aFechaLocal(iso).getDay();
+  const rango = HORARIO[dia];
+  if (!rango) return [];
+  const [abre, cierra] = rango;
+  const slots = [];
+  for (let h = abre; h < cierra; h++){
+    slots.push(`${String(h).padStart(2,"0")}:00`);
+    if (h + 0.5 < cierra) slots.push(`${String(h).padStart(2,"0")}:30`);
+  }
+  return slots;
+}
+
+const NOMBRE_DIA = ["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
+function fechaLegible(iso){
+  const d = aFechaLocal(iso);
+  return `${NOMBRE_DIA[d.getDay()]} ${d.getDate()} de ` +
+    d.toLocaleDateString("es-MX", {month:"long"});
+}
+
+function abrirAgenda(tipo, modeloId){
+  cita = { tipo, modeloId: modeloId ?? 3, fecha:"", hora:"", nombre:"", tel:"", notas:"" };
+  document.getElementById("overlay").classList.add("abierto");
+  document.body.style.overflow = "hidden";
+  pintarAgenda();
+}
+
+function cerrarAgenda(){
+  document.getElementById("overlay").classList.remove("abierto");
+  document.body.style.overflow = "";
+}
+
+function setCampo(k, val){
+  cita[k] = val;
+  if (k === "fecha"){ cita.hora = ""; pintarAgenda(); }
+}
+function setHora(h){ cita.hora = h; pintarAgenda(); }
+
+function pintarAgenda(){
+  const esManejo = cita.tipo === "manejo";
+  const slots = horasDisponibles(cita.fecha);
+  const dia = cita.fecha ? aFechaLocal(cita.fecha).getDay() : null;
+
+  document.getElementById("modal").innerHTML = `
+    <div class="modal-head">
+      <div>
+        <h2 id="tituloAgenda">${esManejo ? "Prueba de manejo" : "Cita de servicio"}</h2>
+        <p>${esManejo ? "45 minutos, sin costo." : "Te confirmamos el mismo día."}</p>
+      </div>
+      <button class="cerrar" onclick="cerrarAgenda()" aria-label="Cerrar">✕</button>
+    </div>
+
+    <div class="modal-body">
+      ${esManejo ? `
+      <label class="campo"><span>Modelo</span>
+        <select onchange="setCampo('modeloId', Number(this.value))">
+          ${CATALOGO.map(v => `<option value="${v.id}" ${v.id===cita.modeloId?"selected":""}>
+            ${v.modelo} ${v.version}</option>`).join("")}
+        </select>
+      </label>` : ""}
+
+      <label class="campo"><span>Fecha</span>
+        <input type="date" min="${fechaMin()}" max="${fechaMax()}" value="${cita.fecha}"
+          onchange="setCampo('fecha', this.value)">
+      </label>
+
+      ${cita.fecha ? (slots.length === 0
+        ? `<div class="aviso">La agencia no abre ese día. Elige otra fecha.</div>`
+        : `<div class="campo">
+             <span>Hora ${dia === 0 ? "· domingo, 11:00 a 16:00" : "· 9:00 a 19:00"}</span>
+             <div class="horas">
+               ${slots.map(h => `<button aria-pressed="${cita.hora===h}"
+                 onclick="setHora('${h}')">${h}</button>`).join("")}
+             </div>
+           </div>`) : ""}
+
+      <label class="campo"><span>Nombre</span>
+        <input type="text" placeholder="Tu nombre" value="${cita.nombre}"
+          oninput="cita.nombre = this.value" autocomplete="name">
+      </label>
+
+      <label class="campo"><span>Teléfono</span>
+        <input type="tel" inputmode="tel" placeholder="55 1234 5678" value="${cita.tel}"
+          oninput="cita.tel = this.value" autocomplete="tel">
+      </label>
+
+      <label class="campo"><span>Algo que debamos saber (opcional)</span>
+        <textarea placeholder="${esManejo
+          ? 'Ej. me interesa comparar con el Dolphin'
+          : 'Ej. servicio de 10,000 km, ruido en la suspensión'}"
+          oninput="cita.notas = this.value">${cita.notas}</textarea>
+      </label>
+
+      <div class="error" id="errorAgenda"></div>
+    </div>
+
+    <div class="modal-pie">
+      <button class="btn-principal" onclick="enviarSolicitud()">Solicitar esta cita</button>
+      <button class="btn-secundario" onclick="cerrarAgenda()">Cancelar</button>
+    </div>`;
+}
+
+function validar(){
+  if (!cita.fecha) return "Elige una fecha.";
+  if (horasDisponibles(cita.fecha).length === 0) return "La agencia no abre ese día.";
+  if (!cita.hora) return "Elige una hora.";
+  if (cita.nombre.trim().length < 3) return "Escribe tu nombre.";
+  if (cita.tel.replace(/\D/g,"").length < 10) return "El teléfono necesita 10 dígitos.";
+  return null;
+}
+
+/* Genera el .ics que el cliente agrega a su calendario */
+function descargarICS(){
+  const v = CATALOGO.find(x => x.id === cita.modeloId);
+  const esManejo = cita.tipo === "manejo";
+  const [h,m] = cita.hora.split(":").map(Number);
+  const ini = aFechaLocal(cita.fecha, h, m);
+  const fin = new Date(ini.getTime() + DURACION_MIN[cita.tipo] * 60000);
+
+  const z = n => String(n).padStart(2,"0");
+  const fmt = d => `${d.getFullYear()}${z(d.getMonth()+1)}${z(d.getDate())}T${z(d.getHours())}${z(d.getMinutes())}00`;
+
+  const titulo = esManejo
+    ? `Prueba de manejo ${v.modelo} — BYD Tlalnepantla`
+    : `Cita de servicio — BYD Tlalnepantla`;
+
+  const ics = [
+    "BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//BYD Tlalnepantla//ES","CALSCALE:GREGORIAN",
+    "BEGIN:VEVENT",
+    `UID:${Date.now()}@bydtlalnepantla.com.mx`,
+    `DTSTAMP:${fmt(new Date())}`,
+    `DTSTART;TZID=America/Mexico_City:${fmt(ini)}`,
+    `DTEND;TZID=America/Mexico_City:${fmt(fin)}`,
+    `SUMMARY:${titulo}`,
+    "LOCATION:Av. Sor Juana Inés de la Cruz\\, Tlalnepantla de Baz\\, Edo. Méx.",
+    `DESCRIPTION:A nombre de ${cita.nombre}. Tel ${cita.tel}.${cita.notas ? " " + cita.notas.replace(/\n/g," ") : ""}`,
+    "BEGIN:VALARM","TRIGGER:-PT2H","ACTION:DISPLAY","DESCRIPTION:Tu cita en BYD Tlalnepantla","END:VALARM",
+    "END:VEVENT","END:VCALENDAR",
+  ].join("\r\n");
+
+  const url = URL.createObjectURL(new Blob([ics], {type:"text/calendar;charset=utf-8"}));
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = esManejo ? "prueba-de-manejo-byd.ics" : "cita-servicio-byd.ics";
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+function enviarSolicitud(){
+  const err = validar();
+  if (err){
+    document.getElementById("errorAgenda").textContent = err;
+    return;
+  }
+
+  const v = CATALOGO.find(x => x.id === cita.modeloId);
+  const esManejo = cita.tipo === "manejo";
+
+  /* ── Aquí va tu backend cuando lo tengas ──
+     await fetch("/api/citas", {
+       method:"POST",
+       headers:{"Content-Type":"application/json"},
+       body: JSON.stringify(cita)
+     });
+     El endpoint valida disponibilidad y confirma de verdad.  */
+
+  const msg = [
+    esManejo ? "Solicitud de prueba de manejo" : "Solicitud de cita de servicio",
+    "",
+    esManejo ? `Modelo: ${v.modelo} ${v.version}` : null,
+    `Fecha: ${fechaLegible(cita.fecha)}`,
+    `Hora: ${cita.hora}`,
+    `Nombre: ${cita.nombre}`,
+    `Teléfono: ${cita.tel}`,
+    cita.notas ? `Notas: ${cita.notas}` : null,
+  ].filter(Boolean).join("\n");
+
+  document.getElementById("modal").innerHTML = `
+    <div class="exito">
+      <div class="tick">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#111820" stroke-width="2.5">
+          <path d="M20 6 9 17l-5-5"/></svg>
+      </div>
+      <h3>Cita solicitada</h3>
+      <p>Un asesor te confirma por WhatsApp. Mientras tanto, guárdala en tu calendario.</p>
+
+      <div class="resumen-cita">
+        ${esManejo ? `<div><span class="k">Modelo</span><span>${v.modelo} ${v.version}</span></div>` : ""}
+        <div><span class="k">Fecha</span><span>${fechaLegible(cita.fecha)}</span></div>
+        <div><span class="k">Hora</span><span class="num">${cita.hora}</span></div>
+        <div><span class="k">A nombre de</span><span>${cita.nombre}</span></div>
+      </div>
+
+      <div class="modal-pie" style="padding:0">
+        <a class="btn-principal" href="${wa(msg)}">Mandar al asesor por WhatsApp</a>
+        <button class="btn-secundario" onclick="descargarICS()">Agregar a mi calendario</button>
+        <button class="btn-secundario" style="border:0" onclick="cerrarAgenda()">Cerrar</button>
+      </div>
+    </div>`;
+}
+
+/* Cerrar con Escape o tocando fuera */
+document.getElementById("overlay").addEventListener("click", e => {
+  if (e.target.id === "overlay") cerrarAgenda();
+});
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") cerrarAgenda();
+});
+
+/* ═══════════ ARRANQUE ═══════════ */
+const destacado = CATALOGO.find(v => v.id === 3);
+document.getElementById("siluetaHero").innerHTML = silueta(destacado, "100%");
+document.getElementById("calcHero").innerHTML = calcHTML(destacado, "calcHero", true);
+pintarChips();
+pintarLista();
+</script>
+</body>
+</html>

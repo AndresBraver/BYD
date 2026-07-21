@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f6f3">
+<title>Grupo Automundo | Tradición del buen servicio</title>
+<meta name="description" content="Grupo Automundo: 6 décadas de trayectoria. Jeep, Dodge, RAM, Fiat, Peugeot, Alfa Romeo, Mitsubishi y BYD. Agencias en Interlomas, Vallejo, Atizapán y Pachuca.">
+<meta property="og:title" content="Grupo Automundo | Tradición del buen servicio">
+<meta property="og:description" content="6 décadas de trayectoria. 8 marcas, agencias en CDMX, Edo. de México e Hidalgo.">
+<meta property="og:locale" content="es_MX">
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org","@type":"AutoDealer",
+  "name":"BYD Automundo Atizapán",
+  "parentOrganization":{"@type":"Organization","name":"Grupo Automundo"},
+  "address":{"@type":"PostalAddress",
+    "streetAddress":"Av. Adolfo Ruiz Cortines 225, Col. Las Margaritas",
+    "addressLocality":"Ciudad López Mateos, Atizapán de Zaragoza",
+    "addressRegion":"Estado de México","postalCode":"52977","addressCountry":"MX"},
+  "telephone":"+52-55-9724-9599",
+  "brand":{"@type":"Brand","name":"BYD"}
+}
+</script>
+
+<style>
+:root{
+  --tinta:#14181d; --papel:#f7f6f3; --acento:#c8102e; --menta:#3dd6a5;
+  --borde:rgba(20,24,29,.09); --suave:rgba(20,24,29,.55);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{background:var(--papel);color:var(--tinta);line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:1100px;margin:0 auto;padding:0 16px}
+.num{font-variant-numeric:tabular-nums}
+button,input,select,textarea{font:inherit;color:inherit}
+button{background:none;border:0;cursor:pointer}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--tinta);outline-offset:2px;border-radius:8px}
+section{padding:64px 0;scroll-margin-top:60px}
+h2.tit{font-size:clamp(1.8rem,5vw,2.6rem);font-weight:650;letter-spacing:-.035em;margin-bottom:8px}
+.sub{color:var(--suave);max-width:44rem;margin-bottom:32px}
+.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.22em;color:rgba(20,24,29,.4);margin-bottom:14px}
+
+/* Nav */
+nav{position:sticky;top:0;z-index:40;background:rgba(247,246,243,.93);
+  backdrop-filter:blur(14px);border-bottom:1px solid var(--borde)}
+.navrow{display:flex;align-items:center;justify-content:space-between;min-height:58px}
+.marca{font-size:13px;font-weight:700;letter-spacing:.16em}
+.navlinks{display:none;gap:22px;font-size:14px;color:var(--suave)}
+.navlinks button:hover{color:var(--tinta)}
+.burger{display:block;padding:10px;margin-right:-10px;font-size:20px;line-height:1}
+.movil{display:none;border-top:1px solid var(--borde);padding:4px 16px 10px}
+.movil.on{display:block}
+.movil button{display:block;width:100%;text-align:left;padding:13px 0;font-size:16px}
+@media(min-width:900px){.navlinks{display:flex}.burger{display:none}.movil{display:none!important}}
+
+/* Hero */
+header.hero{padding:64px 0 44px}
+h1{font-size:clamp(2.8rem,9vw,5.6rem);font-weight:680;letter-spacing:-.045em;line-height:.94;margin-bottom:20px}
+h1 .fade{color:rgba(20,24,29,.3)}
+.lead{font-size:clamp(1rem,2.4vw,1.2rem);color:var(--suave);max-width:38rem}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:40px;max-width:600px}
+.stat b{display:block;font-size:clamp(1.6rem,5vw,2.4rem);font-weight:650;letter-spacing:-.03em}
+.stat span{font-size:12px;color:var(--suave)}
+
+/* Cards */
+.grid{display:grid;gap:12px}
+.g2{grid-template-columns:1fr}
+.g3{grid-template-columns:1fr}
+@media(min-width:640px){.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:900px){.g3{grid-template-columns:repeat(3,1fr)}}
+.card{background:#fff;border:1px solid var(--borde);border-radius:22px;padding:24px;
+  text-align:left;width:100%;display:flex;flex-direction:column;transition:border-color .18s,transform .18s}
+.card:hover{border-color:rgba(20,24,29,.25)}
+a.card:hover,button.card:hover{transform:translateY(-2px)}
+.chip{display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  padding:5px 10px;border-radius:99px;background:rgba(20,24,29,.06);color:var(--suave);margin-bottom:12px;align-self:flex-start}
+.chip.rojo{background:rgba(200,16,46,.1);color:var(--acento)}
+.card h3{font-size:20px;font-weight:640;letter-spacing:-.02em;line-height:1.25}
+.card p{font-size:14px;color:var(--suave);margin-top:8px}
+.meta{font-size:13px;color:var(--suave);margin-top:14px;display:flex;flex-direction:column;gap:5px}
+.meta span{display:flex;gap:8px;align-items:flex-start}
+.ir{margin-top:auto;padding-top:18px;font-size:14px;font-weight:560;display:flex;align-items:center;gap:5px}
+
+/* Botones */
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:50px;
+  border-radius:15px;font-weight:560;padding:0 20px}
+.btn-p{background:var(--tinta);color:#fff}
+.btn-s{border:1px solid rgba(20,24,29,.16)}
+.btn-row{display:flex;flex-direction:column;gap:8px;margin-top:18px}
+@media(min-width:520px){.btn-row{flex-direction:row}.btn-row .btn{flex:1}}
+
+/* Historia */
+.valores{display:grid;gap:10px;grid-template-columns:1fr;margin-top:28px}
+@media(min-width:640px){.valores{grid-template-columns:repeat(3,1fr)}}
+.valor{background:#fff;border:1px solid var(--borde);border-radius:16px;padding:18px}
+.valor b{font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+.valor p{font-size:13px;color:var(--suave);margin-top:6px}
+.cita{border-left:3px solid var(--acento);padding-left:18px;margin:28px 0;
+  font-size:clamp(1.1rem,3vw,1.4rem);letter-spacing:-.02em;line-height:1.45}
+
+/* Modelos */
+.filtros{display:flex;gap:6px;overflow-x:auto;padding-bottom:8px;margin:0 -16px 22px;padding-left:16px;padding-right:16px}
+.filtros button{padding:0 16px;min-height:42px;border-radius:99px;font-size:14px;white-space:nowrap;
+  background:#fff;border:1px solid var(--borde);color:var(--suave)}
+.filtros button[aria-pressed=true]{background:var(--tinta);color:#fff;border-color:var(--tinta)}
+.specs{display:flex;gap:14px;flex-wrap:wrap;margin-top:14px;font-size:12px;color:var(--suave)}
+.specs b{display:block;font-size:15px;color:var(--tinta);font-weight:560}
+
+/* Promos */
+.promo{background:var(--tinta);color:#fff;border-radius:22px;padding:24px;display:flex;flex-direction:column}
+.promo .bono{font-size:clamp(1.8rem,6vw,2.6rem);font-weight:650;letter-spacing:-.03em;margin:6px 0}
+.promo .cond{font-size:13px;color:rgba(255,255,255,.6);margin-top:auto;padding-top:16px}
+.promo .vig{font-size:11px;color:rgba(255,255,255,.4);margin-top:8px}
+.aviso{background:#fdf4e3;border:1px solid #f0dcbb;color:#7a4d12;border-radius:14px;
+  padding:14px 16px;font-size:13px;line-height:1.55;margin-bottom:24px}
+
+/* Modal */
+.ov{position:fixed;inset:0;z-index:60;background:rgba(20,24,29,.55);backdrop-filter:blur(4px);
+  display:none;align-items:flex-end;justify-content:center}
+.ov.on{display:flex}
+@media(min-width:640px){.ov{align-items:center}}
+.modal{background:var(--papel);width:100%;max-width:540px;max-height:92dvh;overflow-y:auto;
+  border-radius:22px 22px 0 0;padding-bottom:calc(24px + env(safe-area-inset-bottom))}
+@media(min-width:640px){.modal{border-radius:22px;padding-bottom:24px}}
+.mhead{position:sticky;top:0;background:var(--papel);padding:20px 24px 12px;
+  display:flex;justify-content:space-between;gap:16px;z-index:1;border-bottom:1px solid var(--borde)}
+.mhead h3{font-size:22px;font-weight:640;letter-spacing:-.02em}
+.mhead p{font-size:13px;color:var(--suave);margin-top:3px}
+.x{font-size:22px;line-height:1;padding:6px;margin:-6px -6px 0 0;color:var(--suave)}
+.mbody{padding:20px 24px 0}
+.campo{display:block;margin-bottom:16px}
+.campo>span{display:block;font-size:13px;color:var(--suave);margin-bottom:7px}
+.campo input,.campo select,.campo textarea{width:100%;min-height:50px;padding:12px 14px;
+  border-radius:14px;border:1px solid rgba(20,24,29,.13);background:#fff;font-size:16px}
+.campo textarea{min-height:88px;resize:vertical}
+.horas{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.horas button{min-height:46px;border-radius:12px;font-size:14px;background:#fff;
+  border:1px solid rgba(20,24,29,.13)}
+.horas button[aria-pressed=true]{background:var(--tinta);color:#fff;border-color:var(--tinta)}
+.horas button:disabled{opacity:.32;cursor:not-allowed;text-decoration:line-through}
+.err{font-size:13px;color:var(--acento);margin:-6px 0 14px;min-height:18px}
+.mpie{padding:6px 24px 0;display:flex;flex-direction:column;gap:8px}
+.exito{padding:32px 24px;text-align:center}
+.tick{width:56px;height:56px;border-radius:99px;background:var(--menta);display:flex;
+  align-items:center;justify-content:center;margin:0 auto 18px;font-size:26px}
+.resumen{background:#fff;border:1px solid var(--borde);border-radius:15px;padding:16px;
+  text-align:left;margin:20px 0}
+.resumen div{display:flex;justify-content:space-between;font-size:14px;padding:5px 0;gap:16px}
+.resumen .k{color:var(--suave);flex-shrink:0}
+
+footer{border-top:1px solid var(--borde);padding:44px 0 60px}
+footer p{font-size:12px;color:rgba(20,24,29,.45);line-height:1.7}
+footer a{text-decoration:underline;text-underline-offset:3px}
+.legal{margin-top:16px;font-size:11px;color:rgba(20,24,29,.38)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap navrow">
+    <span class="marca">GRUPO AUTOMUNDO</span>
+    <div class="navlinks">
+      <button onclick="ir('agencias')">Agencias</button>
+      <button onclick="ir('modelos')">Modelos</button>
+      <button onclick="ir('promos')">Promociones</button>
+      <button onclick="ir('lanzamientos')">Lanzamientos</button>
+      <button onclick="ir('seminuevos')">Seminuevos</button>
+      <button onclick="ir('historia')">Nosotros</button>
+      <button onclick="abrir('cita')" style="font-weight:600;color:var(--tinta)">Agendar</button>
+    </div>
+    <button class="burger" onclick="menu()" aria-label="Menú" aria-expanded="false" id="bg">☰</button>
+  </div>
+  <div class="movil" id="mm">
+    <button onclick="ir('agencias')">Agencias</button>
+    <button onclick="ir('modelos')">Modelos</button>
+    <button onclick="ir('promos')">Promociones</button>
+    <button onclick="ir('lanzamientos')">Lanzamientos</button>
+    <button onclick="ir('seminuevos')">Seminuevos</button>
+    <button onclick="ir('historia')">Nosotros</button>
+    <button onclick="abrir('cita')" style="font-weight:600">Agendar cita</button>
+  </div>
+</nav>
+
+<header class="hero wrap">
+  <div class="eyebrow">Tradición del buen servicio</div>
+  <h1>Seis décadas<br><span class="fade">moviendo México.</span></h1>
+  <p class="lead">Ocho marcas, agencias en la Ciudad de México, Estado de México e Hidalgo.
+     Autos nuevos, seminuevos, arrendamiento y talleres multimarca.</p>
+  <div class="stats">
+    <div class="stat"><b>6</b><span>décadas de trayectoria</span></div>
+    <div class="stat"><b>8</b><span>marcas representadas</span></div>
+    <div class="stat"><b>+400</b><span>unidades disponibles</span></div>
+  </div>
+  <div class="btn-row" style="max-width:520px">
+    <button class="btn btn-p" onclick="ir('agencias')">Ver todas las agencias</button>
+    <button class="btn btn-s" onclick="abrir('cita')">Agendar una cita</button>
+  </div>
+</header>
+
+<!-- AGENCIAS -->
+<section id="agencias" class="wrap">
+  <div class="eyebrow">Dónde estamos</div>
+  <h2 class="tit">Todas nuestras agencias</h2>
+  <p class="sub">Cada agencia con su propio sitio, inventario y taller. Toca una para ir a su página.</p>
+  <div class="grid g3" id="listaAgencias"></div>
+
+  <h3 style="font-size:18px;font-weight:620;margin:40px 0 14px;letter-spacing:-.02em">Otros servicios del grupo</h3>
+  <div class="grid g3" id="listaServicios"></div>
+</section>
+
+<!-- MODELOS BYD -->
+<section id="modelos" class="wrap" style="background:rgba(20,24,29,.02)">
+  <div class="eyebrow">Ocho marcas, un solo lugar</div>
+  <h2 class="tit">Todos nuestros modelos</h2>
+  <p class="sub">El catálogo completo de Grupo Automundo: BYD, Jeep, Dodge, RAM, Fiat, Peugeot,
+     Alfa Romeo y Mitsubishi. Filtra por marca o por tipo.</p>
+  <div class="filtros" id="filtros"></div>
+  <div class="filtros" id="filtros2" style="margin-bottom:16px"></div>
+  <div class="conteo num" id="conteoModelos"
+       style="font-size:14px;color:var(--suave);margin-bottom:16px"></div>
+  <div class="grid g3" id="listaModelos"></div>
+  <p class="legal" style="margin-top:24px">
+    Mitsubishi publica precios "Desde" por modelo. Las marcas Stellantis (Jeep, Dodge, RAM, Fiat,
+    Peugeot) y Alfa Romeo se cotizan directamente en agencia. Precios en pesos mexicanos, sujetos a
+    cambio sin previo aviso y a disponibilidad. Equipamiento y versiones varían; confirma con un asesor.
+  </p>
+</section>
+
+<!-- PROMOCIONES -->
+<section id="promos" class="wrap">
+  <div class="eyebrow">Financiamiento</div>
+  <h2 class="tit">Promociones vigentes</h2>
+  <p class="sub">Bonos, meses sin intereses y tasa preferencial con Banorte.</p>
+  <div class="aviso" id="avisoPromo"></div>
+  <div class="grid g3" id="listaPromos"></div>
+  <p class="legal" id="letrasChicas" style="margin-top:24px"></p>
+</section>
+
+<!-- LANZAMIENTOS -->
+<section id="lanzamientos" class="wrap" style="background:rgba(20,24,29,.02)">
+  <div class="eyebrow">Novedades</div>
+  <h2 class="tit">Lanzamientos</h2>
+  <p class="sub">Lo más reciente en piso.</p>
+  <div class="grid g3" id="listaLanzamientos"></div>
+</section>
+
+<!-- SEMINUEVOS -->
+<section id="seminuevos" class="wrap">
+  <div class="eyebrow">Seminuevos Grupo Automundo</div>
+  <h2 class="tit">Seminuevos con garantía</h2>
+  <p class="sub">Todas las unidades revisadas y respaldadas. Tres sucursales, inventario multimarca.</p>
+
+  <div class="grid g2" style="margin-bottom:12px">
+    <div class="card">
+      <h3>Cómo funciona</h3>
+      <div class="meta" style="margin-top:16px">
+        <span>▸ Enganche mínimo del <b>20%</b> del precio total</span>
+        <span>▸ Plazos de <b>24 hasta 72 meses</b></span>
+        <span>▸ Garantía de <b>3 meses</b>, ampliable hasta 1 año sin límite de kilometraje</span>
+        <span>▸ Apartado desde <b>$5,000 MXN</b> (una semana para formalizar)</span>
+        <span>▸ Aceptamos tu auto a cuenta · valuación sin costo</span>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn-p" href="https://seminuevosgrupoautomundo.com" target="_blank" rel="noopener">Ver inventario</a>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Requisitos de financiamiento</h3>
+      <div class="meta" style="margin-top:16px">
+        <span>▸ Identificación oficial vigente</span>
+        <span>▸ Comprobante de domicilio</span>
+        <span>▸ Estado de cuenta no mayor a 3 meses</span>
+      </div>
+      <p style="margin-top:16px">También hacemos pruebas de manejo de seminuevos. Se agendan por WhatsApp.</p>
+      <div class="btn-row">
+        <a class="btn btn-s" href="https://seminuevosgrupoautomundo.com/auto-a-cuenta" target="_blank" rel="noopener">Vende tu auto</a>
+      </div>
+    </div>
+  </div>
+  <div class="grid g3" id="listaSeminuevos"></div>
+</section>
+
+<!-- HISTORIA -->
+<section id="historia" class="wrap" style="background:rgba(20,24,29,.02)">
+  <div class="eyebrow">Nosotros</div>
+  <h2 class="tit">Nuestra historia</h2>
+  <p class="sub">Un grupo automotriz familiar con seis décadas de trayectoria en México.</p>
+
+  <blockquote class="cita">"Proporcionar la máxima satisfacción de nuestros clientes, basados en nuestro
+    lema: <b>Tradición del buen servicio</b>, superando todas las expectativas de comercialización
+    automotriz del mercado mexicano."</blockquote>
+  <p style="color:var(--suave);font-size:13px;margin-top:-14px">— Nuestra misión</p>
+
+  <div class="grid g2" style="margin-top:32px">
+    <div class="card">
+      <span class="chip">Visión</span>
+      <p style="font-size:15px;color:var(--tinta)">Convertirnos en el principal grupo comercializador
+        automotriz de México, en las marcas que representamos con prestigio y solidez; así mismo,
+        crecemos rentablemente siendo la mejor opción para nuestros colaboradores y clientes.</p>
+    </div>
+    <div class="card">
+      <span class="chip">Política de calidad</span>
+      <p style="font-size:15px;color:var(--tinta)">Estamos comprometidos en satisfacer los requerimientos
+        y necesidades de nuestros clientes internos y externos, a través de la experiencia de nuestros
+        asociados, buscando la mejora continua dentro de un ambiente de liderazgo, innovación y respeto.</p>
+    </div>
+  </div>
+
+  <h3 style="font-size:18px;font-weight:620;margin:36px 0 0;letter-spacing:-.02em">Nuestros valores</h3>
+  <div class="valores" id="listaValores"></div>
+
+  <h3 style="font-size:18px;font-weight:620;margin:36px 0 14px;letter-spacing:-.02em">Hitos</h3>
+  <div class="grid g3" id="listaHitos"></div>
+</section>
+
+<!-- CONTACTO / QUEJAS -->
+<section id="contacto" class="wrap">
+  <div class="eyebrow">Estamos para escucharte</div>
+  <h2 class="tit">Contacto, sugerencias y quejas</h2>
+  <p class="sub">Tu opinión mejora el servicio. Toda queja recibe folio y seguimiento.</p>
+  <div class="grid g3">
+    <button class="card" onclick="abrir('cita')">
+      <span class="chip rojo">Agendar</span>
+      <h3>Prueba de manejo o servicio</h3>
+      <p>Elige día y hora. Los horarios ya apartados no aparecen disponibles.</p>
+      <span class="ir">Agendar cita →</span>
+    </button>
+    <button class="card" onclick="abrir('queja')">
+      <span class="chip">Buzón</span>
+      <h3>Sugerencias y quejas</h3>
+      <p>Cuéntanos qué pasó. Generamos un folio para darle seguimiento.</p>
+      <span class="ir">Abrir buzón →</span>
+    </button>
+    <div class="card">
+      <span class="chip">Directo</span>
+      <h3>Habla con nosotros</h3>
+      <div class="meta" id="contactoDirecto"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><b>Grupo Automundo</b> · Paseo de la Herradura No. 422, Col. Interlomas,
+       Huixquilucan, Estado de México, C.P. 52760 · Tel. 55 3000 3400</p>
+    <p style="margin-top:10px">
+      <a href="https://www.grupoautomundo.net/general-4" target="_blank" rel="noopener">Aviso de privacidad</a> ·
+      <a href="https://www.grupoautomundo.net/bolsa-de-trabajo" target="_blank" rel="noopener">Bolsa de trabajo</a> ·
+      <a href="https://www.grupoautomundo.net" target="_blank" rel="noopener">Sitio corporativo</a>
+    </p>
+    <p class="legal">
+      Imágenes y siluetas de carácter ilustrativo; colores y equipamiento pueden variar según versión.
+      Precios y promociones en pesos mexicanos, sujetos a cambio sin previo aviso y a disponibilidad
+      de existencias. Autonomías y tiempos de carga son estimados bajo ciclo NEDC/WLTC y varían según
+      condiciones de uso. Las citas agendadas en este sitio son <b>solicitudes</b> y quedan sujetas a
+      confirmación de la agencia.
+    </p>
+  </div>
+</footer>
+
+<div class="ov" id="ov" role="dialog" aria-modal="true"><div class="modal" id="modal"></div></div>
+
+<script>
+/* ══════════════════════════════════════════════════════════════
+   CONFIGURACIÓN — edita solo estos bloques para actualizar el sitio
+   ══════════════════════════════════════════════════════════════ */
+
+/* Contacto principal de la agencia BYD.
+   Estos son los números oficiales publicados por la agencia.
+   Si quieres usar otro, cámbialo aquí y se actualiza en todo el sitio. */
+const CONTACTO = {
+  ventas:     "5597249599",
+  whatsapp:   "5550703901",
+  servicio:   "5534916916",
+  corporativo:"5530003400",
+};
+
+/* ── AGENCIAS DE AUTO NUEVO ── */
+const AGENCIAS = [
+  { nombre:"Automundo Interlomas", marcas:"Jeep · Dodge · RAM · Fiat · Peugeot · Alfa Romeo",
+    dir:"Paseo de la Herradura 422, Parques de la Herradura, C.P. 52760, Huixquilucan, Edo. Méx.",
+    tel:"5530003400", wa:"5545107198",
+    horario:"Ventas L-V 9:00–20:00 · Sáb 9:00–18:00 · Dom 10:00–18:00",
+    url:"https://www.interlomaschrysler.com.mx",
+    nota:"Primera agencia en Latinoamérica con el concepto Stellantis Brand House." },
+
+  { nombre:"Automundo Vallejo", marcas:"Jeep · Dodge · RAM · Fiat · Peugeot",
+    dir:"Calzada Vallejo 1059, Nueva Industrial Vallejo, C.P. 07720, Gustavo A. Madero, CDMX",
+    tel:"5530672300", wa:"5527282928",
+    horario:"Ventas L-V 9:00–18:00 · Sáb 9:00–14:00",
+    url:"https://www.automundo.com.mx",
+    nota:"Garantía de 2 años o 40,000 km defensa a defensa." },
+
+  { nombre:"Mitsubishi Interlomas", marcas:"Mitsubishi",
+    dir:"Paseo de la Herradura 422, Parques de la Herradura, C.P. 52760, Naucalpan, Edo. Méx.",
+    tel:"5530003400", wa:"5662143262",
+    horario:"L-V 9:00–18:00 · Sáb 9:00–14:00",
+    url:"https://www.mitsubishi-interlomas.mx",
+    nota:"Puntos de venta en Parque Tepeyac y Torres Lindavista." },
+
+  { nombre:"Mitsubishi Vallejo", marcas:"Mitsubishi",
+    dir:"Calzada Vallejo 1059, Industrial Vallejo, C.P. 07720, Gustavo A. Madero, CDMX",
+    tel:"5595506568", wa:"5662143262",
+    horario:"L-V 9:00–18:00 · Sáb 9:00–14:00",
+    url:"https://www.mitsubishi-vallejo.mx",
+    nota:"Abrió en mayo de 2026. Punto de venta en Centro Santa Fe." },
+
+  { nombre:"BYD Automundo Atizapán", marcas:"BYD · Eléctricos e híbridos", destacada:true,
+    dir:"Av. Adolfo Ruiz Cortines 225, Col. Las Margaritas, C.P. 52977, Cd. López Mateos, Edo. Méx.",
+    tel:"5597249599", wa:"5550703901",
+    horario:"L-Sáb 9:00–19:00 · Dom 11:00–18:00",
+    url:"https://www.bydatizapan.com",
+    nota:"Diez modelos eléctricos e híbridos enchufables en piso." },
+
+  { nombre:"BYD Automundo Pachuca", marcas:"BYD · Eléctricos e híbridos",
+    dir:"Blvd. Luis Donaldo Colosio, Industrial La Paz, C.P. 42186, Pachuca de Soto, Hidalgo",
+    tel:"5566756344", wa:"7713613708",
+    horario:"L-V 9:00–19:00 · Sáb 9:00–14:00",
+    url:"https://www.grupoautomundo.net/byd",
+    nota:"Puntos de venta en Galerías Pachuca y Plaza Explanada." },
+];
+
+/* ── OTROS SERVICIOS ── */
+const SERVICIOS_GRUPO = [
+  { nombre:"Seminuevos Grupo Automundo", marcas:"Multimarca · 3 sucursales",
+    dir:"Interlomas · Vallejo · Viaducto", tel:"5543297444",
+    url:"https://seminuevosgrupoautomundo.com",
+    nota:"Inventario de seminuevos con garantía y valuación gratuita." },
+  { nombre:"GA Soluciones", marcas:"Arrendamiento y leasing",
+    dir:"Paseo de la Herradura 422, Parques de la Herradura, C.P. 52786, Naucalpan, Edo. Méx.",
+    tel:"5544996196", url:"https://gasoluciones.mx",
+    nota:"Planes de arrendamiento a la medida, deducibles al 100%." },
+  { nombre:"Talleres Prepasa", marcas:"Servicio multimarca",
+    dir:"Jesús del Monte 271, Huixquilucan · Viaducto Miguel Alemán 55, Cuauhtémoc, CDMX",
+    tel:"5524525550", url:"https://www.grupoautomundo.net/talleres",
+    nota:"Mecánica, hojalatería y pintura de cualquier marca. Atienden flotillas." },
+];
+
+/* ── SUCURSALES DE SEMINUEVOS ── */
+const SEMINUEVOS = [
+  { nombre:"Seminuevos Interlomas", dir:"Paseo de la Herradura 422, Fracc. Interlomas, C.P. 52760, Huixquilucan, Edo. Méx.",
+    tel:"5530003430", horario:"8:00–19:30" },
+  { nombre:"Seminuevos Vallejo", dir:"Calzada Vallejo 1059, Nueva Industrial Vallejo, C.P. 07750, GAM, CDMX",
+    tel:"5530672300", horario:"8:00–20:10" },
+  { nombre:"Seminuevos Viaducto", dir:"Viaducto Miguel Alemán 55, Col. Buenos Aires, C.P. 06780, Cuauhtémoc, CDMX",
+    tel:"5530672300", horario:"8:00–20:00" },
+];
+
+/* ══════════════════════════════════════════════════════════════
+   CATÁLOGO POR MARCA
+
+   precio: número = precio "Desde" publicado por la agencia
+           null   = la agencia no publica precio (se cotiza)
+   Solo Mitsubishi publica precios. Stellantis usa cotizador.
+   Alfa Romeo muestra un precio de plantilla en su sitio que NO
+   es real por modelo, por eso va como cotización.
+   ══════════════════════════════════════════════════════════════ */
+const CATALOGO = [
+{ marca:"BYD", color:"#2B7A6F", sitio:"https://www.bydatizapan.com",
+  agencia:"BYD Automundo Atizapán", modelos:[
+  { n:"Dolphin Mini", carr:"Hatchback", motor:"Eléctrico", precio:null, tono:"#7ED8C3",
+    d:"Hatchback 100% eléctrico con diseño deportivo inspirado en la línea Ocean Series de Wolfgang Egger, con sistema operativo inteligente y conexión a Apple CarPlay y Android Auto.",
+    s:[["380 km","Autonomía NEDC"],["10.1\"","Pantalla giratoria"],["Blade","Batería"]], u:"/dolphin-mini" },
+  { n:"Yuan Pro", carr:"SUV", motor:"Eléctrico", precio:null, tono:"#A8C4A2",
+    d:"SUV 100% eléctrica más espaciosa que el promedio de su clase, con maletero de 1,210 litros y asientos abatibles, con capacidad para 5 pasajeros.",
+    s:[["380 km","Autonomía NEDC"],["7.9 s","0 a 100 km/h"],["12.8\"","Pantalla"]], u:"/yuan-pro" },
+  { n:"Seal", carr:"Sedán", motor:"Eléctrico", precio:null, tono:"#27374F",
+    d:"Una verdadera obra maestra del diseño inspirado en el océano, con un frente en forma de X que emana deportividad y estilo. Recibió el codiciado iF Design Award.",
+    s:[["520 km","Autonomía WLTC"],["3.8 s","0 a 100 km/h"],["CTB","Cell to Body"]], u:"/seal" },
+  { n:"Sealion 7", carr:"SUV", motor:"Eléctrico", precio:null, tono:"#5C6B7A",
+    d:"Redefine los estándares de diseño, tecnología y rendimiento. Combina un diseño aerodinámico y deportivo con tecnologías de vanguardia.",
+    s:[["456 km","Autonomía WLTC"],["4.5 s","0 a 100 km/h"],["215 km/h","Velocidad máx."]], u:"/sealion7" },
+  { n:"King", carr:"Sedán", motor:"Híbrido enchufable", precio:null, tono:"#B8A88F",
+    d:"Único sedán híbrido enchufable con modo de conducción 100% eléctrico. Formas geométricas poligonales y tiras cromadas tipo pancarta crean un estilo único.",
+    s:[["1,175 km","Autonomía NEDC"],["50 km","Modo eléctrico"],["3.9 L","Por 100 km"]], u:"/king" },
+  { n:"Song Pro", carr:"SUV", motor:"Híbrido enchufable", precio:null, tono:"#9AAFC4",
+    d:"El híbrido enchufable más accesible del mercado, la mejor opción SUV familiar grande de cinco plazas, con diseño inspirado en la forma de un dragón.",
+    s:[["1,001 km","Autonomía NEDC"],["71 km","Modo eléctrico"],["22.7 km/L","Rendimiento"]], u:"/song-pro" },
+  { n:"Song Plus", carr:"SUV", motor:"Híbrido enchufable", precio:null, tono:"#8E9E88",
+    d:"Déjate envolver por su galardonado diseño frontal Ocean Face X, que unifica elementos para crear una sensación de dinamismo y modernidad.",
+    s:[["1,105 km","Autonomía NEDC"],["5.1 L","Por 100 km"],["19\"","Rines"]], u:"/song-plus" },
+  { n:"Shark", carr:"Pickup", motor:"Híbrido enchufable", precio:null, tono:"#454F5B",
+    d:"Dirigido por el Director de Diseño Global de BYD, Wolfgang Egger, el diseño está inspirado en la agilidad y el dominio de los tiburones. Plataforma DMO 4x4.",
+    s:[["840 km","Autonomía NEDC"],["430 hp","Potencia"],["2,500 kg","Arrastre"]], u:"/shark" },
+  { n:"M9", carr:"Van", motor:"Híbrido enchufable", precio:null, tono:"#C3BDB2",
+    d:"Tecnología DMi en la van más inteligente. La rejilla tipo armadura se extiende en forma de V, transmitiendo poder y elegancia. Hasta 7 pasajeros.",
+    s:[["945 km","Autonomía NEDC"],["7","Pasajeros"],["2,036 L","Cajuela máx."]], u:"/m9" },
+  { n:"Atto 8", carr:"SUV", motor:"Híbrido enchufable", precio:null, tono:"#6E7B8B", nuevo:true,
+    d:"Tu viaje, tu voz, tu espacio. Primera SUV de BYD de más de 5 metros de largo, con nuevo diseño de cabina inteligente y 7 plazas.",
+    s:[["1,030 km","Autonomía NEDC"],["152 km","Modo eléctrico"],["4.9 s","0 a 100 km/h"]], u:"/atto8" },
+]},
+
+{ marca:"Jeep", color:"#3D5C3A", sitio:"https://www.interlomaschrysler.com.mx/jeep/",
+  agencia:"Automundo Interlomas y Vallejo", modelos:[
+  { n:"Renegade", carr:"SUV", motor:"Gasolina", precio:null, tono:"#6B8E5E", nuevo:true,
+    d:"La SUV subcompacta de Jeep, con la capacidad todoterreno de la marca en formato urbano.",
+    s:[["2026","Modelo"]], u:"showroom/jeep/renegade/2026/" },
+  { n:"Compass", carr:"SUV", motor:"Gasolina", precio:null, tono:"#5A7A52",
+    d:"Con capacidades incomparables.",
+    s:[["2025","Modelo"]], u:"showroom/jeep/compass/2025/" },
+  { n:"Cherokee", carr:"SUV", motor:"Gasolina", precio:null, tono:"#44603E", nuevo:true,
+    d:"Cherokee, SUV con estilo que perdura.",
+    s:[["2026","Modelo"]], u:"showroom/jeep/cherokee/2026/" },
+  { n:"Commander", carr:"SUV", motor:"Gasolina", precio:null, tono:"#7A8F6A",
+    d:"Otra dimensión para tu aventura. SUV de tres filas.",
+    s:[["2025","Modelo"],["3 filas","Asientos"]], u:"showroom/jeep/commander/2025/" },
+  { n:"Wrangler 4xe", carr:"SUV", motor:"Híbrido enchufable", precio:null, tono:"#39513A",
+    d:"El mejor híbrido enchufable para el off-road.",
+    s:[["2025","Modelo"],["4x4","Tracción"]], u:"showroom/jeep/wrangler-4xe/2025/" },
+  { n:"Grand Cherokee 4xe", carr:"SUV", motor:"Híbrido enchufable", precio:null, tono:"#4E6B48",
+    d:"La SUV insignia de Jeep en versión híbrida enchufable.",
+    s:[["2025","Modelo"]], u:"showroom/jeep/grand-cherokee-4xe/2025/" },
+  { n:"Grand Wagoneer L", carr:"SUV", motor:"Gasolina", precio:null, tono:"#2F4430",
+    d:"La SUV full-size más lujosa de la familia Jeep.",
+    s:[["2024","Modelo"],["Full-size","Tamaño"]], u:"showroom/jeep/grand-wagoneer-l/2024/" },
+]},
+
+{ marca:"Dodge", color:"#8E1B1B", sitio:"https://www.interlomaschrysler.com.mx/dodge/",
+  agencia:"Automundo Interlomas y Vallejo", modelos:[
+  { n:"Attitude R/T", carr:"Sedán", motor:"Gasolina", precio:null, tono:"#A32323", nuevo:true,
+    d:"Vive la emoción, vive la innovación. Con el nuevo Dodge Attitude R/T vive un estilo de vida emocionante y lleno de adrenalina.",
+    s:[["2026","Modelo"]], u:"showroom/dodge/attitude/2026/" },
+  { n:"Attitude", carr:"Sedán", motor:"Gasolina", precio:null, tono:"#B84545",
+    d:"Vive la emoción, vive la innovación. Con el nuevo Dodge Attitude vive un estilo de vida emocionante y lleno de adrenalina.",
+    s:[["2025","Modelo"]], u:"showroom/dodge/new-attitude/2025/" },
+  { n:"Journey", carr:"SUV", motor:"Gasolina", precio:null, tono:"#7A2E2E",
+    d:"A new Journey to the future. Combina conectividad, seguridad, desempeño y conveniencia de otro nivel para brindarte versatilidad en el camino.",
+    s:[["2024","Modelo"]], u:"showroom/dodge/journey/2024/" },
+  { n:"Durango", carr:"SUV", motor:"Gasolina V6/V8", precio:null, tono:"#5E1A1A",
+    d:"La SUV para familias rebeldes. La imponente SUV de tres filas pensada para brindarte el máximo nivel de confort, seguridad y conducción deportiva.",
+    s:[["2025","Modelo"],["3 filas","Asientos"]], u:"showroom/dodge/durango/2025/" },
+]},
+
+{ marca:"RAM", color:"#4A4A4A", sitio:"https://www.interlomaschrysler.com.mx/ram/",
+  agencia:"Automundo Interlomas y Vallejo", modelos:[
+  { n:"700", carr:"Pickup", motor:"Gasolina", precio:null, tono:"#6E6E6E", nuevo:true,
+    d:"Pickup compacta para el trabajo diario. Consulta precios oficiales, versiones y financiamiento.",
+    s:[["2026","Modelo"],["Comercial","Uso"]], u:"showroom/ram/700/2026/" },
+  { n:"1200", carr:"Pickup", motor:"Gasolina / Diésel", precio:null, tono:"#5A5A5A",
+    d:"Pickup mediana con capacidad de carga para tu negocio.",
+    s:[["2025","Modelo"],["Comercial","Uso"]], u:"showroom/ram/1200/2025/" },
+  { n:"1500 RHO", carr:"Pickup", motor:"Gasolina", precio:null, tono:"#3D3D3D",
+    d:"Pickup full-size de alto desempeño.",
+    s:[["2025","Modelo"],["Full-size","Tamaño"]], u:"showroom/ram/1500-rho/2025/" },
+  { n:"2500 HD Power Wagon", carr:"Pickup", motor:"Gasolina", precio:null, tono:"#2E2E2E",
+    d:"Pickup de trabajo pesado con capacidades todoterreno.",
+    s:[["2024","Modelo"],["Heavy duty","Categoría"]], u:"showroom/ram/2500-hd-power-wagon/2024/" },
+  { n:"4000", carr:"Pickup", motor:"Diésel", precio:null, tono:"#6E6E6E",
+    d:"Chasis comercial para flotillas y transformaciones.",
+    s:[["2024","Modelo"],["Flotilla","Uso"]], u:"showroom/ram/4000/2024/" },
+  { n:"ProMaster", carr:"Van", motor:"Diésel / Gasolina", precio:null, tono:"#565656",
+    d:"Van comercial de carga con gran volumen interior.",
+    s:[["2025","Modelo"],["Comercial","Uso"]], u:"showroom/ram/promaster/2025/" },
+]},
+
+{ marca:"Fiat", color:"#8C2434", sitio:"https://www.interlomaschrysler.com.mx/fiat/",
+  agencia:"Automundo Interlomas y Vallejo", modelos:[
+  { n:"Mobi", carr:"Hatchback", motor:"Gasolina", precio:null, tono:"#B0505E",
+    d:"El hatchback más compacto de Fiat, ideal para la ciudad.",
+    s:[["2024","Modelo"]], u:"fiat/promociones/mobi/2024/" },
+  { n:"Argo", carr:"Hatchback", motor:"Gasolina", precio:null, tono:"#A03A48",
+    d:"El hatchback de la familia Fiat.",
+    s:[["2025","Modelo"]], u:"showroom/fiat/argo/2025/" },
+  { n:"Pulse", carr:"SUV", motor:"Gasolina", precio:null, tono:"#8C2434",
+    d:"La SUV compacta de Fiat, con diseño italiano y tecnología a bordo.",
+    s:[["2025","Modelo"]], u:"showroom/fiat/pulse/2025/" },
+  { n:"Pulse Abarth", carr:"SUV", motor:"Gasolina turbo", precio:null, tono:"#6E1A28", nuevo:true,
+    d:"La versión más deportiva de la Pulse. Edición especial Stranger Things 2026.",
+    s:[["2026","Modelo"],["Turbo","Motor"]], u:"showroom/fiat/pulse-abarth/2025/" },
+  { n:"Fastback", carr:"SUV Coupé", motor:"Gasolina turbo", precio:null, tono:"#A8434F",
+    d:"Lo mejor de 2 mundos. Mitad sedán, mitad SUV. Conoce el nuevo SUV Coupé de FIAT, que hará volar tu mente.",
+    s:[["2025","Modelo"],["Turbo","Motor"]], u:"showroom/fiat/fastback/2025/" },
+]},
+
+{ marca:"Peugeot", color:"#1F3A5F", sitio:"https://www.interlomaschrysler.com.mx/peugeot/",
+  agencia:"Automundo Interlomas y Vallejo", modelos:[
+  { n:"Nueva 2008", carr:"SUV", motor:"Gasolina", precio:null, tono:"#3D5A80", nuevo:true,
+    d:"Confía en tu instinto. La nueva SUV PEUGEOT 2008 redefine los códigos estéticos del segmento, con nuevas luces LED, amplia parrilla que enmarca el nuevo escudo de PEUGEOT y nuevos rines de aluminio.",
+    s:[["2026","Modelo"]], u:"showroom/peugeot/nueva-2008/2026/" },
+  { n:"3008", carr:"SUV", motor:"Gasolina", precio:null, tono:"#2C4A6E",
+    d:"Con su estilo único, la PEUGEOT 3008 reinventa la SUV. Abre una nueva era de modernidad y seducción.",
+    s:[["2025","Modelo"]], u:"showroom/peugeot/3008/2025/" },
+  { n:"Nueva 3008", carr:"SUV", motor:"Gasolina 1.6 turbo", precio:null, tono:"#1F3A5F", nuevo:true,
+    d:"Lista para ir más allá. Redefine lo que significa una SUV premium, con el exclusivo Peugeot i-Cockpit panorámico de pantalla curva de 21 pulgadas. No se maneja: se experimenta.",
+    s:[["180 hp","Potencia"],["21\"","Pantalla curva"],["2026","Modelo"]], u:"showroom/peugeot/nueva-3008/2026/" },
+  { n:"Nueva Rifter", carr:"Van familiar", motor:"Gasolina", precio:null, tono:"#4A6B8A", nuevo:true,
+    d:"Lista para la aventura. Revela su estilo robusto y asertivo. Su interior conectado, su modularidad ejemplar y sus motorizaciones eficientes invitan a la aventura.",
+    s:[["2026","Modelo"]], u:"showroom/peugeot/nueva-rifter/2026/" },
+  { n:"Partner", carr:"Van", motor:"Gasolina", precio:null, tono:"#5A7A99", pro:true,
+    d:"La van comercial hecha para la ciudad. Eficiente, cómoda y ágil, equipada con PEUGEOT i-Cockpit y banca multiflex, con espacio hasta para 3 pasajeros al frente.",
+    s:[["2025","Modelo"],["Comercial","Línea Professional"]], u:"showroom/peugeot-professional/partner/2025/" },
+  { n:"Manager", carr:"Van", motor:"Diésel", precio:null, tono:"#3D5A80", pro:true,
+    d:"Para estar a la altura de tus ambiciones, el PEUGEOT Manager te ofrece dos tamaños para poder llevar tu negocio a otro nivel.",
+    s:[["2025","Modelo"],["Comercial","Línea Professional"]], u:"showroom/peugeot-professional/manager/2025/" },
+]},
+
+{ marca:"Alfa Romeo", color:"#7A1220", sitio:"https://alfaromeointerlomas.mx",
+  agencia:"Alfa Romeo Interlomas", modelos:[
+  { n:"Tonale", carr:"SUV", motor:"Gasolina turbo", precio:null, tono:"#9E2233",
+    d:"La SUV compacta de Alfa Romeo, con el carácter deportivo italiano de la marca.",
+    s:[["256 hp","Potencia"],["9 vel.","Transmisión"]], u:"/TONALE/24/" },
+  { n:"Tonale Híbrido", carr:"SUV", motor:"Híbrido enchufable", precio:null, tono:"#7A1220",
+    d:"Versión híbrida enchufable de la Tonale, que combina motor 1.3 Turbo con propulsión eléctrica.",
+    s:[["285 hp","Potencia"],["5.6 s","0 a 100 km/h"],["53 km","Rango eléctrico"]], u:"/TONALE/24/" },
+  { n:"Giulia", carr:"Sedán", motor:"Gasolina turbo", precio:null, tono:"#8C1A28",
+    d:"El sedán deportivo de Alfa Romeo, con tracción trasera y equilibrio de peso perfecto.",
+    s:[["Sedán","Carrocería"]], u:"/giulia/24/" },
+  { n:"Giulia Quadrifoglio", carr:"Sedán", motor:"Gasolina V6", precio:null, tono:"#5E0D18",
+    d:"La versión de máximo desempeño del Giulia, con motor V6 biturbo.",
+    s:[["V6","Motor"],["Quadrifoglio","Línea"]], u:"/giulia/24/" },
+  { n:"Stelvio", carr:"SUV", motor:"Gasolina turbo", precio:null, tono:"#A8303F",
+    d:"La SUV de Alfa Romeo con dinámica de conducción deportiva.",
+    s:[["SUV","Carrocería"]], u:"/" },
+  { n:"Stelvio Quadrifoglio", carr:"SUV", motor:"Gasolina V6", precio:null, tono:"#6E101C",
+    d:"La versión de alto desempeño del Stelvio, con motor V6 biturbo.",
+    s:[["V6","Motor"],["Quadrifoglio","Línea"]], u:"/" },
+]},
+
+{ marca:"Mitsubishi", color:"#B01722", sitio:"https://www.mitsubishi-interlomas.mx",
+  agencia:"Mitsubishi Interlomas y Vallejo", modelos:[
+  { n:"Mirage G4", carr:"Sedán", motor:"Gasolina", precio:322900, tono:"#C94A54", nuevo:true,
+    d:"El sedán subcompacto de Mitsubishi, eficiente y accesible.",
+    s:[["2026","Modelo"]], u:"/modelos/mirage-g4-2026" },
+  { n:"Xpander", carr:"MPV", motor:"Gasolina", precio:453900, tono:"#B01722",
+    d:"MPV familiar con espacio para siete pasajeros y gran versatilidad.",
+    s:[["2026","Modelo"],["7","Pasajeros"]], u:"/modelos/xpander-2026" },
+  { n:"Xpander Cross", carr:"MPV", motor:"Gasolina", precio:475900, tono:"#9E1420",
+    d:"La versión crossover del Xpander, con mayor altura y estética aventurera.",
+    s:[["2026","Modelo"],["7","Pasajeros"]], u:"/modelos/xpander-cross-2026" },
+  { n:"Outlander Sport", carr:"SUV", motor:"Gasolina", precio:467900, tono:"#C4323C",
+    d:"SUV compacta con el equipamiento y la garantía de Mitsubishi.",
+    s:[["2026","Modelo"]], u:"/modelos/outlander-sport-2026" },
+  { n:"Outlander", carr:"SUV", motor:"Gasolina", precio:609900, tono:"#8C1018", nuevo:true,
+    d:"La SUV insignia de Mitsubishi, renovada para 2026.",
+    s:[["2026","Modelo"]], u:"/modelos/outlander-2026" },
+  { n:"L200", carr:"Pickup", motor:"Diésel", precio:580900, tono:"#7A0E14",
+    d:"La pickup de trabajo de Mitsubishi, con motor diésel y capacidad todoterreno.",
+    s:[["2026","Modelo"],["Diésel","Motor"]], u:"/modelos/l200-2026" },
+  { n:"L200 GSR", carr:"Pickup", motor:"Diésel", precio:868900, tono:"#5E0A10",
+    d:"La versión tope de gama de la L200, con equipamiento premium.",
+    s:[["2026","Modelo"],["Tope de gama","Versión"]], u:"/modelos/l200-gsr-2026" },
+  { n:"Outlander PHEV", carr:"SUV", motor:"Híbrido enchufable", precio:883900, tono:"#A01620", nuevo:true,
+    d:"La SUV híbrida enchufable de Mitsubishi, con tracción integral eléctrica.",
+    s:[["2026","Modelo"],["PHEV","Motorización"]], u:"/modelos/outlander-phev-2026" },
+  { n:"Montero Sport", carr:"SUV", motor:"Diésel", precio:980900, tono:"#6E0C12",
+    d:"SUV de tres filas con chasis de bastidor y capacidad todoterreno real.",
+    s:[["2025","Modelo"],["3 filas","Asientos"]], u:"/modelos/montero-sport-2025" },
+]},
+];
+
+/* Aplanado: cada modelo con su marca, para filtrar en un solo arreglo */
+const MODELOS = CATALOGO.flatMap(m => m.modelos.map((v,i) => ({
+  ...v, id:`${m.marca}-${i}`, marca:m.marca, marcaColor:m.color,
+  agencia:m.agencia,
+  url: v.u.startsWith("/") && m.marca!=="Mitsubishi" && m.marca!=="Alfa Romeo" && m.marca!=="BYD"
+       ? m.sitio + v.u
+       : (v.u.startsWith("http") ? v.u
+          : (m.marca==="BYD" || m.marca==="Mitsubishi" || m.marca==="Alfa Romeo"
+             ? m.sitio.replace(/\/$/,"") + v.u
+             : "https://www.interlomaschrysler.com.mx/" + v.u))
+})));
+
+/* ══════════════════════════════════════════════════════════════
+   PROMOCIONES — esto es lo que cambia cada mes.
+   Actualiza VIGENCIA y los montos con el PDF legal que te dé BYD.
+   Si CONFIRMADO = false, el sitio muestra el aviso de "sujeto a confirmar".
+   ══════════════════════════════════════════════════════════════ */
+const PROMOS_META = {
+  vigencia: "30 de junio de 2026",
+  banco: "Banorte",
+  confirmado: false,
+  letras: "Financiamiento otorgado por Banco Mercantil del Norte, S.A. (Banorte). " +
+    "Enganche mínimo del 50%. Comisión por apertura desde 2%. Sujeto a aprobación de crédito. " +
+    "Bono operado por BYD y aplicado a subsidio de tasa. No acumulable con otras promociones. " +
+    "No aplica en compra de flotillas. El seguro no está incluido. CAT promedio para fines " +
+    "informativos y de comparación. Vigente hasta la fecha indicada o hasta agotar existencias.",
+};
+
+const PROMOS = [
+  { modelo:"Dolphin Mini 300 km", beneficio:"Mensualidad desde $3,160", bono:25000, tasa:"3.89%", plazo:"72 meses", cat:"4.7%" },
+  { modelo:"Dolphin Mini 380 km", beneficio:"Mensualidad desde $3,230", bono:30000, tasa:"3.24%", plazo:"72 meses", cat:"4.0%" },
+  { modelo:"King DM-i",           beneficio:"Mensualidad desde $3,887", bono:35000, tasa:"3.39%", plazo:"72 meses", cat:"4.2%" },
+  { modelo:"Song Pro DM-i",       beneficio:"Mensualidad desde $4,783", bono:35000, tasa:"4.16%", plazo:"72 meses", cat:"5.0%" },
+  { modelo:"Yuan Pro DM-i",       beneficio:"Mensualidad desde $4,350", bono:20000, tasa:"5.46%", plazo:"72 meses", cat:"6.3%" },
+  { modelo:"Song Plus DM-i",      beneficio:"36 meses sin intereses",   bono:51000, tasa:"0%",    plazo:"36 MSI",   cat:"1.3%" },
+  { modelo:"Sealion 7",           beneficio:"36 meses sin intereses",   bono:61700, tasa:"0%",    plazo:"36 MSI",   cat:"1.3%" },
+  { modelo:"Shark GS DMO",        beneficio:"24 meses sin intereses",   bono:55000, tasa:"0%",    plazo:"24 MSI",   cat:"2.0%" },
+  { modelo:"M9",                  beneficio:"60 meses sin intereses",   bono:100000,tasa:"0%",    plazo:"60 MSI",   cat:"1.0%" },
+];
+
+const LANZAMIENTOS = [
+  { nombre:"Nueva Outlander 2026", marca:"Mitsubishi", url:"https://www.mitsubishi-interlomas.mx",
+    desc:"La SUV insignia de Mitsubishi renovada, ya disponible en nuestras agencias Mitsubishi." },
+  { nombre:"Nuevas Peugeot 3008 y 5008", marca:"Peugeot", url:"https://www.interlomaschrysler.com.mx/peugeot/",
+    desc:"La nueva generación de las SUV de Peugeot llega a Automundo Interlomas y Vallejo." },
+  { nombre:"Nueva BYD Atto 8", marca:"BYD", url:"https://www.bydatizapan.com/atto8",
+    desc:"La primera SUV de BYD de más de 5 metros, híbrida enchufable con 7 plazas." },
+];
+
+const VALORES = [
+  ["Respeto","Fomentamos la capacidad de aceptar diferentes criterios, escuchamos a todos con atención y valoramos sus aportes."],
+  ["Honestidad","Ser congruentes con lo que decimos, pensamos y hacemos, regir nuestra conducta bajo principios de ética."],
+  ["Constancia","Alcanzar las metas que nos hemos propuesto con firmeza y perseverancia."],
+  ["Compromiso","Contribuir con el máximo de nuestras capacidades para el logro de los objetivos."],
+  ["Innovación","Aportar ideas para mejorar, reinventarnos día a día. Si queremos resultados diferentes, hagamos las cosas diferentes."],
+  ["Pasión","Ese sentimiento de absoluta satisfacción que produce algo en nosotros. Tener pasión por algo es querer repetirlo siempre."],
+];
+
+const HITOS = [
+  { año:"1966", t:"Nace Automundo", d:"La familia Grinberg funda el grupo con la distribución de autos en la Ciudad de México." },
+  { año:"2024", t:"Stellantis Brand House", d:"Automundo Interlomas se convierte en la primera agencia de Latinoamérica con este concepto." },
+  { año:"2026", t:"Mitsubishi Vallejo", d:"Abre la segunda agencia Mitsubishi del grupo, sobre Calzada Vallejo." },
+];
+
+/* ══════════════ UTILIDADES ══════════════ */
+const mxn = n => new Intl.NumberFormat("es-MX",{style:"currency",currency:"MXN",maximumFractionDigits:0}).format(n);
+const telFmt = t => t.replace(/(\d{2})(\d{4})(\d{4})/,"$1 $2 $3");
+const wa = (num,msg) => `https://wa.me/52${num}?text=${encodeURIComponent(msg)}`;
+const esc = s => String(s).replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]));
+
+function silueta(color,carr){
+  const p = {
+    Hatchback:"M14 60 L24 42 Q30 32 46 31 L86 31 Q100 32 108 45 L134 51 Q146 54 146 63 L146 69 L14 69 Z",
+    "Sedán"  :"M10 60 L22 43 Q28 32 46 31 L94 31 Q110 32 120 45 L144 52 Q154 55 154 64 L154 69 L10 69 Z",
+    SUV      :"M12 58 L22 38 Q28 28 46 27 L98 27 Q114 28 124 41 L146 48 Q156 51 156 61 L156 69 L12 69 Z",
+    Pickup   :"M10 58 L20 38 Q26 28 44 27 L80 27 Q92 28 98 41 L98 49 L152 49 Q160 51 160 61 L160 69 L10 69 Z",
+    Van      :"M10 56 L18 34 Q24 26 44 26 L108 26 Q126 27 136 40 L152 47 Q160 50 160 60 L160 69 L10 69 Z",
+  }[carr] || {
+    "SUV Coupé"   :"M12 58 L22 38 Q28 28 46 27 L96 27 Q114 30 126 44 L148 50 Q156 53 156 62 L156 69 L12 69 Z",
+    "MPV"         :"M10 57 L20 36 Q26 27 46 26 L104 26 Q120 28 130 42 L150 48 Q158 51 158 61 L158 69 L10 69 Z",
+    "Van familiar":"M10 56 L18 34 Q24 26 44 26 L106 26 Q124 27 134 40 L152 47 Q160 50 160 60 L160 69 L10 69 Z",
+  }[carr] || "M10 60 L22 43 Q28 32 46 31 L94 31 Q110 32 120 45 L144 52 Q154 55 154 64 L154 69 L10 69 Z";
+  return `<svg viewBox="0 0 172 80" style="width:100%;max-width:230px;display:block" role="img"
+    aria-label="Perfil ${carr}"><path d="${p}" fill="${color}"/>
+    <circle cx="46" cy="69" r="11" fill="#14181d"/><circle cx="46" cy="69" r="4.5" fill="${color}"/>
+    <circle cx="126" cy="69" r="11" fill="#14181d"/><circle cx="126" cy="69" r="4.5" fill="${color}"/></svg>`;
+}
+
+/* ══════════════ RENDER ══════════════ */
+function tarjetaAgencia(a){
+  return `<a class="card" href="${a.url}" target="_blank" rel="noopener">
+    <span class="chip ${a.destacada?'rojo':''}">${esc(a.marcas)}</span>
+    <h3>${esc(a.nombre)}</h3>
+    <p>${esc(a.nota||"")}</p>
+    <div class="meta">
+      <span>📍 ${esc(a.dir)}</span>
+      ${a.horario?`<span>🕐 ${esc(a.horario)}</span>`:""}
+      <span>📞 ${telFmt(a.tel)}</span>
+    </div>
+    <span class="ir">Ir al sitio →</span></a>`;
+}
+
+document.getElementById("listaAgencias").innerHTML = AGENCIAS.map(tarjetaAgencia).join("");
+document.getElementById("listaServicios").innerHTML = SERVICIOS_GRUPO.map(tarjetaAgencia).join("");
+
+document.getElementById("listaSeminuevos").innerHTML = SEMINUEVOS.map(s=>`
+  <div class="card"><h3 style="font-size:17px">${esc(s.nombre)}</h3>
+    <div class="meta"><span>📍 ${esc(s.dir)}</span><span>🕐 ${esc(s.horario)}</span>
+      <span>📞 ${telFmt(s.tel)}</span></div></div>`).join("");
+
+document.getElementById("listaValores").innerHTML = VALORES.map(([t,d])=>
+  `<div class="valor"><b>${t}</b><p>${d}</p></div>`).join("");
+
+document.getElementById("listaHitos").innerHTML = HITOS.map(h=>
+  `<div class="card"><span class="chip">${h.año}</span><h3 style="font-size:17px">${h.t}</h3>
+   <p>${h.d}</p></div>`).join("");
+
+document.getElementById("listaLanzamientos").innerHTML = LANZAMIENTOS.map(l=>
+  `<a class="card" href="${l.url}" target="_blank" rel="noopener">
+    <span class="chip rojo">${l.marca}</span><h3>${esc(l.nombre)}</h3><p>${esc(l.desc)}</p>
+    <span class="ir">Conocer más →</span></a>`).join("");
+
+document.getElementById("contactoDirecto").innerHTML = `
+  <span>📞 Ventas · ${telFmt(CONTACTO.ventas)}</span>
+  <span>🔧 Servicio · ${telFmt(CONTACTO.servicio)}</span>
+  <span>🏢 Corporativo · ${telFmt(CONTACTO.corporativo)}</span>
+  <span style="margin-top:8px"><a href="${wa(CONTACTO.whatsapp,'Hola, tengo una pregunta.')}"
+    style="text-decoration:underline;text-underline-offset:3px">Escribir por WhatsApp →</a></span>`;
+
+/* Promociones */
+document.getElementById("avisoPromo").innerHTML = PROMOS_META.confirmado
+  ? `Promociones vigentes al <b>${PROMOS_META.vigencia}</b>, con financiamiento ${PROMOS_META.banco}.`
+  : `Los montos mostrados corresponden a la última promoción publicada oficialmente
+     (vigencia al <b>${PROMOS_META.vigencia}</b>) y se muestran como referencia.
+     <b>Confirma condiciones y vigencia del mes en curso con un asesor</b> antes de tomar una decisión.`;
+
+document.getElementById("listaPromos").innerHTML = PROMOS.map(p=>`
+  <div class="promo">
+    <span class="chip" style="background:rgba(255,255,255,.12);color:rgba(255,255,255,.75)">${esc(p.modelo)}</span>
+    <div class="bono num">${mxn(p.bono)}</div>
+    <div style="font-size:14px;color:rgba(255,255,255,.65)">de bono · ${esc(p.beneficio)}</div>
+    <div class="cond num">Tasa ${p.tasa} · ${p.plazo} · CAT ${p.cat}</div>
+    <div class="vig">Vigencia ${PROMOS_META.vigencia}</div>
+    <a class="btn" style="background:#fff;color:var(--tinta);margin-top:16px"
+       href="${wa(CONTACTO.whatsapp,'Hola, me interesa la promoción del '+p.modelo+'.')}">Cotizar</a>
+  </div>`).join("");
+
+document.getElementById("letrasChicas").textContent = PROMOS_META.letras;
+
+/* Modelos: filtro por marca y por tipo */
+let fMarca = "Todas", fTipo = "Todos";
+const MARCAS = ["Todas", ...CATALOGO.map(c=>c.marca)];
+const TIPOS  = ["Todos","Eléctrico","Híbrido enchufable","SUV","Sedán","Hatchback","Pickup","Van"];
+
+function pintarFiltros(){
+  document.getElementById("filtros").innerHTML =
+    MARCAS.map(m=>`<button aria-pressed="${m===fMarca}" onclick="setMarca('${m}')">${m}</button>`).join("");
+  document.getElementById("filtros2").innerHTML =
+    TIPOS.map(t=>`<button aria-pressed="${t===fTipo}" onclick="setTipo('${t}')">${t}</button>`).join("");
+}
+function setMarca(m){ fMarca=m; pintarFiltros(); pintarModelos(); }
+function setTipo(t){ fTipo=t; pintarFiltros(); pintarModelos(); }
+function limpiarModelos(){ fMarca="Todas"; fTipo="Todos"; pintarFiltros(); pintarModelos(); }
+
+function coincide(v){
+  if(fMarca!=="Todas" && v.marca!==fMarca) return false;
+  if(fTipo==="Todos") return true;
+  return v.motor.includes(fTipo) || v.carr.includes(fTipo);
+}
+
+function pintarModelos(){
+  const res = MODELOS.filter(coincide);
+  document.getElementById("conteoModelos").textContent =
+    `${res.length} ${res.length===1?"modelo":"modelos"}`;
+
+  document.getElementById("listaModelos").innerHTML = res.length===0
+    ? `<div class="card" style="grid-column:1/-1;text-align:center">
+        <p style="margin-bottom:14px">No hay modelos con esos filtros.</p>
+        <button onclick="limpiarModelos()" style="font-weight:560;text-decoration:underline;
+          text-underline-offset:4px">Quitar filtros</button></div>`
+    : res.map(v=>`
+      <div class="card">
+        ${silueta(v.tono, v.carr)}
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:18px">
+          <span class="chip" style="margin:0;background:${v.marcaColor}1a;color:${v.marcaColor}">${v.marca}</span>
+          ${v.nuevo?`<span class="chip rojo" style="margin:0">Nuevo</span>`:""}
+          ${v.pro?`<span class="chip" style="margin:0">Professional</span>`:""}
+        </div>
+        <h3 style="margin-top:12px">${esc(v.n)}</h3>
+        <p style="font-size:12px;color:rgba(20,24,29,.4);margin-top:4px">${v.carr} · ${v.motor}</p>
+        <p>${esc(v.d)}</p>
+        <div class="specs">
+          ${v.s.map(([a,b])=>`<div><b class="num">${a}</b>${b}</div>`).join("")}
+        </div>
+        <div style="margin-top:16px;font-size:15px;font-weight:560">
+          ${v.precio ? `<span class="num">Desde ${mxn(v.precio)}</span>
+             <span style="font-size:12px;font-weight:400;color:var(--suave)"> M.N.</span>`
+            : `<span style="color:var(--suave);font-weight:400;font-size:14px">Precio bajo cotización</span>`}
+        </div>
+        <div class="btn-row">
+          <a class="btn btn-p" href="${wa(CONTACTO.whatsapp,'Hola, quiero cotizar el '+v.marca+' '+v.n+'.')}">Cotizar</a>
+          <a class="btn btn-s" href="${v.url}" target="_blank" rel="noopener">Ver ficha</a>
+        </div>
+        <p style="font-size:11px;color:rgba(20,24,29,.35);margin-top:12px">${v.agencia}</p>
+      </div>`).join("");
+}
+pintarFiltros(); pintarModelos();
+
+/* ══════════════════════════════════════════════════════════════
+   AGENDA CON BLOQUEO DE HORARIOS
+
+   IMPORTANTE: este sitio no tiene servidor, así que las reservas
+   se guardan en el navegador de cada visitante (localStorage).
+   Eso significa que un horario apartado desaparece SOLO en ese
+   dispositivo, no para todos los usuarios.
+
+   Para que el bloqueo sea real y compartido, sustituye
+   leerReservas() y guardarReserva() por llamadas a tu API:
+
+     async function leerReservas(){
+       const r = await fetch('/api/reservas');
+       return r.json();            // ["2026-07-20T10:00", ...]
+     }
+     async function guardarReserva(clave, datos){
+       const r = await fetch('/api/reservas',{
+         method:'POST',
+         headers:{'Content-Type':'application/json'},
+         body: JSON.stringify({clave, ...datos})
+       });
+       if(r.status === 409) throw new Error('OCUPADO');
+       return r.json();
+     }
+
+   El endpoint debe rechazar con 409 si la clave ya existe —
+   ahí es donde se evita de verdad el doble agendado.
+   ══════════════════════════════════════════════════════════════ */
+
+const LLAVE = "automundo_reservas_v1";
+const HORARIO_AGENCIA = { 1:[9,19],2:[9,19],3:[9,19],4:[9,19],5:[9,19],6:[9,19],0:[11,18] };
+const SERVICIOS_CITA = [
+  {id:"mantenimiento",n:"Mantenimiento programado",d:"10, 20, 30 mil km",min:90},
+  {id:"revision",     n:"Revisión general",        d:"Diagnóstico multipunto",min:60},
+  {id:"bateria",      n:"Diagnóstico de batería",  d:"Estado de celdas y carga",min:60},
+  {id:"frenos",       n:"Frenos y suspensión",     d:"Balatas, discos, amortiguadores",min:90},
+  {id:"garantia",     n:"Garantía",                d:"Falla cubierta por BYD",min:60},
+  {id:"software",     n:"Actualización de software",d:"Sistema del vehículo",min:45},
+];
+
+function leerReservas(){
+  try { return JSON.parse(localStorage.getItem(LLAVE)) || []; }
+  catch { return []; }
+}
+function guardarReserva(clave, datos){
+  const r = leerReservas();
+  if (r.some(x => x.clave === clave)) throw new Error("OCUPADO");
+  r.push({clave, ...datos, creada:new Date().toISOString()});
+  try { localStorage.setItem(LLAVE, JSON.stringify(r)); } catch {}
+  return true;
+}
+const claveDe = (fecha,hora) => `${fecha}T${hora}`;
+const estaOcupado = (fecha,hora) => leerReservas().some(x => x.clave === claveDe(fecha,hora));
+
+let cita = {tipo:"manejo",modeloId:MODELOS[0].id,servicio:"mantenimiento",fecha:"",hora:"",nombre:"",tel:"",notas:""};
+let queja = {tipo:"queja",nombre:"",tel:"",correo:"",agencia:AGENCIAS[4].nombre,mensaje:"",acepta:false};
+
+const hoyMas = d => { const x=new Date(); x.setDate(x.getDate()+d); return x.toISOString().slice(0,10); };
+function fechaLocal(iso,h=0,m=0){ const [a,me,d]=iso.split("-").map(Number); return new Date(a,me-1,d,h,m); }
+const DIAS=["domingo","lunes","martes","miércoles","jueves","viernes","sábado"];
+function fechaLegible(iso){ const d=fechaLocal(iso);
+  return `${DIAS[d.getDay()]} ${d.getDate()} de ${d.toLocaleDateString("es-MX",{month:"long"})}`; }
+
+function slots(iso){
+  if(!iso) return [];
+  const r = HORARIO_AGENCIA[fechaLocal(iso).getDay()];
+  if(!r) return [];
+  const out=[];
+  for(let h=r[0];h<r[1];h++){
+    out.push(`${String(h).padStart(2,"0")}:00`);
+    if(h+0.5<r[1]) out.push(`${String(h).padStart(2,"0")}:30`);
+  }
+  return out;
+}
+
+function abrir(que, modeloId){
+  if(que==="cita"){
+    cita = {tipo:"manejo",modeloId:modeloId||MODELOS[0].id,servicio:"mantenimiento",
+            fecha:"",hora:"",nombre:"",tel:"",notas:""};
+    pintarCita();
+  } else {
+    queja = {tipo:"queja",nombre:"",tel:"",correo:"",agencia:AGENCIAS[4].nombre,mensaje:"",acepta:false};
+    pintarQueja();
+  }
+  document.getElementById("ov").classList.add("on");
+  document.body.style.overflow="hidden";
+}
+function cerrar(){
+  document.getElementById("ov").classList.remove("on");
+  document.body.style.overflow="";
+}
+function setC(k,v){ cita[k]=v; if(k==="fecha"||k==="tipo"){cita.hora="";} pintarCita(); }
+function setQ(k,v){ queja[k]=v; }
+
+function pintarCita(){
+  const esManejo = cita.tipo==="manejo";
+  const srv = SERVICIOS_CITA.find(s=>s.id===cita.servicio);
+  const ss = slots(cita.fecha);
+  const dia = cita.fecha ? fechaLocal(cita.fecha).getDay() : null;
+
+  document.getElementById("modal").innerHTML = `
+    <div class="mhead">
+      <div><h3>Agendar cita</h3>
+        <p>${esManejo?"Prueba de manejo · 45 min":`${srv.n} · ${srv.min} min`}</p></div>
+      <button class="x" onclick="cerrar()" aria-label="Cerrar">✕</button>
+    </div>
+    <div class="mbody">
+      <label class="campo"><span>Tipo de cita</span>
+        <select onchange="setC('tipo',this.value)">
+          <option value="manejo" ${esManejo?"selected":""}>Prueba de manejo</option>
+          <option value="servicio" ${!esManejo?"selected":""}>Servicio o taller</option>
+        </select></label>
+
+      ${esManejo ? `
+      <label class="campo"><span>Modelo</span>
+        <select onchange="setC('modeloId',this.value)">
+          ${MODELOS.map(m=>`<option value="${m.id}" ${m.id===cita.modeloId?"selected":""}>${m.marca} ${m.n}</option>`).join("")}
+        </select></label>` : `
+      <label class="campo"><span>¿Qué necesita tu auto?</span>
+        <select onchange="setC('servicio',this.value)">
+          ${SERVICIOS_CITA.map(s=>`<option value="${s.id}" ${s.id===cita.servicio?"selected":""}>${s.n} — ${s.d}</option>`).join("")}
+        </select></label>`}
+
+      <label class="campo"><span>Fecha</span>
+        <input type="date" min="${hoyMas(1)}" max="${hoyMas(60)}" value="${cita.fecha}"
+          onchange="setC('fecha',this.value)"></label>
+
+      ${cita.fecha ? (ss.length===0
+        ? `<div class="aviso">La agencia no abre ese día. Elige otra fecha.</div>`
+        : `<div class="campo">
+             <span>Hora · ${dia===0?"domingo 11:00 a 18:00":"9:00 a 19:00"}
+               <span style="color:var(--acento)">· las horas tachadas ya están apartadas</span></span>
+             <div class="horas">
+               ${ss.map(h=>{
+                 const ocup = estaOcupado(cita.fecha,h);
+                 return `<button ${ocup?"disabled":""} aria-pressed="${cita.hora===h}"
+                   ${ocup?'title="Horario ya apartado"':''}
+                   onclick="setC('hora','${h}')">${h}</button>`;
+               }).join("")}
+             </div></div>`) : ""}
+
+      <label class="campo"><span>Nombre</span>
+        <input type="text" placeholder="Tu nombre" value="${esc(cita.nombre)}"
+          oninput="cita.nombre=this.value" autocomplete="name"></label>
+      <label class="campo"><span>Teléfono</span>
+        <input type="tel" inputmode="tel" placeholder="55 1234 5678" value="${esc(cita.tel)}"
+          oninput="cita.tel=this.value" autocomplete="tel"></label>
+      <label class="campo"><span>Algo que debamos saber (opcional)</span>
+        <textarea oninput="cita.notas=this.value">${esc(cita.notas)}</textarea></label>
+
+      <div class="err" id="errC"></div>
+    </div>
+    <div class="mpie">
+      <button class="btn btn-p" onclick="enviarCita()">Apartar este horario</button>
+      <a class="btn btn-s" href="tel:+52${CONTACTO.ventas}">Prefiero llamar · ${telFmt(CONTACTO.ventas)}</a>
+      <button class="btn btn-s" style="border:0" onclick="cerrar()">Cancelar</button>
+    </div>`;
+}
+
+function enviarCita(){
+  const e = document.getElementById("errC");
+  if(!cita.fecha) return e.textContent="Elige una fecha.";
+  if(slots(cita.fecha).length===0) return e.textContent="La agencia no abre ese día.";
+  if(!cita.hora) return e.textContent="Elige una hora.";
+  if(cita.nombre.trim().length<3) return e.textContent="Escribe tu nombre.";
+  if(cita.tel.replace(/\D/g,"").length<10) return e.textContent="El teléfono necesita 10 dígitos.";
+
+  const clave = claveDe(cita.fecha,cita.hora);
+  try {
+    guardarReserva(clave,{tipo:cita.tipo,nombre:cita.nombre,tel:cita.tel});
+  } catch {
+    e.textContent = "Ese horario acaba de apartarse. Elige otro.";
+    return pintarCita();
+  }
+
+  const m = MODELOS.find(x=>x.id===cita.modeloId);
+  const s = SERVICIOS_CITA.find(x=>x.id===cita.servicio);
+  const esManejo = cita.tipo==="manejo";
+  const msg = [
+    esManejo?"Solicitud de prueba de manejo":"Solicitud de cita de servicio","",
+    esManejo?`Modelo: ${m.marca} ${m.n}`:`Servicio: ${s.n}`,
+    `Fecha: ${fechaLegible(cita.fecha)}`, `Hora: ${cita.hora}`,
+    `Nombre: ${cita.nombre}`, `Teléfono: ${cita.tel}`,
+    cita.notas?`Notas: ${cita.notas}`:null,
+  ].filter(Boolean).join("\n");
+
+  document.getElementById("modal").innerHTML = `
+    <div class="exito">
+      <div class="tick">✓</div>
+      <h3 style="font-size:22px;font-weight:640;letter-spacing:-.02em">Horario apartado</h3>
+      <p style="font-size:14px;color:var(--suave);margin-top:8px">
+        Mándanos la solicitud por WhatsApp para que un asesor la confirme.</p>
+      <div class="resumen">
+        <div><span class="k">${esManejo?"Modelo":"Servicio"}</span>
+             <span>${esManejo?m.marca+" "+m.n:s.n}</span></div>
+        <div><span class="k">Fecha</span><span>${fechaLegible(cita.fecha)}</span></div>
+        <div><span class="k">Hora</span><span class="num">${cita.hora}</span></div>
+        <div><span class="k">A nombre de</span><span>${esc(cita.nombre)}</span></div>
+      </div>
+      <div class="mpie" style="padding:0">
+        <a class="btn btn-p" href="${wa(CONTACTO.whatsapp,msg)}">Enviar por WhatsApp</a>
+        <button class="btn btn-s" onclick="descargarICS()">Agregar a mi calendario</button>
+        <a class="btn btn-s" href="tel:+52${CONTACTO.ventas}">Llamar a la agencia</a>
+        <button class="btn btn-s" style="border:0" onclick="cerrar()">Cerrar</button>
+      </div>
+    </div>`;
+}
+
+function descargarICS(){
+  const m = MODELOS.find(x=>x.id===cita.modeloId);
+  const s = SERVICIOS_CITA.find(x=>x.id===cita.servicio);
+  const esManejo = cita.tipo==="manejo";
+  const [h,mi] = cita.hora.split(":").map(Number);
+  const ini = fechaLocal(cita.fecha,h,mi);
+  const fin = new Date(ini.getTime() + (esManejo?45:s.min)*60000);
+  const z = n=>String(n).padStart(2,"0");
+  const f = d=>`${d.getFullYear()}${z(d.getMonth()+1)}${z(d.getDate())}T${z(d.getHours())}${z(d.getMinutes())}00`;
+  const ics = ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Grupo Automundo//ES","CALSCALE:GREGORIAN",
+    "BEGIN:VEVENT",`UID:${Date.now()}@grupoautomundo.net`,`DTSTAMP:${f(new Date())}`,
+    `DTSTART;TZID=America/Mexico_City:${f(ini)}`,`DTEND;TZID=America/Mexico_City:${f(fin)}`,
+    `SUMMARY:${esManejo?"Prueba de manejo "+m.marca+" "+m.n:s.n} — Grupo Automundo`,
+    "LOCATION:Av. Adolfo Ruiz Cortines 225\\, Col. Las Margaritas\\, Cd. López Mateos\\, Edo. Méx.",
+    `DESCRIPTION:A nombre de ${cita.nombre}. Tel ${cita.tel}.`,
+    "BEGIN:VALARM","TRIGGER:-PT2H","ACTION:DISPLAY","DESCRIPTION:Tu cita en BYD Automundo","END:VALARM",
+    "END:VEVENT","END:VCALENDAR"].join("\r\n");
+  const url = URL.createObjectURL(new Blob([ics],{type:"text/calendar;charset=utf-8"}));
+  const a = document.createElement("a");
+  a.href=url; a.download="cita-automundo.ics";
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+/* ── Buzón de sugerencias y quejas ── */
+function pintarQueja(){
+  document.getElementById("modal").innerHTML = `
+    <div class="mhead">
+      <div><h3>Sugerencias y quejas</h3><p>Toda queja recibe folio y seguimiento.</p></div>
+      <button class="x" onclick="cerrar()" aria-label="Cerrar">✕</button>
+    </div>
+    <div class="mbody">
+      <label class="campo"><span>Tipo de mensaje</span>
+        <select onchange="setQ('tipo',this.value)">
+          <option value="queja">Queja</option>
+          <option value="sugerencia">Sugerencia</option>
+          <option value="felicitacion">Felicitación</option>
+          <option value="aclaracion">Aclaración</option>
+        </select></label>
+      <label class="campo"><span>Agencia</span>
+        <select onchange="setQ('agencia',this.value)">
+          ${AGENCIAS.map(a=>`<option ${a.destacada?"selected":""}>${a.nombre}</option>`).join("")}
+          ${SERVICIOS_GRUPO.map(s=>`<option>${s.nombre}</option>`).join("")}
+        </select></label>
+      <label class="campo"><span>Nombre</span>
+        <input type="text" oninput="setQ('nombre',this.value)" autocomplete="name"></label>
+      <label class="campo"><span>Teléfono</span>
+        <input type="tel" inputmode="tel" oninput="setQ('tel',this.value)" autocomplete="tel"></label>
+      <label class="campo"><span>Correo (opcional)</span>
+        <input type="email" oninput="setQ('correo',this.value)" autocomplete="email"></label>
+      <label class="campo"><span>Cuéntanos qué pasó</span>
+        <textarea style="min-height:120px" oninput="setQ('mensaje',this.value)"></textarea></label>
+      <label style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--suave);margin-bottom:16px">
+        <input type="checkbox" style="width:20px;height:20px;margin-top:2px;flex-shrink:0"
+          onchange="setQ('acepta',this.checked)">
+        <span>He leído y acepto el
+          <a href="https://www.grupoautomundo.net/general-4" target="_blank" rel="noopener"
+             style="text-decoration:underline">aviso de privacidad</a>
+          y el tratamiento de mis datos para dar seguimiento a este mensaje.</span></label>
+      <div class="err" id="errQ"></div>
+    </div>
+    <div class="mpie">
+      <button class="btn btn-p" onclick="enviarQueja()">Enviar mensaje</button>
+      <button class="btn btn-s" style="border:0" onclick="cerrar()">Cancelar</button>
+    </div>`;
+}
+
+function enviarQueja(){
+  const e = document.getElementById("errQ");
+  if(queja.nombre.trim().length<3) return e.textContent="Escribe tu nombre.";
+  if(queja.tel.replace(/\D/g,"").length<10) return e.textContent="El teléfono necesita 10 dígitos.";
+  if(queja.mensaje.trim().length<15) return e.textContent="Cuéntanos un poco más de lo que pasó.";
+  if(!queja.acepta) return e.textContent="Necesitamos que aceptes el aviso de privacidad.";
+
+  const folio = "GA-" + Date.now().toString(36).toUpperCase().slice(-6);
+  const msg = [`Folio ${folio}`,`Tipo: ${queja.tipo}`,`Agencia: ${queja.agencia}`,"",
+    `Nombre: ${queja.nombre}`,`Teléfono: ${queja.tel}`,
+    queja.correo?`Correo: ${queja.correo}`:null,"",queja.mensaje].filter(Boolean).join("\n");
+
+  document.getElementById("modal").innerHTML = `
+    <div class="exito">
+      <div class="tick">✓</div>
+      <h3 style="font-size:22px;font-weight:640;letter-spacing:-.02em">Mensaje registrado</h3>
+      <p style="font-size:14px;color:var(--suave);margin-top:8px">
+        Guarda tu folio. Envíalo al equipo para que le den seguimiento.</p>
+      <div class="resumen">
+        <div><span class="k">Folio</span><span class="num" style="font-weight:600">${folio}</span></div>
+        <div><span class="k">Tipo</span><span>${queja.tipo}</span></div>
+        <div><span class="k">Agencia</span><span>${esc(queja.agencia)}</span></div>
+      </div>
+      <div class="mpie" style="padding:0">
+        <a class="btn btn-p" href="${wa(CONTACTO.whatsapp,msg)}">Enviar por WhatsApp</a>
+        <a class="btn btn-s" href="tel:+52${CONTACTO.corporativo}">Llamar a corporativo</a>
+        <button class="btn btn-s" style="border:0" onclick="cerrar()">Cerrar</button>
+      </div>
+      <p style="font-size:11px;color:rgba(20,24,29,.4);margin-top:18px;line-height:1.6">
+        Si no recibes respuesta, puedes acudir a PROFECO al 55 5568 8722.</p>
+    </div>`;
+}
+
+/* ── Nav ── */
+function menu(){
+  const m=document.getElementById("mm"), b=document.getElementById("bg");
+  const on=m.classList.toggle("on");
+  b.setAttribute("aria-expanded",on); b.textContent = on?"✕":"☰";
+}
+function ir(id){
+  document.getElementById("mm").classList.remove("on");
+  document.getElementById("bg").textContent="☰";
+  document.getElementById(id).scrollIntoView({behavior:"smooth"});
+}
+document.getElementById("ov").addEventListener("click",e=>{ if(e.target.id==="ov") cerrar(); });
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") cerrar(); });
+</script>
+</body>
+</html>

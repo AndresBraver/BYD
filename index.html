@@ -174,27 +174,6 @@ footer a{text-decoration:underline;text-underline-offset:3px}
 .logo img{max-width:100%;max-height:100%;object-fit:contain}
 .logo span{font-size:11px;font-weight:700;letter-spacing:.08em;text-align:center;line-height:1.2}
 
-/* Pase Automundo */
-.pase{background:var(--tinta);color:#fff;border-radius:24px;padding:28px}
-.pase h3{font-size:clamp(1.5rem,4vw,2rem);font-weight:650;letter-spacing:-.03em}
-.pase .regla{font-size:15px;color:rgba(255,255,255,.62);margin-top:10px;line-height:1.6}
-.calc-pase{background:rgba(255,255,255,.07);border-radius:16px;padding:18px;margin-top:22px}
-.calc-pase input{width:100%;min-height:50px;padding:12px 14px;border-radius:12px;
-  border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:#fff;font-size:16px}
-.calc-pase input::placeholder{color:rgba(255,255,255,.35)}
-.pts{display:flex;align-items:baseline;gap:8px;margin-top:16px}
-.pts b{font-size:clamp(2rem,7vw,3rem);font-weight:650;letter-spacing:-.03em;color:var(--menta)}
-.pts span{font-size:14px;color:rgba(255,255,255,.55)}
-.nivel-actual{font-size:13px;color:rgba(255,255,255,.7);margin-top:8px;min-height:20px}
-.niveles{display:grid;gap:8px;margin-top:12px}
-@media(min-width:640px){.niveles{grid-template-columns:repeat(2,1fr)}}
-.nivel{background:#fff;border:1px solid var(--borde);border-radius:15px;padding:16px;
-  display:flex;gap:14px;align-items:flex-start}
-.nivel.alcanzado{border-color:var(--menta);background:#f2fdf9}
-.nivel .n{font-size:20px;font-weight:650;letter-spacing:-.02em;min-width:52px}
-.nivel b{font-size:14px;display:block}
-.nivel p{font-size:13px;color:var(--suave);margin-top:3px}
-
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -210,7 +189,6 @@ footer a{text-decoration:underline;text-underline-offset:3px}
       <button onclick="ir('lanzamientos')">Lanzamientos</button>
       <button onclick="ir('seminuevos')">Seminuevos</button>
       <button onclick="ir('historia')">Nosotros</button>
-      <button onclick="ir('pase')">Pase</button>
       <button onclick="abrir('cita')" style="font-weight:600;color:var(--tinta)">Agendar</button>
     </div>
     <button class="burger" onclick="menu()" aria-label="Menú" aria-expanded="false" id="bg">☰</button>
@@ -363,37 +341,6 @@ footer a{text-decoration:underline;text-underline-offset:3px}
     Todas las marcas y logotipos son propiedad de sus respectivos titulares.
     Grupo Automundo los usa como distribuidor autorizado.
   </p>
-</section>
-
-<!-- PASE AUTOMUNDO -->
-<section id="pase" class="wrap">
-  <div class="eyebrow">Programa de lealtad</div>
-  <h2 class="tit">Pase Automundo</h2>
-  <p class="sub">Cada compra suma. Junta puntos y cámbialos por descuentos en servicio y accesorios,
-     en cualquier agencia del grupo.</p>
-
-  <div class="grid g2">
-    <div class="pase">
-      <h3>1 punto por cada $10,000</h3>
-      <p class="regla">Acumulas con la compra de tu auto, servicios de taller, refacciones y accesorios.
-         Los puntos no vencen mientras tu Pase esté activo.</p>
-      <div class="calc-pase">
-        <label><span style="font-size:13px;color:rgba(255,255,255,.6);display:block;margin-bottom:8px">
-          ¿Cuánto llevas acumulado?</span>
-          <input type="text" inputmode="numeric" id="montoPase" placeholder="Ej. 450,000"
-            oninput="calcPase(this.value)" aria-label="Monto acumulado"></label>
-        <div class="pts"><b class="num" id="ptsPase">0</b><span>puntos</span></div>
-        <div class="nivel-actual" id="nivelPase">Escribe un monto para ver tu nivel.</div>
-      </div>
-    </div>
-    <div>
-      <div class="niveles" id="listaNiveles"></div>
-      <p class="legal" style="margin-top:14px">
-        Los puntos que calculas aquí son informativos. Tu saldo real lo lleva la agencia:
-        pregunta por tu Pase Automundo en caja o con tu asesor de servicio.
-      </p>
-    </div>
-  </div>
 </section>
 
 <!-- CONTACTO / QUEJAS -->
@@ -589,21 +536,6 @@ const MARCA_SUCURSAL = {
 const LOGOS = {
   "BYD":null, "Jeep":null, "Dodge":null, "RAM":null,
   "Fiat":null, "Peugeot":null, "Alfa Romeo":null, "Mitsubishi":null,
-};
-
-/* ══════════════════════════════════════════════════════════════
-   PASE AUTOMUNDO — programa de lealtad
-   1 punto por cada $10,000 de compra acumulada.
-   Los niveles y beneficios son política del negocio: edítalos aquí.
-   ══════════════════════════════════════════════════════════════ */
-const PASE = {
-  puntoCada: 10000,
-  niveles: [
-    { pts:5,  nombre:"Bronce", benef:"10% de descuento en accesorios" },
-    { pts:15, nombre:"Plata",  benef:"15% en accesorios y 10% en mano de obra de servicio" },
-    { pts:30, nombre:"Oro",    benef:"20% en accesorios, 15% en servicio y auto de cortesía" },
-    { pts:60, nombre:"Platino",benef:"25% en accesorios, 20% en servicio y servicio a domicilio" },
-  ],
 };
 
 /* ══════════════════════════════════════════════════════════════
@@ -1009,7 +941,6 @@ function pintarModelos(){
         </div>
         <div class="btn-row">
           <a class="btn btn-p" href="${wa(CONTACTO.whatsapp,'Hola, quiero cotizar el '+v.marca+' '+v.n+'.')}">Cotizar</a>
-          <a class="btn btn-s" href="${v.url}" target="_blank" rel="noopener">Ver ficha</a>
         </div>
         <p style="font-size:11px;color:rgba(20,24,29,.35);margin-top:12px">${v.agencia}</p>
       </div>`).join("");
@@ -1025,34 +956,6 @@ document.getElementById("listaLogos").innerHTML = CATALOGO.map(m=>{
   return `<a class="logo" href="${m.sitio}" target="_blank" rel="noopener"
     title="${m.marca} · ${m.agencia}">${dentro}</a>`;
 }).join("");
-
-/* ── Pase Automundo ── */
-document.getElementById("listaNiveles").innerHTML = PASE.niveles.map(n=>`
-  <div class="nivel" data-pts="${n.pts}">
-    <span class="n num">${n.pts}</span>
-    <div><b>${n.nombre}</b><p>${n.benef}</p></div>
-  </div>`).join("");
-
-function calcPase(valor){
-  const monto = Number(String(valor).replace(/[^\d]/g,"")) || 0;
-  const pts = Math.floor(monto / PASE.puntoCada);
-  document.getElementById("ptsPase").textContent = pts.toLocaleString("es-MX");
-
-  const alcanzados = PASE.niveles.filter(n=>pts>=n.pts);
-  const actual = alcanzados[alcanzados.length-1];
-  const siguiente = PASE.niveles.find(n=>pts<n.pts);
-
-  document.getElementById("nivelPase").innerHTML = monto===0
-    ? "Escribe un monto para ver tu nivel."
-    : (actual
-        ? `Nivel <b style="color:var(--menta)">${actual.nombre}</b>` +
-          (siguiente ? ` · te faltan ${siguiente.pts-pts} puntos para ${siguiente.nombre}.` : " · nivel máximo.")
-        : `Aún sin nivel · te faltan ${PASE.niveles[0].pts-pts} puntos para ${PASE.niveles[0].nombre}.`);
-
-  document.querySelectorAll(".nivel").forEach(el=>{
-    el.classList.toggle("alcanzado", pts >= Number(el.dataset.pts));
-  });
-}
 
 /* ══════════════════════════════════════════════════════════════
    AGENDA CON BLOQUEO DE HORARIOS

@@ -157,6 +157,44 @@ footer{border-top:1px solid var(--borde);padding:44px 0 60px}
 footer p{font-size:12px;color:rgba(20,24,29,.45);line-height:1.7}
 footer a{text-decoration:underline;text-underline-offset:3px}
 .legal{margin-top:16px;font-size:11px;color:rgba(20,24,29,.38)}
+/* Ubicación en el modal */
+.ubic{background:#fff;border:1px solid var(--borde);border-radius:15px;padding:16px;margin-bottom:18px}
+.ubic-t{font-size:14px;font-weight:600;margin-bottom:6px}
+.ubic p{font-size:13px;color:var(--suave);line-height:1.55}
+.ubic-links{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;font-size:13px;font-weight:540}
+.ubic-links a{text-decoration:underline;text-underline-offset:3px}
+
+/* Logos de marca */
+.logos{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:28px}
+@media(min-width:760px){.logos{grid-template-columns:repeat(8,1fr)}}
+.logo{background:#fff;border:1px solid var(--borde);border-radius:14px;
+  aspect-ratio:3/2;display:flex;align-items:center;justify-content:center;padding:10px;
+  transition:border-color .18s}
+.logo:hover{border-color:rgba(20,24,29,.28)}
+.logo img{max-width:100%;max-height:100%;object-fit:contain}
+.logo span{font-size:11px;font-weight:700;letter-spacing:.08em;text-align:center;line-height:1.2}
+
+/* Pase Automundo */
+.pase{background:var(--tinta);color:#fff;border-radius:24px;padding:28px}
+.pase h3{font-size:clamp(1.5rem,4vw,2rem);font-weight:650;letter-spacing:-.03em}
+.pase .regla{font-size:15px;color:rgba(255,255,255,.62);margin-top:10px;line-height:1.6}
+.calc-pase{background:rgba(255,255,255,.07);border-radius:16px;padding:18px;margin-top:22px}
+.calc-pase input{width:100%;min-height:50px;padding:12px 14px;border-radius:12px;
+  border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:#fff;font-size:16px}
+.calc-pase input::placeholder{color:rgba(255,255,255,.35)}
+.pts{display:flex;align-items:baseline;gap:8px;margin-top:16px}
+.pts b{font-size:clamp(2rem,7vw,3rem);font-weight:650;letter-spacing:-.03em;color:var(--menta)}
+.pts span{font-size:14px;color:rgba(255,255,255,.55)}
+.nivel-actual{font-size:13px;color:rgba(255,255,255,.7);margin-top:8px;min-height:20px}
+.niveles{display:grid;gap:8px;margin-top:12px}
+@media(min-width:640px){.niveles{grid-template-columns:repeat(2,1fr)}}
+.nivel{background:#fff;border:1px solid var(--borde);border-radius:15px;padding:16px;
+  display:flex;gap:14px;align-items:flex-start}
+.nivel.alcanzado{border-color:var(--menta);background:#f2fdf9}
+.nivel .n{font-size:20px;font-weight:650;letter-spacing:-.02em;min-width:52px}
+.nivel b{font-size:14px;display:block}
+.nivel p{font-size:13px;color:var(--suave);margin-top:3px}
+
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -172,6 +210,7 @@ footer a{text-decoration:underline;text-underline-offset:3px}
       <button onclick="ir('lanzamientos')">Lanzamientos</button>
       <button onclick="ir('seminuevos')">Seminuevos</button>
       <button onclick="ir('historia')">Nosotros</button>
+      <button onclick="ir('pase')">Pase</button>
       <button onclick="abrir('cita')" style="font-weight:600;color:var(--tinta)">Agendar</button>
     </div>
     <button class="burger" onclick="menu()" aria-label="Menú" aria-expanded="false" id="bg">☰</button>
@@ -317,6 +356,44 @@ footer a{text-decoration:underline;text-underline-offset:3px}
 
   <h3 style="font-size:18px;font-weight:620;margin:36px 0 14px;letter-spacing:-.02em">Hitos</h3>
   <div class="grid g3" id="listaHitos"></div>
+
+  <h3 style="font-size:18px;font-weight:620;margin:40px 0 0;letter-spacing:-.02em">Las marcas que representamos</h3>
+  <div class="logos" id="listaLogos"></div>
+  <p class="legal" style="margin-top:14px">
+    Todas las marcas y logotipos son propiedad de sus respectivos titulares.
+    Grupo Automundo los usa como distribuidor autorizado.
+  </p>
+</section>
+
+<!-- PASE AUTOMUNDO -->
+<section id="pase" class="wrap">
+  <div class="eyebrow">Programa de lealtad</div>
+  <h2 class="tit">Pase Automundo</h2>
+  <p class="sub">Cada compra suma. Junta puntos y cámbialos por descuentos en servicio y accesorios,
+     en cualquier agencia del grupo.</p>
+
+  <div class="grid g2">
+    <div class="pase">
+      <h3>1 punto por cada $10,000</h3>
+      <p class="regla">Acumulas con la compra de tu auto, servicios de taller, refacciones y accesorios.
+         Los puntos no vencen mientras tu Pase esté activo.</p>
+      <div class="calc-pase">
+        <label><span style="font-size:13px;color:rgba(255,255,255,.6);display:block;margin-bottom:8px">
+          ¿Cuánto llevas acumulado?</span>
+          <input type="text" inputmode="numeric" id="montoPase" placeholder="Ej. 450,000"
+            oninput="calcPase(this.value)" aria-label="Monto acumulado"></label>
+        <div class="pts"><b class="num" id="ptsPase">0</b><span>puntos</span></div>
+        <div class="nivel-actual" id="nivelPase">Escribe un monto para ver tu nivel.</div>
+      </div>
+    </div>
+    <div>
+      <div class="niveles" id="listaNiveles"></div>
+      <p class="legal" style="margin-top:14px">
+        Los puntos que calculas aquí son informativos. Tu saldo real lo lleva la agencia:
+        pregunta por tu Pase Automundo en caja o con tu asesor de servicio.
+      </p>
+    </div>
+  </div>
 </section>
 
 <!-- CONTACTO / QUEJAS -->
@@ -451,6 +528,83 @@ const SEMINUEVOS = [
   { nombre:"Seminuevos Viaducto", dir:"Viaducto Miguel Alemán 55, Col. Buenos Aires, C.P. 06780, Cuauhtémoc, CDMX",
     tel:"5530672300", horario:"8:00–20:00" },
 ];
+
+/* ══════════════════════════════════════════════════════════════
+   SUCURSALES — cada marca se atiende en una agencia distinta.
+   Al elegir un modelo, la cita usa el teléfono y la dirección
+   de la agencia que vende esa marca.
+   ══════════════════════════════════════════════════════════════ */
+const SUCURSALES = {
+  interlomas: { nombre:"Automundo Interlomas",
+    dir:"Paseo de la Herradura 422, Parques de la Herradura, C.P. 52760, Huixquilucan, Edo. Méx.",
+    tel:"5530003400", wa:"5545107198",
+    maps:"https://maps.google.com/?q=Paseo+de+la+Herradura+422+Interlomas" },
+  vallejo: { nombre:"Automundo Vallejo",
+    dir:"Calzada Vallejo 1059, Nueva Industrial Vallejo, C.P. 07720, Gustavo A. Madero, CDMX",
+    tel:"5530672300", wa:"5527282928",
+    maps:"https://maps.google.com/?q=Calzada+Vallejo+1059+Nueva+Industrial+Vallejo" },
+  atizapan: { nombre:"BYD Automundo Atizapán",
+    dir:"Av. Adolfo Ruiz Cortines 225, Col. Las Margaritas, C.P. 52977, Cd. López Mateos, Edo. Méx.",
+    tel:"5597249599", wa:"5550703901",
+    maps:"https://maps.google.com/?q=Av+Adolfo+Ruiz+Cortines+225+Las+Margaritas+Atizapan" },
+  pachuca: { nombre:"BYD Automundo Pachuca",
+    dir:"Blvd. Luis Donaldo Colosio, Industrial La Paz, C.P. 42186, Pachuca de Soto, Hidalgo",
+    tel:"5566756344", wa:"7713613708",
+    maps:"https://maps.google.com/?q=Blvd+Luis+Donaldo+Colosio+Pachuca" },
+  mitsuInterlomas: { nombre:"Mitsubishi Interlomas",
+    dir:"Paseo de la Herradura 422, Parques de la Herradura, C.P. 52760, Naucalpan, Edo. Méx.",
+    tel:"5530003400", wa:"5662143262",
+    maps:"https://maps.google.com/?q=Paseo+de+la+Herradura+422+Interlomas" },
+  mitsuVallejo: { nombre:"Mitsubishi Vallejo",
+    dir:"Calzada Vallejo 1059, Industrial Vallejo, C.P. 07720, Gustavo A. Madero, CDMX",
+    tel:"5595506568", wa:"5662143262",
+    maps:"https://maps.google.com/?q=Calzada+Vallejo+1059+Industrial+Vallejo" },
+  alfa: { nombre:"Alfa Romeo Interlomas",
+    dir:"Paseo de la Herradura 422, Parques de la Herradura, C.P. 52760, Huixquilucan, Edo. Méx.",
+    tel:"5530003400", wa:"5545107198",
+    maps:"https://maps.google.com/?q=Paseo+de+la+Herradura+422+Interlomas" },
+};
+
+/* Qué agencias venden cada marca. Si hay más de una, el usuario elige. */
+const MARCA_SUCURSAL = {
+  "BYD":        ["atizapan","pachuca"],
+  "Jeep":       ["interlomas","vallejo"],
+  "Dodge":      ["interlomas","vallejo"],
+  "RAM":        ["interlomas","vallejo"],
+  "Fiat":       ["interlomas","vallejo"],
+  "Peugeot":    ["interlomas","vallejo"],
+  "Alfa Romeo": ["alfa"],
+  "Mitsubishi": ["mitsuInterlomas","mitsuVallejo"],
+};
+
+/* ── LOGOS ──────────────────────────────────────────────────────
+   Pide a cada marca (o a corporativo) el kit oficial de logos,
+   guárdalos en /logos/ y pon aquí la ruta. Mientras estén en null,
+   el sitio dibuja una marca tipográfica.
+   No uses hotlinking a los sitios de las marcas: son marcas
+   registradas y el enlace se rompe cuando cambian la URL.
+
+     "Jeep": "/logos/jeep.svg",
+   ──────────────────────────────────────────────────────────────── */
+const LOGOS = {
+  "BYD":null, "Jeep":null, "Dodge":null, "RAM":null,
+  "Fiat":null, "Peugeot":null, "Alfa Romeo":null, "Mitsubishi":null,
+};
+
+/* ══════════════════════════════════════════════════════════════
+   PASE AUTOMUNDO — programa de lealtad
+   1 punto por cada $10,000 de compra acumulada.
+   Los niveles y beneficios son política del negocio: edítalos aquí.
+   ══════════════════════════════════════════════════════════════ */
+const PASE = {
+  puntoCada: 10000,
+  niveles: [
+    { pts:5,  nombre:"Bronce", benef:"10% de descuento en accesorios" },
+    { pts:15, nombre:"Plata",  benef:"15% en accesorios y 10% en mano de obra de servicio" },
+    { pts:30, nombre:"Oro",    benef:"20% en accesorios, 15% en servicio y auto de cortesía" },
+    { pts:60, nombre:"Platino",benef:"25% en accesorios, 20% en servicio y servicio a domicilio" },
+  ],
+};
 
 /* ══════════════════════════════════════════════════════════════
    CATÁLOGO POR MARCA
@@ -862,6 +1016,44 @@ function pintarModelos(){
 }
 pintarFiltros(); pintarModelos();
 
+/* ── Logos de marca ── */
+document.getElementById("listaLogos").innerHTML = CATALOGO.map(m=>{
+  const src = LOGOS[m.marca];
+  const dentro = src
+    ? `<img src="${src}" alt="Logo ${m.marca}" loading="lazy">`
+    : `<span style="color:${m.color}">${m.marca.toUpperCase()}</span>`;
+  return `<a class="logo" href="${m.sitio}" target="_blank" rel="noopener"
+    title="${m.marca} · ${m.agencia}">${dentro}</a>`;
+}).join("");
+
+/* ── Pase Automundo ── */
+document.getElementById("listaNiveles").innerHTML = PASE.niveles.map(n=>`
+  <div class="nivel" data-pts="${n.pts}">
+    <span class="n num">${n.pts}</span>
+    <div><b>${n.nombre}</b><p>${n.benef}</p></div>
+  </div>`).join("");
+
+function calcPase(valor){
+  const monto = Number(String(valor).replace(/[^\d]/g,"")) || 0;
+  const pts = Math.floor(monto / PASE.puntoCada);
+  document.getElementById("ptsPase").textContent = pts.toLocaleString("es-MX");
+
+  const alcanzados = PASE.niveles.filter(n=>pts>=n.pts);
+  const actual = alcanzados[alcanzados.length-1];
+  const siguiente = PASE.niveles.find(n=>pts<n.pts);
+
+  document.getElementById("nivelPase").innerHTML = monto===0
+    ? "Escribe un monto para ver tu nivel."
+    : (actual
+        ? `Nivel <b style="color:var(--menta)">${actual.nombre}</b>` +
+          (siguiente ? ` · te faltan ${siguiente.pts-pts} puntos para ${siguiente.nombre}.` : " · nivel máximo.")
+        : `Aún sin nivel · te faltan ${PASE.niveles[0].pts-pts} puntos para ${PASE.niveles[0].nombre}.`);
+
+  document.querySelectorAll(".nivel").forEach(el=>{
+    el.classList.toggle("alcanzado", pts >= Number(el.dataset.pts));
+  });
+}
+
 /* ══════════════════════════════════════════════════════════════
    AGENDA CON BLOQUEO DE HORARIOS
 
@@ -913,10 +1105,13 @@ function guardarReserva(clave, datos){
   try { localStorage.setItem(LLAVE, JSON.stringify(r)); } catch {}
   return true;
 }
-const claveDe = (fecha,hora) => `${fecha}T${hora}`;
-const estaOcupado = (fecha,hora) => leerReservas().some(x => x.clave === claveDe(fecha,hora));
+/* La clave incluye la sucursal: el mismo horario puede estar libre
+   en Interlomas y ocupado en Vallejo. */
+const claveDe = (fecha,hora,suc) => `${suc}|${fecha}T${hora}`;
+const estaOcupado = (fecha,hora,suc) => leerReservas().some(x => x.clave === claveDe(fecha,hora,suc));
 
-let cita = {tipo:"manejo",modeloId:MODELOS[0].id,servicio:"mantenimiento",fecha:"",hora:"",nombre:"",tel:"",notas:""};
+let cita = {tipo:"manejo",modeloId:MODELOS[0].id,servicio:"mantenimiento",marcaServicio:"BYD",
+            sucursal:"atizapan",fecha:"",hora:"",nombre:"",tel:"",notas:""};
 let queja = {tipo:"queja",nombre:"",tel:"",correo:"",agencia:AGENCIAS[4].nombre,mensaje:"",acepta:false};
 
 const hoyMas = d => { const x=new Date(); x.setDate(x.getDate()+d); return x.toISOString().slice(0,10); };
@@ -939,7 +1134,9 @@ function slots(iso){
 
 function abrir(que, modeloId){
   if(que==="cita"){
-    cita = {tipo:"manejo",modeloId:modeloId||MODELOS[0].id,servicio:"mantenimiento",
+    const mm = MODELOS.find(x=>x.id===modeloId) || MODELOS[0];
+    cita = {tipo:"manejo",modeloId:mm.id,servicio:"mantenimiento",marcaServicio:mm.marca,
+            sucursal:(MARCA_SUCURSAL[mm.marca]||["interlomas"])[0],
             fecha:"",hora:"",nombre:"",tel:"",notas:""};
     pintarCita();
   } else {
@@ -953,14 +1150,36 @@ function cerrar(){
   document.getElementById("ov").classList.remove("on");
   document.body.style.overflow="";
 }
-function setC(k,v){ cita[k]=v; if(k==="fecha"||k==="tipo"){cita.hora="";} pintarCita(); }
+function setC(k,v){
+  cita[k]=v;
+  if(k==="modeloId"){
+    const m = MODELOS.find(x=>x.id===v);
+    cita.sucursal = (MARCA_SUCURSAL[m.marca]||["interlomas"])[0];
+    cita.hora="";
+  }
+  if(k==="marcaServicio"){ cita.sucursal=(MARCA_SUCURSAL[v]||["interlomas"])[0]; cita.hora=""; }
+  if(k==="fecha"||k==="tipo"||k==="sucursal"){ cita.hora=""; }
+  pintarCita();
+}
 function setQ(k,v){ queja[k]=v; }
+
+/* Devuelve la sucursal activa según el modelo elegido */
+function sucursalDeCita(){
+  const m = MODELOS.find(x=>x.id===cita.modeloId);
+  const claves = cita.tipo==="manejo"
+    ? (MARCA_SUCURSAL[m.marca] || ["interlomas"])
+    : (MARCA_SUCURSAL[cita.marcaServicio] || ["interlomas"]);
+  const clave = claves.includes(cita.sucursal) ? cita.sucursal : claves[0];
+  return { clave, claves, suc: SUCURSALES[clave] };
+}
 
 function pintarCita(){
   const esManejo = cita.tipo==="manejo";
   const srv = SERVICIOS_CITA.find(s=>s.id===cita.servicio);
   const ss = slots(cita.fecha);
   const dia = cita.fecha ? fechaLocal(cita.fecha).getDay() : null;
+  const {clave, claves, suc} = sucursalDeCita();
+  cita.sucursal = clave;
 
   document.getElementById("modal").innerHTML = `
     <div class="mhead">
@@ -978,12 +1197,35 @@ function pintarCita(){
       ${esManejo ? `
       <label class="campo"><span>Modelo</span>
         <select onchange="setC('modeloId',this.value)">
-          ${MODELOS.map(m=>`<option value="${m.id}" ${m.id===cita.modeloId?"selected":""}>${m.marca} ${m.n}</option>`).join("")}
+          ${CATALOGO.map(mk=>`<optgroup label="${mk.marca}">
+            ${MODELOS.filter(x=>x.marca===mk.marca).map(m=>
+              `<option value="${m.id}" ${m.id===cita.modeloId?"selected":""}>${m.marca} ${m.n}</option>`
+            ).join("")}</optgroup>`).join("")}
         </select></label>` : `
+      <label class="campo"><span>Marca de tu auto</span>
+        <select onchange="setC('marcaServicio',this.value)">
+          ${Object.keys(MARCA_SUCURSAL).map(mk=>
+            `<option ${mk===cita.marcaServicio?"selected":""}>${mk}</option>`).join("")}
+        </select></label>
       <label class="campo"><span>¿Qué necesita tu auto?</span>
         <select onchange="setC('servicio',this.value)">
           ${SERVICIOS_CITA.map(s=>`<option value="${s.id}" ${s.id===cita.servicio?"selected":""}>${s.n} — ${s.d}</option>`).join("")}
         </select></label>`}
+
+      ${claves.length>1 ? `
+      <label class="campo"><span>Sucursal</span>
+        <select onchange="setC('sucursal',this.value)">
+          ${claves.map(k=>`<option value="${k}" ${k===clave?"selected":""}>${SUCURSALES[k].nombre}</option>`).join("")}
+        </select></label>` : ""}
+
+      <div class="ubic">
+        <div class="ubic-t">📍 ${esc(suc.nombre)}</div>
+        <p>${esc(suc.dir)}</p>
+        <div class="ubic-links">
+          <a href="${suc.maps}" target="_blank" rel="noopener">Cómo llegar →</a>
+          <a href="tel:+52${suc.tel}">Llamar · ${telFmt(suc.tel)}</a>
+        </div>
+      </div>
 
       <label class="campo"><span>Fecha</span>
         <input type="date" min="${hoyMas(1)}" max="${hoyMas(60)}" value="${cita.fecha}"
@@ -993,13 +1235,13 @@ function pintarCita(){
         ? `<div class="aviso">La agencia no abre ese día. Elige otra fecha.</div>`
         : `<div class="campo">
              <span>Hora · ${dia===0?"domingo 11:00 a 18:00":"9:00 a 19:00"}
-               <span style="color:var(--acento)">· las horas tachadas ya están apartadas</span></span>
+               <span style="color:var(--acento)">· las tachadas ya están apartadas</span></span>
              <div class="horas">
-               ${ss.map(h=>{
-                 const ocup = estaOcupado(cita.fecha,h);
-                 return `<button ${ocup?"disabled":""} aria-pressed="${cita.hora===h}"
-                   ${ocup?'title="Horario ya apartado"':''}
-                   onclick="setC('hora','${h}')">${h}</button>`;
+               ${ss.map(hh=>{
+                 const oc = estaOcupado(cita.fecha,hh,clave);
+                 return `<button ${oc?"disabled":""} aria-pressed="${cita.hora===hh}"
+                   ${oc?'title="Horario ya apartado en esta sucursal"':''}
+                   onclick="setC('hora','${hh}')">${hh}</button>`;
                }).join("")}
              </div></div>`) : ""}
 
@@ -1016,7 +1258,7 @@ function pintarCita(){
     </div>
     <div class="mpie">
       <button class="btn btn-p" onclick="enviarCita()">Apartar este horario</button>
-      <a class="btn btn-s" href="tel:+52${CONTACTO.ventas}">Prefiero llamar · ${telFmt(CONTACTO.ventas)}</a>
+      <a class="btn btn-s" href="tel:+52${suc.tel}">Prefiero llamar · ${telFmt(suc.tel)}</a>
       <button class="btn btn-s" style="border:0" onclick="cerrar()">Cancelar</button>
     </div>`;
 }
@@ -1029,9 +1271,10 @@ function enviarCita(){
   if(cita.nombre.trim().length<3) return e.textContent="Escribe tu nombre.";
   if(cita.tel.replace(/\D/g,"").length<10) return e.textContent="El teléfono necesita 10 dígitos.";
 
-  const clave = claveDe(cita.fecha,cita.hora);
+  const {clave:sc, suc} = sucursalDeCita();
+  const clave = claveDe(cita.fecha,cita.hora,sc);
   try {
-    guardarReserva(clave,{tipo:cita.tipo,nombre:cita.nombre,tel:cita.tel});
+    guardarReserva(clave,{tipo:cita.tipo,nombre:cita.nombre,tel:cita.tel,sucursal:sc});
   } catch {
     e.textContent = "Ese horario acaba de apartarse. Elige otro.";
     return pintarCita();
@@ -1043,6 +1286,7 @@ function enviarCita(){
   const msg = [
     esManejo?"Solicitud de prueba de manejo":"Solicitud de cita de servicio","",
     esManejo?`Modelo: ${m.marca} ${m.n}`:`Servicio: ${s.n}`,
+    `Sucursal: ${suc.nombre}`,
     `Fecha: ${fechaLegible(cita.fecha)}`, `Hora: ${cita.hora}`,
     `Nombre: ${cita.nombre}`, `Teléfono: ${cita.tel}`,
     cita.notas?`Notas: ${cita.notas}`:null,
@@ -1057,14 +1301,19 @@ function enviarCita(){
       <div class="resumen">
         <div><span class="k">${esManejo?"Modelo":"Servicio"}</span>
              <span>${esManejo?m.marca+" "+m.n:s.n}</span></div>
+        <div><span class="k">Sucursal</span><span>${esc(suc.nombre)}</span></div>
         <div><span class="k">Fecha</span><span>${fechaLegible(cita.fecha)}</span></div>
         <div><span class="k">Hora</span><span class="num">${cita.hora}</span></div>
         <div><span class="k">A nombre de</span><span>${esc(cita.nombre)}</span></div>
       </div>
+      <div class="ubic" style="text-align:left;margin-bottom:20px">
+        <p>${esc(suc.dir)}</p>
+        <div class="ubic-links"><a href="${suc.maps}" target="_blank" rel="noopener">Cómo llegar →</a></div>
+      </div>
       <div class="mpie" style="padding:0">
-        <a class="btn btn-p" href="${wa(CONTACTO.whatsapp,msg)}">Enviar por WhatsApp</a>
+        <a class="btn btn-p" href="${wa(suc.wa,msg)}">Enviar por WhatsApp</a>
         <button class="btn btn-s" onclick="descargarICS()">Agregar a mi calendario</button>
-        <a class="btn btn-s" href="tel:+52${CONTACTO.ventas}">Llamar a la agencia</a>
+        <a class="btn btn-s" href="tel:+52${suc.tel}">Llamar a ${esc(suc.nombre)}</a>
         <button class="btn btn-s" style="border:0" onclick="cerrar()">Cerrar</button>
       </div>
     </div>`;
@@ -1083,7 +1332,7 @@ function descargarICS(){
     "BEGIN:VEVENT",`UID:${Date.now()}@grupoautomundo.net`,`DTSTAMP:${f(new Date())}`,
     `DTSTART;TZID=America/Mexico_City:${f(ini)}`,`DTEND;TZID=America/Mexico_City:${f(fin)}`,
     `SUMMARY:${esManejo?"Prueba de manejo "+m.marca+" "+m.n:s.n} — Grupo Automundo`,
-    "LOCATION:Av. Adolfo Ruiz Cortines 225\\, Col. Las Margaritas\\, Cd. López Mateos\\, Edo. Méx.",
+    `LOCATION:${sucursalDeCita().suc.dir.replace(/,/g,"\\,")}`,
     `DESCRIPTION:A nombre de ${cita.nombre}. Tel ${cita.tel}.`,
     "BEGIN:VALARM","TRIGGER:-PT2H","ACTION:DISPLAY","DESCRIPTION:Tu cita en BYD Automundo","END:VALARM",
     "END:VEVENT","END:VCALENDAR"].join("\r\n");

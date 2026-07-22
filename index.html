@@ -174,6 +174,53 @@ footer a{text-decoration:underline;text-underline-offset:3px}
 .logo img{max-width:100%;max-height:100%;object-fit:contain}
 .logo span{font-size:11px;font-weight:700;letter-spacing:.08em;text-align:center;line-height:1.2}
 
+/* Calculadora de mensualidad */
+.calc{background:var(--tinta);color:#fff;border-radius:24px;padding:26px}
+.calc h3{font-size:11px;text-transform:uppercase;letter-spacing:.2em;color:rgba(255,255,255,.45);font-weight:400}
+.calc-pago{display:flex;align-items:baseline;gap:8px;margin:6px 0 26px}
+.calc-pago b{font-size:clamp(2.6rem,9vw,3.6rem);font-weight:650;letter-spacing:-.03em}
+.calc-pago i{font-style:normal;font-size:14px;color:rgba(255,255,255,.45)}
+.calc .fila{display:flex;justify-content:space-between;font-size:14px;margin-bottom:10px}
+.calc .fila .k{color:rgba(255,255,255,.65)}
+.calc input[type=range]{width:100%;height:6px;border-radius:99px;appearance:none;-webkit-appearance:none;
+  background:rgba(255,255,255,.15);accent-color:var(--menta)}
+.calc select,.calc input[type=text]{width:100%;min-height:50px;padding:12px 14px;border-radius:12px;
+  border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:#fff;font-size:16px}
+.calc option{color:#14181d}
+.plazos{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:10px}
+.plazos button{min-height:46px;border-radius:12px;font-size:14px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.65)}
+.plazos button[aria-pressed=true]{background:var(--menta);color:var(--tinta);font-weight:600}
+.calc-res{border-top:1px solid rgba(255,255,255,.1);padding-top:16px;margin-top:22px}
+.calc-res .fila{color:rgba(255,255,255,.55)}
+
+/* Panel de edición */
+#panel{display:none;position:fixed;inset:0;z-index:80;background:var(--papel);overflow-y:auto}
+#panel.on{display:block}
+.p-head{position:sticky;top:0;background:var(--papel);border-bottom:1px solid var(--borde);
+  padding:14px 0;z-index:2}
+.p-head .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.p-tabs{display:flex;gap:6px;overflow-x:auto;padding:12px 0 0}
+.p-tabs button{padding:0 14px;min-height:40px;border-radius:99px;font-size:14px;white-space:nowrap;
+  background:#fff;border:1px solid var(--borde);color:var(--suave)}
+.p-tabs button[aria-pressed=true]{background:var(--tinta);color:#fff;border-color:var(--tinta)}
+.p-item{background:#fff;border:1px solid var(--borde);border-radius:16px;padding:16px;margin-bottom:10px}
+.p-item h4{font-size:15px;font-weight:600;margin-bottom:12px;display:flex;justify-content:space-between;gap:10px}
+.p-grid{display:grid;gap:10px;grid-template-columns:1fr}
+@media(min-width:640px){.p-grid{grid-template-columns:repeat(2,1fr)}}
+.p-campo span{display:block;font-size:12px;color:var(--suave);margin-bottom:5px}
+.p-campo input,.p-campo textarea,.p-campo select{width:100%;min-height:44px;padding:10px 12px;
+  border-radius:10px;border:1px solid rgba(20,24,29,.13);background:var(--papel);font-size:15px}
+.p-campo textarea{min-height:72px;resize:vertical}
+.p-borrar{font-size:12px;color:var(--acento);white-space:nowrap}
+.p-add{width:100%;min-height:48px;border:1px dashed rgba(20,24,29,.25);border-radius:14px;
+  color:var(--suave);font-size:14px;margin-bottom:24px}
+.p-nota{background:#fdf4e3;border:1px solid #f0dcbb;color:#7a4d12;border-radius:14px;
+  padding:14px 16px;font-size:13px;line-height:1.6;margin:16px 0}
+#abrirPanel{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:35;
+  width:46px;height:46px;border-radius:99px;background:var(--tinta);color:#fff;font-size:17px;
+  box-shadow:0 4px 16px rgba(20,24,29,.28);opacity:.35;transition:opacity .2s}
+#abrirPanel:hover,#abrirPanel:focus{opacity:1}
+
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -189,6 +236,7 @@ footer a{text-decoration:underline;text-underline-offset:3px}
       <button onclick="ir('lanzamientos')">Lanzamientos</button>
       <button onclick="ir('seminuevos')">Seminuevos</button>
       <button onclick="ir('historia')">Nosotros</button>
+      <button onclick="ir('calculadora')">Calculadora</button>
       <button onclick="abrir('cita')" style="font-weight:600;color:var(--tinta)">Agendar</button>
     </div>
     <button class="burger" onclick="menu()" aria-label="Menú" aria-expanded="false" id="bg">☰</button>
@@ -200,6 +248,7 @@ footer a{text-decoration:underline;text-underline-offset:3px}
     <button onclick="ir('lanzamientos')">Lanzamientos</button>
     <button onclick="ir('seminuevos')">Seminuevos</button>
     <button onclick="ir('historia')">Nosotros</button>
+      <button onclick="ir('calculadora')">Calculadora</button>
     <button onclick="abrir('cita')" style="font-weight:600">Agendar cita</button>
   </div>
 </nav>
@@ -231,7 +280,7 @@ footer a{text-decoration:underline;text-underline-offset:3px}
   <div class="grid g3" id="listaServicios"></div>
 </section>
 
-<!-- MODELOS BYD -->
+<!-- MODELOS -->
 <section id="modelos" class="wrap" style="background:rgba(20,24,29,.02)">
   <div class="eyebrow">Ocho marcas, un solo lugar</div>
   <h2 class="tit">Todos nuestros modelos</h2>
@@ -341,6 +390,38 @@ footer a{text-decoration:underline;text-underline-offset:3px}
     Todas las marcas y logotipos son propiedad de sus respectivos titulares.
     Grupo Automundo los usa como distribuidor autorizado.
   </p>
+
+  <h3 style="font-size:18px;font-weight:620;margin:40px 0 0;letter-spacing:-.02em">Las marcas que representamos</h3>
+  <div class="logos" id="listaLogos"></div>
+  <p class="legal" style="margin-top:14px">
+    Todas las marcas y logotipos son propiedad de sus respectivos titulares.
+    Grupo Automundo los usa como distribuidor autorizado.
+  </p>
+</section>
+
+<!-- CALCULADORA -->
+<section id="calculadora" class="wrap">
+  <div class="eyebrow">Antes de dar tus datos</div>
+  <h2 class="tit">Calcula tu mensualidad</h2>
+  <p class="sub">Mueve el enganche y el plazo y mira el pago al momento. Sin formularios de por medio.</p>
+  <div class="grid g2">
+    <div class="calc" id="calcBox"></div>
+    <div class="card">
+      <h3>Cómo se calcula</h3>
+      <p>Amortización francesa: mensualidad fija durante todo el plazo, donde cada pago cubre
+         intereses del saldo y abona a capital.</p>
+      <div class="meta" style="margin-top:16px">
+        <span>▸ Los modelos con precio publicado se cargan solos</span>
+        <span>▸ Para el resto, escribe el precio que te cotizaron</span>
+        <span>▸ La tasa es editable: pon la que te ofrezca la financiera</span>
+        <span>▸ No incluye seguro, comisión por apertura ni gastos de placas</span>
+      </div>
+      <p class="legal" style="margin-top:16px">
+        Cálculo informativo, no es una oferta de crédito. La tasa y el plazo finales dependen de tu
+        perfil crediticio y de la institución financiera que autorice.
+      </p>
+    </div>
+  </div>
 </section>
 
 <!-- CONTACTO / QUEJAS -->
@@ -388,6 +469,11 @@ footer a{text-decoration:underline;text-underline-offset:3px}
   </div>
 </footer>
 
+<button id="abrirPanel" onclick="abrirPanel()" title="Editar contenido del sitio"
+  aria-label="Editar contenido del sitio">✎</button>
+
+<div id="panel" role="dialog" aria-modal="true" aria-label="Editor de contenido"></div>
+
 <div class="ov" id="ov" role="dialog" aria-modal="true"><div class="modal" id="modal"></div></div>
 
 <script>
@@ -398,7 +484,7 @@ footer a{text-decoration:underline;text-underline-offset:3px}
 /* Contacto principal de la agencia BYD.
    Estos son los números oficiales publicados por la agencia.
    Si quieres usar otro, cámbialo aquí y se actualiza en todo el sitio. */
-const CONTACTO = {
+let CONTACTO = {
   ventas:     "5597249599",
   whatsapp:   "5550703901",
   servicio:   "5534916916",
@@ -406,7 +492,7 @@ const CONTACTO = {
 };
 
 /* ── AGENCIAS DE AUTO NUEVO ── */
-const AGENCIAS = [
+let AGENCIAS = [
   { nombre:"Automundo Interlomas", marcas:"Jeep · Dodge · RAM · Fiat · Peugeot · Alfa Romeo",
     dir:"Paseo de la Herradura 422, Parques de la Herradura, C.P. 52760, Huixquilucan, Edo. Méx.",
     tel:"5530003400", wa:"5545107198",
@@ -451,7 +537,7 @@ const AGENCIAS = [
 ];
 
 /* ── OTROS SERVICIOS ── */
-const SERVICIOS_GRUPO = [
+let SERVICIOS_GRUPO = [
   { nombre:"Seminuevos Grupo Automundo", marcas:"Multimarca · 3 sucursales",
     dir:"Interlomas · Vallejo · Viaducto", tel:"5543297444",
     url:"https://seminuevosgrupoautomundo.com",
@@ -467,7 +553,7 @@ const SERVICIOS_GRUPO = [
 ];
 
 /* ── SUCURSALES DE SEMINUEVOS ── */
-const SEMINUEVOS = [
+let SEMINUEVOS = [
   { nombre:"Seminuevos Interlomas", dir:"Paseo de la Herradura 422, Fracc. Interlomas, C.P. 52760, Huixquilucan, Edo. Méx.",
     tel:"5530003430", horario:"8:00–19:30" },
   { nombre:"Seminuevos Vallejo", dir:"Calzada Vallejo 1059, Nueva Industrial Vallejo, C.P. 07750, GAM, CDMX",
@@ -481,7 +567,7 @@ const SEMINUEVOS = [
    Al elegir un modelo, la cita usa el teléfono y la dirección
    de la agencia que vende esa marca.
    ══════════════════════════════════════════════════════════════ */
-const SUCURSALES = {
+let SUCURSALES = {
   interlomas: { nombre:"Automundo Interlomas",
     dir:"Paseo de la Herradura 422, Parques de la Herradura, C.P. 52760, Huixquilucan, Edo. Méx.",
     tel:"5530003400", wa:"5545107198",
@@ -513,7 +599,7 @@ const SUCURSALES = {
 };
 
 /* Qué agencias venden cada marca. Si hay más de una, el usuario elige. */
-const MARCA_SUCURSAL = {
+let MARCA_SUCURSAL = {
   "BYD":        ["atizapan","pachuca"],
   "Jeep":       ["interlomas","vallejo"],
   "Dodge":      ["interlomas","vallejo"],
@@ -533,10 +619,11 @@ const MARCA_SUCURSAL = {
 
      "Jeep": "/logos/jeep.svg",
    ──────────────────────────────────────────────────────────────── */
-const LOGOS = {
+let LOGOS = {
   "BYD":null, "Jeep":null, "Dodge":null, "RAM":null,
   "Fiat":null, "Peugeot":null, "Alfa Romeo":null, "Mitsubishi":null,
 };
+
 
 /* ══════════════════════════════════════════════════════════════
    CATÁLOGO POR MARCA
@@ -547,7 +634,7 @@ const LOGOS = {
    Alfa Romeo muestra un precio de plantilla en su sitio que NO
    es real por modelo, por eso va como cotización.
    ══════════════════════════════════════════════════════════════ */
-const CATALOGO = [
+let CATALOGO = [
 { marca:"BYD", color:"#2B7A6F", sitio:"https://www.bydatizapan.com",
   agencia:"BYD Automundo Atizapán", modelos:[
   { n:"Dolphin Mini", carr:"Hatchback", motor:"Eléctrico", precio:null, tono:"#7ED8C3",
@@ -741,7 +828,7 @@ const CATALOGO = [
 ];
 
 /* Aplanado: cada modelo con su marca, para filtrar en un solo arreglo */
-const MODELOS = CATALOGO.flatMap(m => m.modelos.map((v,i) => ({
+let MODELOS = CATALOGO.flatMap(m => m.modelos.map((v,i) => ({
   ...v, id:`${m.marca}-${i}`, marca:m.marca, marcaColor:m.color,
   agencia:m.agencia,
   url: v.u.startsWith("/") && m.marca!=="Mitsubishi" && m.marca!=="Alfa Romeo" && m.marca!=="BYD"
@@ -757,7 +844,7 @@ const MODELOS = CATALOGO.flatMap(m => m.modelos.map((v,i) => ({
    Actualiza VIGENCIA y los montos con el PDF legal que te dé BYD.
    Si CONFIRMADO = false, el sitio muestra el aviso de "sujeto a confirmar".
    ══════════════════════════════════════════════════════════════ */
-const PROMOS_META = {
+let PROMOS_META = {
   vigencia: "30 de junio de 2026",
   banco: "Banorte",
   confirmado: false,
@@ -768,7 +855,7 @@ const PROMOS_META = {
     "informativos y de comparación. Vigente hasta la fecha indicada o hasta agotar existencias.",
 };
 
-const PROMOS = [
+let PROMOS = [
   { modelo:"Dolphin Mini 300 km", beneficio:"Mensualidad desde $3,160", bono:25000, tasa:"3.89%", plazo:"72 meses", cat:"4.7%" },
   { modelo:"Dolphin Mini 380 km", beneficio:"Mensualidad desde $3,230", bono:30000, tasa:"3.24%", plazo:"72 meses", cat:"4.0%" },
   { modelo:"King DM-i",           beneficio:"Mensualidad desde $3,887", bono:35000, tasa:"3.39%", plazo:"72 meses", cat:"4.2%" },
@@ -780,7 +867,7 @@ const PROMOS = [
   { modelo:"M9",                  beneficio:"60 meses sin intereses",   bono:100000,tasa:"0%",    plazo:"60 MSI",   cat:"1.0%" },
 ];
 
-const LANZAMIENTOS = [
+let LANZAMIENTOS = [
   { nombre:"Nueva Outlander 2026", marca:"Mitsubishi", url:"https://www.mitsubishi-interlomas.mx",
     desc:"La SUV insignia de Mitsubishi renovada, ya disponible en nuestras agencias Mitsubishi." },
   { nombre:"Nuevas Peugeot 3008 y 5008", marca:"Peugeot", url:"https://www.interlomaschrysler.com.mx/peugeot/",
@@ -789,7 +876,7 @@ const LANZAMIENTOS = [
     desc:"La primera SUV de BYD de más de 5 metros, híbrida enchufable con 7 plazas." },
 ];
 
-const VALORES = [
+let VALORES = [
   ["Respeto","Fomentamos la capacidad de aceptar diferentes criterios, escuchamos a todos con atención y valoramos sus aportes."],
   ["Honestidad","Ser congruentes con lo que decimos, pensamos y hacemos, regir nuestra conducta bajo principios de ética."],
   ["Constancia","Alcanzar las metas que nos hemos propuesto con firmeza y perseverancia."],
@@ -798,7 +885,7 @@ const VALORES = [
   ["Pasión","Ese sentimiento de absoluta satisfacción que produce algo en nosotros. Tener pasión por algo es querer repetirlo siempre."],
 ];
 
-const HITOS = [
+let HITOS = [
   { año:"1966", t:"Nace Automundo", d:"La familia Grinberg funda el grupo con la distribución de autos en la Ciudad de México." },
   { año:"2024", t:"Stellantis Brand House", d:"Automundo Interlomas se convierte en la primera agencia de Latinoamérica con este concepto." },
   { año:"2026", t:"Mitsubishi Vallejo", d:"Abre la segunda agencia Mitsubishi del grupo, sobre Calzada Vallejo." },
@@ -842,34 +929,11 @@ function tarjetaAgencia(a){
     <span class="ir">Ir al sitio →</span></a>`;
 }
 
-document.getElementById("listaAgencias").innerHTML = AGENCIAS.map(tarjetaAgencia).join("");
-document.getElementById("listaServicios").innerHTML = SERVICIOS_GRUPO.map(tarjetaAgencia).join("");
 
-document.getElementById("listaSeminuevos").innerHTML = SEMINUEVOS.map(s=>`
-  <div class="card"><h3 style="font-size:17px">${esc(s.nombre)}</h3>
-    <div class="meta"><span>📍 ${esc(s.dir)}</span><span>🕐 ${esc(s.horario)}</span>
-      <span>📞 ${telFmt(s.tel)}</span></div></div>`).join("");
 
-document.getElementById("listaValores").innerHTML = VALORES.map(([t,d])=>
-  `<div class="valor"><b>${t}</b><p>${d}</p></div>`).join("");
-
-document.getElementById("listaHitos").innerHTML = HITOS.map(h=>
-  `<div class="card"><span class="chip">${h.año}</span><h3 style="font-size:17px">${h.t}</h3>
-   <p>${h.d}</p></div>`).join("");
-
-document.getElementById("listaLanzamientos").innerHTML = LANZAMIENTOS.map(l=>
-  `<a class="card" href="${l.url}" target="_blank" rel="noopener">
-    <span class="chip rojo">${l.marca}</span><h3>${esc(l.nombre)}</h3><p>${esc(l.desc)}</p>
-    <span class="ir">Conocer más →</span></a>`).join("");
-
-document.getElementById("contactoDirecto").innerHTML = `
-  <span>📞 Ventas · ${telFmt(CONTACTO.ventas)}</span>
-  <span>🔧 Servicio · ${telFmt(CONTACTO.servicio)}</span>
-  <span>🏢 Corporativo · ${telFmt(CONTACTO.corporativo)}</span>
-  <span style="margin-top:8px"><a href="${wa(CONTACTO.whatsapp,'Hola, tengo una pregunta.')}"
-    style="text-decoration:underline;text-underline-offset:3px">Escribir por WhatsApp →</a></span>`;
 
 /* Promociones */
+function pintarPromos(){
 document.getElementById("avisoPromo").innerHTML = PROMOS_META.confirmado
   ? `Promociones vigentes al <b>${PROMOS_META.vigencia}</b>, con financiamiento ${PROMOS_META.banco}.`
   : `Los montos mostrados corresponden a la última promoción publicada oficialmente
@@ -888,6 +952,7 @@ document.getElementById("listaPromos").innerHTML = PROMOS.map(p=>`
   </div>`).join("");
 
 document.getElementById("letrasChicas").textContent = PROMOS_META.letras;
+}
 
 /* Modelos: filtro por marca y por tipo */
 let fMarca = "Todas", fTipo = "Todos";
@@ -900,7 +965,7 @@ function pintarFiltros(){
   document.getElementById("filtros2").innerHTML =
     TIPOS.map(t=>`<button aria-pressed="${t===fTipo}" onclick="setTipo('${t}')">${t}</button>`).join("");
 }
-function setMarca(m){ fMarca=m; pintarFiltros(); pintarModelos(); }
+function setMarca(m){ fMarca=m;  }
 function setTipo(t){ fTipo=t; pintarFiltros(); pintarModelos(); }
 function limpiarModelos(){ fMarca="Todas"; fTipo="Todos"; pintarFiltros(); pintarModelos(); }
 
@@ -947,7 +1012,92 @@ function pintarModelos(){
 }
 pintarFiltros(); pintarModelos();
 
+/* ══════════════════════════════════════════════════════════════
+   CALCULADORA DE MENSUALIDAD — amortización francesa
+   ══════════════════════════════════════════════════════════════ */
+function mensualidad(precio, enganche, tasaAnual, meses){
+  const P = precio - enganche;
+  if (P <= 0) return 0;
+  const i = tasaAnual / 12 / 100;
+  return i === 0 ? P/meses : (P*i)/(1 - Math.pow(1+i, -meses));
+}
+
+const PLAZOS_CALC = [24,36,48,60,72];
+let calc = { modeloId:"", precio:609900, pct:30, meses:48, tasa:13.9 };
+
+function setCalc(k,v){
+  if(k==="modeloId"){
+    calc.modeloId = v;
+    const m = MODELOS.find(x=>x.id===v);
+    if(m && m.precio) calc.precio = m.precio;
+  }
+  else if(k==="precio"){ calc.precio = Number(String(v).replace(/[^\d]/g,"")) || 0; }
+  else if(k==="tasa"){ calc.tasa = Math.max(0, Number(String(v).replace(/[^\d.]/g,"")) || 0); }
+  else calc[k] = Number(v);
+  pintarCalc(k==="precio" || k==="tasa");
+}
+
+function pintarCalc(conservarFoco){
+  const conPrecio = MODELOS.filter(m=>m.precio);
+  const enganche = Math.round(calc.precio * calc.pct / 100);
+  const pago = mensualidad(calc.precio, enganche, calc.tasa, calc.meses);
+  const total = pago * calc.meses + enganche;
+
+  document.getElementById("calcBox").innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:baseline">
+      <h3>Tu mensualidad</h3>
+      <span style="font-size:11px;color:rgba(255,255,255,.4)">${calc.meses} meses</span>
+    </div>
+    <div class="calc-pago"><b class="num">${mxn(pago)}</b><i>/ mes</i></div>
+
+    <label style="display:block;margin-bottom:14px">
+      <span class="fila"><span class="k">Modelo</span></span>
+      <select onchange="setCalc('modeloId',this.value)">
+        <option value="">Escribir precio manualmente</option>
+        ${conPrecio.map(m=>`<option value="${m.id}" ${m.id===calc.modeloId?"selected":""}>
+          ${m.marca} ${m.n} — ${mxn(m.precio)}</option>`).join("")}
+      </select></label>
+
+    <div class="p-grid" style="margin-bottom:16px">
+      <label><span class="fila"><span class="k">Precio del auto</span></span>
+        <input type="text" inputmode="numeric" id="inpPrecio"
+          value="${calc.precio.toLocaleString("es-MX")}" oninput="setCalc('precio',this.value)"></label>
+      <label><span class="fila"><span class="k">Tasa anual %</span></span>
+        <input type="text" inputmode="decimal" id="inpTasa"
+          value="${calc.tasa}" oninput="setCalc('tasa',this.value)"></label>
+    </div>
+
+    <label style="display:block;margin-bottom:18px">
+      <span class="fila"><span class="k">Enganche</span>
+        <span class="num">${mxn(enganche)} · ${calc.pct}%</span></span>
+      <input type="range" min="0" max="60" step="5" value="${calc.pct}"
+        oninput="setCalc('pct',this.value)" aria-label="Porcentaje de enganche"></label>
+
+    <div>
+      <div class="fila"><span class="k">Plazo en meses</span></div>
+      <div class="plazos">
+        ${PLAZOS_CALC.map(p=>`<button aria-pressed="${calc.meses===p}"
+          onclick="setCalc('meses',${p})">${p}</button>`).join("")}
+      </div>
+    </div>
+
+    <div class="calc-res">
+      <div class="fila"><span>Monto a financiar</span><span class="num">${mxn(calc.precio-enganche)}</span></div>
+      <div class="fila"><span>Costo total</span><span class="num">${mxn(total)}</span></div>
+    </div>
+
+    <a class="btn" style="background:#fff;color:var(--tinta);margin-top:20px"
+       href="${wa(CONTACTO.whatsapp,`Hola, calculé una mensualidad de ${mxn(pago)} a ${calc.meses} meses con ${mxn(enganche)} de enganche. Quiero más información.`)}">
+       Mandar esta cotización</a>`;
+
+  if(conservarFoco){
+    const el = document.getElementById(conservarFoco===true?"inpPrecio":"inpPrecio");
+    if(el){ el.focus(); el.setSelectionRange(el.value.length, el.value.length); }
+  }
+}
+
 /* ── Logos de marca ── */
+function pintarLogos(){
 document.getElementById("listaLogos").innerHTML = CATALOGO.map(m=>{
   const src = LOGOS[m.marca];
   const dentro = src
@@ -956,6 +1106,349 @@ document.getElementById("listaLogos").innerHTML = CATALOGO.map(m=>{
   return `<a class="logo" href="${m.sitio}" target="_blank" rel="noopener"
     title="${m.marca} · ${m.agencia}">${dentro}</a>`;
 }).join("");
+}
+
+
+/* ── Logos de marca ── */
+function pintarLogos(){
+  document.getElementById("listaLogos").innerHTML = CATALOGO.map(m=>{
+    const src = LOGOS[m.marca];
+    const dentro = src
+      ? `<img src="${src}" alt="Logo ${esc(m.marca)}" loading="lazy">`
+      : `<span style="color:${m.color}">${esc(m.marca.toUpperCase())}</span>`;
+    return `<a class="logo" href="${m.sitio}" target="_blank" rel="noopener"
+      title="${esc(m.marca)} · ${esc(m.agencia)}">${dentro}</a>`;
+  }).join("");
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PANEL DE EDICIÓN
+
+   Cómo funciona el guardado, en corto:
+   · Guardas → se escribe en localStorage de ESTE navegador.
+     Sirve para trabajar y ver los cambios al instante, pero
+     nadie más los ve.
+   · Exportar → te descarga contenido.json con todo lo editado.
+     Para que los cambios sean permanentes y públicos, pega ese
+     JSON dentro de DATOS_GUARDADOS más abajo y vuelve a subir
+     el archivo. Eso ya lo ve todo el mundo.
+   · Importar → carga un contenido.json que hayas exportado antes.
+
+   Si algún día montas backend, cambia guardarTodo() por un POST
+   y cargarGuardado() por un GET a tu API.
+   ══════════════════════════════════════════════════════════════ */
+
+const LLAVE_DATOS = "automundo_contenido_v1";
+
+/* Pega aquí el JSON exportado para dejar los cambios fijos en el sitio.
+   Ejemplo:  const DATOS_GUARDADOS = { "CATALOGO":[...], "PROMOS":[...] };  */
+const DATOS_GUARDADOS = null;
+
+const EDITABLES = {
+  CATALOGO:()=>CATALOGO, SUCURSALES:()=>SUCURSALES, AGENCIAS:()=>AGENCIAS,
+  PROMOS:()=>PROMOS, PROMOS_META:()=>PROMOS_META, SERVICIOS_CITA:()=>SERVICIOS_CITA,
+  LANZAMIENTOS:()=>LANZAMIENTOS, CONTACTO:()=>CONTACTO,
+  SEMINUEVOS:()=>SEMINUEVOS, SERVICIOS_GRUPO:()=>SERVICIOS_GRUPO, LOGOS:()=>LOGOS,
+};
+
+function aplicar(d){
+  if(!d) return;
+  if(d.CATALOGO) CATALOGO = d.CATALOGO;
+  if(d.SUCURSALES) SUCURSALES = d.SUCURSALES;
+  if(d.AGENCIAS) AGENCIAS = d.AGENCIAS;
+  if(d.PROMOS) PROMOS = d.PROMOS;
+  if(d.PROMOS_META) PROMOS_META = d.PROMOS_META;
+  if(d.SERVICIOS_CITA) SERVICIOS_CITA = d.SERVICIOS_CITA;
+  if(d.LANZAMIENTOS) LANZAMIENTOS = d.LANZAMIENTOS;
+  if(d.CONTACTO) CONTACTO = d.CONTACTO;
+  if(d.SEMINUEVOS) SEMINUEVOS = d.SEMINUEVOS;
+  if(d.SERVICIOS_GRUPO) SERVICIOS_GRUPO = d.SERVICIOS_GRUPO;
+  if(d.LOGOS) LOGOS = d.LOGOS;
+  recalcularModelos();
+}
+
+function recalcularModelos(){
+  MODELOS = CATALOGO.flatMap(m => m.modelos.map((v,i) => ({
+    ...v, id:`${m.marca}-${i}`, marca:m.marca, marcaColor:m.color, agencia:m.agencia,
+    url: v.u.startsWith("http") ? v.u
+       : (m.marca==="BYD" || m.marca==="Mitsubishi" || m.marca==="Alfa Romeo"
+          ? m.sitio.replace(/\/$/,"") + v.u
+          : "https://www.interlomaschrysler.com.mx/" + v.u)
+  })));
+}
+
+function cargarGuardado(){
+  try{
+    const local = JSON.parse(localStorage.getItem(LLAVE_DATOS));
+    aplicar(local || DATOS_GUARDADOS);
+  }catch{ aplicar(DATOS_GUARDADOS); }
+}
+
+function guardarTodo(){
+  const d = {};
+  Object.keys(EDITABLES).forEach(k => d[k] = EDITABLES[k]());
+  try{
+    localStorage.setItem(LLAVE_DATOS, JSON.stringify(d));
+    avisoPanel("Guardado en este navegador. Usa Exportar para dejarlo fijo en el sitio.");
+  }catch{
+    avisoPanel("No se pudo guardar (¿modo privado?). Usa Exportar para no perder los cambios.", true);
+  }
+  redibujarTodo();
+}
+
+function exportarTodo(){
+  const d = {};
+  Object.keys(EDITABLES).forEach(k => d[k] = EDITABLES[k]());
+  const url = URL.createObjectURL(new Blob([JSON.stringify(d,null,2)],{type:"application/json"}));
+  const a = document.createElement("a");
+  a.href=url; a.download="contenido.json";
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+  avisoPanel("Descargado contenido.json. Pégalo en DATOS_GUARDADOS para hacerlo permanente.");
+}
+
+function importarTodo(input){
+  const f = input.files[0];
+  if(!f) return;
+  const fr = new FileReader();
+  fr.onload = () => {
+    try{
+      aplicar(JSON.parse(fr.result));
+      guardarTodo();
+      pintarPanel();
+      avisoPanel("Contenido importado.");
+    }catch{ avisoPanel("Ese archivo no es un contenido.json válido.", true); }
+  };
+  fr.readAsText(f);
+}
+
+function restaurar(){
+  if(!confirm("¿Descartar tus cambios y volver al contenido original del archivo?")) return;
+  try{ localStorage.removeItem(LLAVE_DATOS); }catch{}
+  location.reload();
+}
+
+function avisoPanel(txt, malo){
+  const el = document.getElementById("avisoP");
+  if(!el) return;
+  el.textContent = txt;
+  el.style.display = "block";
+  el.style.background = malo ? "#fdecea" : "#eefaf4";
+  el.style.borderColor = malo ? "#f5c6c0" : "#bfe9d6";
+  el.style.color = malo ? "#8a2f26" : "#1d6b4c";
+  clearTimeout(avisoPanel.t);
+  avisoPanel.t = setTimeout(()=>{ el.style.display="none"; }, 4000);
+}
+
+/* ── Redibuja el sitio con los datos actuales ── */
+function redibujarTodo(){
+  document.getElementById("listaAgencias").innerHTML = AGENCIAS.map(tarjetaAgencia).join("");
+  document.getElementById("listaServicios").innerHTML = SERVICIOS_GRUPO.map(tarjetaAgencia).join("");
+  document.getElementById("listaSeminuevos").innerHTML = SEMINUEVOS.map(s=>`
+    <div class="card"><h3 style="font-size:17px">${esc(s.nombre)}</h3>
+      <div class="meta"><span>📍 ${esc(s.dir)}</span><span>🕐 ${esc(s.horario)}</span>
+        <span>📞 ${telFmt(s.tel)}</span></div></div>`).join("");
+  document.getElementById("listaLanzamientos").innerHTML = LANZAMIENTOS.map(l=>
+    `<a class="card" href="${l.url}" target="_blank" rel="noopener">
+      <span class="chip rojo">${esc(l.marca)}</span><h3>${esc(l.nombre)}</h3><p>${esc(l.desc)}</p>
+      <span class="ir">Conocer más →</span></a>`).join("");
+  pintarPromos(); pintarLogos();
+}
+
+/* ── Panel ── */
+let tabActivo = "CATALOGO";
+const TABS = [
+  ["CATALOGO","Modelos"],["SUCURSALES","Sucursales"],["AGENCIAS","Agencias"],
+  ["PROMOS","Promociones"],["SERVICIOS_CITA","Servicios"],["LANZAMIENTOS","Lanzamientos"],
+  ["CONTACTO","Contacto"],
+];
+
+function abrirPanel(){
+  document.getElementById("panel").classList.add("on");
+  document.body.style.overflow="hidden";
+  pintarPanel();
+}
+function cerrarPanel(){
+  document.getElementById("panel").classList.remove("on");
+  document.body.style.overflow="";
+}
+function setTab(t){ tabActivo=t; pintarPanel(); }
+
+function campo(label, valor, onInput, tipo){
+  const v = valor===null||valor===undefined ? "" : String(valor);
+  const control = tipo==="area"
+    ? `<textarea oninput="${onInput}">${esc(v)}</textarea>`
+    : `<input type="text" value="${esc(v)}" oninput="${onInput}">`;
+  return `<label class="p-campo"><span>${label}</span>${control}</label>`;
+}
+
+function pintarPanel(){
+  document.getElementById("panel").innerHTML = `
+    <div class="p-head"><div class="wrap">
+      <div>
+        <b style="font-size:17px;letter-spacing:-.02em">Editor de contenido</b>
+        <p style="font-size:12px;color:var(--suave)">Los cambios se guardan en este navegador</p>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-p" style="min-height:42px;padding:0 16px" onclick="guardarTodo()">Guardar</button>
+        <button class="btn btn-s" style="min-height:42px;padding:0 16px" onclick="exportarTodo()">Exportar</button>
+        <label class="btn btn-s" style="min-height:42px;padding:0 16px;cursor:pointer">Importar
+          <input type="file" accept="application/json" style="display:none" onchange="importarTodo(this)"></label>
+        <button class="btn btn-s" style="min-height:42px;padding:0 16px" onclick="restaurar()">Restaurar</button>
+        <button class="btn btn-s" style="min-height:42px;padding:0 16px;border:0" onclick="cerrarPanel()">Cerrar ✕</button>
+      </div>
+      <div class="p-tabs" style="width:100%">
+        ${TABS.map(([k,n])=>`<button aria-pressed="${k===tabActivo}" onclick="setTab('${k}')">${n}</button>`).join("")}
+      </div>
+    </div></div>
+
+    <div class="wrap" style="padding-top:20px;padding-bottom:60px">
+      <div id="avisoP" class="p-nota" style="display:none"></div>
+      <div class="p-nota">
+        <b>Para que los cambios los vea todo el mundo:</b> edita aquí, dale Guardar, luego
+        Exportar, y pega el contenido de <code>contenido.json</code> en la constante
+        <code>DATOS_GUARDADOS</code> del archivo. Si solo guardas, los cambios viven
+        únicamente en este navegador.
+      </div>
+      ${cuerpoPanel()}
+    </div>`;
+}
+
+function cuerpoPanel(){
+  if(tabActivo==="CATALOGO") return CATALOGO.map((mk,i)=>`
+    <div class="p-item">
+      <h4>${esc(mk.marca)} <span style="font-weight:400;color:var(--suave)">${mk.modelos.length} modelos</span></h4>
+      <div class="p-grid">
+        ${campo("Marca",mk.marca,`CATALOGO[${i}].marca=this.value`)}
+        ${campo("Color",mk.color,`CATALOGO[${i}].color=this.value`)}
+        ${campo("Sitio",mk.sitio,`CATALOGO[${i}].sitio=this.value`)}
+        ${campo("Agencia",mk.agencia,`CATALOGO[${i}].agencia=this.value`)}
+      </div>
+      <div style="margin-top:14px">
+        ${mk.modelos.map((v,j)=>`
+          <div class="p-item" style="background:var(--papel)">
+            <h4>${esc(v.n)}
+              <button class="p-borrar" onclick="borrarModelo(${i},${j})">Eliminar</button></h4>
+            <div class="p-grid">
+              ${campo("Nombre",v.n,`CATALOGO[${i}].modelos[${j}].n=this.value`)}
+              ${campo("Carrocería",v.carr,`CATALOGO[${i}].modelos[${j}].carr=this.value`)}
+              ${campo("Motorización",v.motor,`CATALOGO[${i}].modelos[${j}].motor=this.value`)}
+              ${campo("Precio (vacío = cotizar)",v.precio,`CATALOGO[${i}].modelos[${j}].precio=this.value?Number(this.value.replace(/[^0-9]/g,'')):null`)}
+              ${campo("Color de silueta",v.tono,`CATALOGO[${i}].modelos[${j}].tono=this.value`)}
+              ${campo("Ruta de ficha",v.u,`CATALOGO[${i}].modelos[${j}].u=this.value`)}
+            </div>
+            ${campo("Descripción",v.d,`CATALOGO[${i}].modelos[${j}].d=this.value`,"area")}
+          </div>`).join("")}
+        <button class="p-add" onclick="agregarModelo(${i})">+ Agregar modelo a ${esc(mk.marca)}</button>
+      </div>
+    </div>`).join("");
+
+  if(tabActivo==="SUCURSALES") return Object.keys(SUCURSALES).map(k=>`
+    <div class="p-item"><h4>${esc(SUCURSALES[k].nombre)}</h4>
+      <div class="p-grid">
+        ${campo("Nombre",SUCURSALES[k].nombre,`SUCURSALES['${k}'].nombre=this.value`)}
+        ${campo("Teléfono",SUCURSALES[k].tel,`SUCURSALES['${k}'].tel=this.value.replace(/[^0-9]/g,'')`)}
+        ${campo("WhatsApp",SUCURSALES[k].wa,`SUCURSALES['${k}'].wa=this.value.replace(/[^0-9]/g,'')`)}
+        ${campo("Link de Maps",SUCURSALES[k].maps,`SUCURSALES['${k}'].maps=this.value`)}
+      </div>
+      ${campo("Dirección",SUCURSALES[k].dir,`SUCURSALES['${k}'].dir=this.value`,"area")}
+    </div>`).join("");
+
+  if(tabActivo==="AGENCIAS") return AGENCIAS.map((a,i)=>`
+    <div class="p-item"><h4>${esc(a.nombre)}
+      <button class="p-borrar" onclick="borrarDe('AGENCIAS',${i})">Eliminar</button></h4>
+      <div class="p-grid">
+        ${campo("Nombre",a.nombre,`AGENCIAS[${i}].nombre=this.value`)}
+        ${campo("Marcas",a.marcas,`AGENCIAS[${i}].marcas=this.value`)}
+        ${campo("Teléfono",a.tel,`AGENCIAS[${i}].tel=this.value.replace(/[^0-9]/g,'')`)}
+        ${campo("WhatsApp",a.wa,`AGENCIAS[${i}].wa=this.value.replace(/[^0-9]/g,'')`)}
+        ${campo("Horario",a.horario,`AGENCIAS[${i}].horario=this.value`)}
+        ${campo("Sitio",a.url,`AGENCIAS[${i}].url=this.value`)}
+      </div>
+      ${campo("Dirección",a.dir,`AGENCIAS[${i}].dir=this.value`,"area")}
+      ${campo("Nota",a.nota,`AGENCIAS[${i}].nota=this.value`,"area")}
+    </div>`).join("") + `<button class="p-add" onclick="agregarA('AGENCIAS')">+ Agregar agencia</button>`;
+
+  if(tabActivo==="PROMOS") return `
+    <div class="p-item"><h4>Ajustes generales</h4>
+      <div class="p-grid">
+        ${campo("Vigencia",PROMOS_META.vigencia,`PROMOS_META.vigencia=this.value`)}
+        ${campo("Banco",PROMOS_META.banco,`PROMOS_META.banco=this.value`)}
+        ${campo("¿Confirmada? (si/no)",PROMOS_META.confirmado?"si":"no",`PROMOS_META.confirmado=this.value.toLowerCase().startsWith('s')`)}
+      </div>
+      ${campo("Letras chicas",PROMOS_META.letras,`PROMOS_META.letras=this.value`,"area")}
+    </div>` + PROMOS.map((p,i)=>`
+    <div class="p-item"><h4>${esc(p.modelo)}
+      <button class="p-borrar" onclick="borrarDe('PROMOS',${i})">Eliminar</button></h4>
+      <div class="p-grid">
+        ${campo("Modelo",p.modelo,`PROMOS[${i}].modelo=this.value`)}
+        ${campo("Beneficio",p.beneficio,`PROMOS[${i}].beneficio=this.value`)}
+        ${campo("Bono",p.bono,`PROMOS[${i}].bono=Number(this.value.replace(/[^0-9]/g,''))||0`)}
+        ${campo("Tasa",p.tasa,`PROMOS[${i}].tasa=this.value`)}
+        ${campo("Plazo",p.plazo,`PROMOS[${i}].plazo=this.value`)}
+        ${campo("CAT",p.cat,`PROMOS[${i}].cat=this.value`)}
+      </div>
+    </div>`).join("") + `<button class="p-add" onclick="agregarA('PROMOS')">+ Agregar promoción</button>`;
+
+  if(tabActivo==="SERVICIOS_CITA") return SERVICIOS_CITA.map((s,i)=>`
+    <div class="p-item"><h4>${esc(s.n)}
+      <button class="p-borrar" onclick="borrarDe('SERVICIOS_CITA',${i})">Eliminar</button></h4>
+      <div class="p-grid">
+        ${campo("Nombre",s.n,`SERVICIOS_CITA[${i}].n=this.value`)}
+        ${campo("Detalle",s.d,`SERVICIOS_CITA[${i}].d=this.value`)}
+        ${campo("Minutos",s.min,`SERVICIOS_CITA[${i}].min=Number(this.value.replace(/[^0-9]/g,''))||30`)}
+        ${campo("¿Exprés? (si/no)",s.rapido?"si":"no",`SERVICIOS_CITA[${i}].rapido=this.value.toLowerCase().startsWith('s')`)}
+      </div>
+    </div>`).join("") + `<button class="p-add" onclick="agregarA('SERVICIOS_CITA')">+ Agregar servicio</button>`;
+
+  if(tabActivo==="LANZAMIENTOS") return LANZAMIENTOS.map((l,i)=>`
+    <div class="p-item"><h4>${esc(l.nombre)}
+      <button class="p-borrar" onclick="borrarDe('LANZAMIENTOS',${i})">Eliminar</button></h4>
+      <div class="p-grid">
+        ${campo("Nombre",l.nombre,`LANZAMIENTOS[${i}].nombre=this.value`)}
+        ${campo("Marca",l.marca,`LANZAMIENTOS[${i}].marca=this.value`)}
+        ${campo("Link",l.url,`LANZAMIENTOS[${i}].url=this.value`)}
+      </div>
+      ${campo("Descripción",l.desc,`LANZAMIENTOS[${i}].desc=this.value`,"area")}
+    </div>`).join("") + `<button class="p-add" onclick="agregarA('LANZAMIENTOS')">+ Agregar lanzamiento</button>`;
+
+  if(tabActivo==="CONTACTO") return `
+    <div class="p-item"><h4>Teléfonos principales</h4>
+      <div class="p-grid">
+        ${campo("Ventas",CONTACTO.ventas,`CONTACTO.ventas=this.value.replace(/[^0-9]/g,'')`)}
+        ${campo("WhatsApp",CONTACTO.whatsapp,`CONTACTO.whatsapp=this.value.replace(/[^0-9]/g,'')`)}
+        ${campo("Servicio",CONTACTO.servicio,`CONTACTO.servicio=this.value.replace(/[^0-9]/g,'')`)}
+        ${campo("Corporativo",CONTACTO.corporativo,`CONTACTO.corporativo=this.value.replace(/[^0-9]/g,'')`)}
+      </div>
+    </div>`;
+  return "";
+}
+
+function borrarModelo(i,j){
+  if(!confirm(`¿Eliminar ${CATALOGO[i].modelos[j].n}?`)) return;
+  CATALOGO[i].modelos.splice(j,1); recalcularModelos(); pintarPanel();
+}
+function agregarModelo(i){
+  CATALOGO[i].modelos.push({n:"Nuevo modelo",carr:"SUV",motor:"Gasolina",precio:null,
+    tono:CATALOGO[i].color,d:"Descripción del modelo.",s:[["","" ]],u:"/"});
+  recalcularModelos(); pintarPanel();
+}
+function borrarDe(lista,i){
+  const L = {AGENCIAS,PROMOS,SERVICIOS_CITA,LANZAMIENTOS}[lista];
+  if(!confirm("¿Eliminar este elemento?")) return;
+  L.splice(i,1); pintarPanel();
+}
+function agregarA(lista){
+  const plantillas = {
+    AGENCIAS:{nombre:"Nueva agencia",marcas:"Marca",dir:"Dirección",tel:"5500000000",
+              wa:"5500000000",horario:"L-V 9:00–19:00",url:"https://",nota:""},
+    PROMOS:{modelo:"Modelo",beneficio:"Beneficio",bono:0,tasa:"0%",plazo:"12 meses",cat:"0%"},
+    SERVICIOS_CITA:{id:"srv"+Date.now(),n:"Nuevo servicio",d:"Detalle",min:30,rapido:false},
+    LANZAMIENTOS:{nombre:"Nuevo lanzamiento",marca:"Marca",url:"https://",desc:"Descripción."},
+  };
+  ({AGENCIAS,PROMOS,SERVICIOS_CITA,LANZAMIENTOS})[lista].push(plantillas[lista]);
+  pintarPanel();
+}
 
 /* ══════════════════════════════════════════════════════════════
    AGENDA CON BLOQUEO DE HORARIOS
@@ -988,13 +1481,26 @@ document.getElementById("listaLogos").innerHTML = CATALOGO.map(m=>{
 
 const LLAVE = "automundo_reservas_v1";
 const HORARIO_AGENCIA = { 1:[9,19],2:[9,19],3:[9,19],4:[9,19],5:[9,19],6:[9,19],0:[11,18] };
-const SERVICIOS_CITA = [
-  {id:"mantenimiento",n:"Mantenimiento programado",d:"10, 20, 30 mil km",min:90},
-  {id:"revision",     n:"Revisión general",        d:"Diagnóstico multipunto",min:60},
-  {id:"bateria",      n:"Diagnóstico de batería",  d:"Estado de celdas y carga",min:60},
-  {id:"frenos",       n:"Frenos y suspensión",     d:"Balatas, discos, amortiguadores",min:90},
-  {id:"garantia",     n:"Garantía",                d:"Falla cubierta por BYD",min:60},
-  {id:"software",     n:"Actualización de software",d:"Sistema del vehículo",min:45},
+let SERVICIOS_CITA = [
+  /* rapidos: true = servicio exprés, sin dejar el auto */
+  {id:"llantas",      n:"Inflado y revisión de llantas", d:"Presión, desgaste y torque", min:15, rapido:true},
+  {id:"lavado",       n:"Lavado y aspirado",             d:"Exterior e interior",        min:30, rapido:true},
+  {id:"bateria12",    n:"Revisión de batería 12V",       d:"Carga y bornes",             min:20, rapido:true},
+  {id:"niveles",      n:"Revisión de niveles",           d:"Aceite, refrigerante, limpiaparabrisas", min:20, rapido:true},
+  {id:"limpiadores",  n:"Cambio de plumillas",           d:"Limpiaparabrisas",           min:15, rapido:true},
+  {id:"aceite",       n:"Cambio de aceite y filtro",     d:"Servicio de lubricación",    min:60},
+  {id:"alineacion",   n:"Alineación y balanceo",         d:"Cuatro ruedas",              min:60},
+  {id:"rotacion",     n:"Rotación de llantas",           d:"Desgaste parejo",            min:45},
+  {id:"mantenimiento",n:"Mantenimiento programado",      d:"10, 20, 30 mil km",          min:90},
+  {id:"revision",     n:"Revisión general",              d:"Diagnóstico multipunto",     min:60},
+  {id:"frenos",       n:"Frenos y suspensión",           d:"Balatas, discos, amortiguadores", min:90},
+  {id:"aire",         n:"Filtros de aire y cabina",      d:"Motor y aire acondicionado", min:45},
+  {id:"clima",        n:"Aire acondicionado",            d:"Carga de gas y diagnóstico", min:75},
+  {id:"bateriaEV",    n:"Diagnóstico de batería de alto voltaje", d:"Solo eléctricos e híbridos", min:60},
+  {id:"software",     n:"Actualización de software",     d:"Sistema del vehículo",       min:45},
+  {id:"garantia",     n:"Garantía",                      d:"Falla cubierta por la marca",min:60},
+  {id:"hojalateria",  n:"Hojalatería y pintura",         d:"Valuación de daños",         min:60},
+  {id:"otro",         n:"Otro",                          d:"Descríbelo en las notas",    min:60},
 ];
 
 function leerReservas(){
@@ -1334,7 +1840,26 @@ function ir(id){
   document.getElementById(id).scrollIntoView({behavior:"smooth"});
 }
 document.getElementById("ov").addEventListener("click",e=>{ if(e.target.id==="ov") cerrar(); });
-document.addEventListener("keydown",e=>{ if(e.key==="Escape") cerrar(); });
+document.addEventListener("keydown",e=>{
+  if(e.key!=="Escape") return;
+  if(document.getElementById("panel").classList.contains("on")) cerrarPanel();
+  else cerrar();
+});
+
+/* ══════════════ ARRANQUE ══════════════ */
+cargarGuardado();          // aplica lo que hayas editado y guardado
+redibujarTodo();           // dibuja todas las secciones
+document.getElementById("listaValores").innerHTML = VALORES.map(([t,d])=>
+  `<div class="valor"><b>${t}</b><p>${d}</p></div>`).join("");
+document.getElementById("listaHitos").innerHTML = HITOS.map(h=>
+  `<div class="card"><span class="chip">${h.año}</span><h3 style="font-size:17px">${h.t}</h3>
+   <p>${h.d}</p></div>`).join("");
+document.getElementById("contactoDirecto").innerHTML = `
+  <span>📞 Ventas · ${telFmt(CONTACTO.ventas)}</span>
+  <span>🔧 Servicio · ${telFmt(CONTACTO.servicio)}</span>
+  <span>🏢 Corporativo · ${telFmt(CONTACTO.corporativo)}</span>
+  <span style="margin-top:8px"><a href="${wa(CONTACTO.whatsapp,'Hola, tengo una pregunta.')}"
+    style="text-decoration:underline;text-underline-offset:3px">Escribir por WhatsApp →</a></span>`;
 </script>
 </body>
 </html>

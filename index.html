@@ -193,34 +193,6 @@ footer a{text-decoration:underline;text-underline-offset:3px}
 .calc-res{border-top:1px solid rgba(255,255,255,.1);padding-top:16px;margin-top:22px}
 .calc-res .fila{color:rgba(255,255,255,.55)}
 
-/* Panel de edición */
-#panel{display:none;position:fixed;inset:0;z-index:80;background:var(--papel);overflow-y:auto}
-#panel.on{display:block}
-.p-head{position:sticky;top:0;background:var(--papel);border-bottom:1px solid var(--borde);
-  padding:14px 0;z-index:2}
-.p-head .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.p-tabs{display:flex;gap:6px;overflow-x:auto;padding:12px 0 0}
-.p-tabs button{padding:0 14px;min-height:40px;border-radius:99px;font-size:14px;white-space:nowrap;
-  background:#fff;border:1px solid var(--borde);color:var(--suave)}
-.p-tabs button[aria-pressed=true]{background:var(--tinta);color:#fff;border-color:var(--tinta)}
-.p-item{background:#fff;border:1px solid var(--borde);border-radius:16px;padding:16px;margin-bottom:10px}
-.p-item h4{font-size:15px;font-weight:600;margin-bottom:12px;display:flex;justify-content:space-between;gap:10px}
-.p-grid{display:grid;gap:10px;grid-template-columns:1fr}
-@media(min-width:640px){.p-grid{grid-template-columns:repeat(2,1fr)}}
-.p-campo span{display:block;font-size:12px;color:var(--suave);margin-bottom:5px}
-.p-campo input,.p-campo textarea,.p-campo select{width:100%;min-height:44px;padding:10px 12px;
-  border-radius:10px;border:1px solid rgba(20,24,29,.13);background:var(--papel);font-size:15px}
-.p-campo textarea{min-height:72px;resize:vertical}
-.p-borrar{font-size:12px;color:var(--acento);white-space:nowrap}
-.p-add{width:100%;min-height:48px;border:1px dashed rgba(20,24,29,.25);border-radius:14px;
-  color:var(--suave);font-size:14px;margin-bottom:24px}
-.p-nota{background:#fdf4e3;border:1px solid #f0dcbb;color:#7a4d12;border-radius:14px;
-  padding:14px 16px;font-size:13px;line-height:1.6;margin:16px 0}
-#abrirPanel{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:35;
-  width:46px;height:46px;border-radius:99px;background:var(--tinta);color:#fff;font-size:17px;
-  box-shadow:0 4px 16px rgba(20,24,29,.28);opacity:.35;transition:opacity .2s}
-#abrirPanel:hover,#abrirPanel:focus{opacity:1}
-
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -468,11 +440,6 @@ footer a{text-decoration:underline;text-underline-offset:3px}
     </p>
   </div>
 </footer>
-
-<button id="abrirPanel" onclick="abrirPanel()" title="Editar contenido del sitio"
-  aria-label="Editar contenido del sitio">✎</button>
-
-<div id="panel" role="dialog" aria-modal="true" aria-label="Editor de contenido"></div>
 
 <div class="ov" id="ov" role="dialog" aria-modal="true"><div class="modal" id="modal"></div></div>
 
@@ -1102,19 +1069,6 @@ function pintarCalc(conservarFoco){
 
 /* ── Logos de marca ── */
 function pintarLogos(){
-document.getElementById("listaLogos").innerHTML = CATALOGO.map(m=>{
-  const src = LOGOS[m.marca];
-  const dentro = src
-    ? `<img src="${src}" alt="Logo ${m.marca}" loading="lazy">`
-    : `<span style="color:${m.color}">${m.marca.toUpperCase()}</span>`;
-  return `<a class="logo" href="${m.sitio}" target="_blank" rel="noopener"
-    title="${m.marca} · ${m.agencia}">${dentro}</a>`;
-}).join("");
-}
-
-
-/* ── Logos de marca ── */
-function pintarLogos(){
   document.getElementById("listaLogos").innerHTML = CATALOGO.map(m=>{
     const src = LOGOS[m.marca];
     const dentro = src
@@ -1126,34 +1080,18 @@ function pintarLogos(){
 }
 
 /* ══════════════════════════════════════════════════════════════
-   PANEL DE EDICIÓN
+   CONTENIDO EDITABLE
 
-   Cómo funciona el guardado, en corto:
-   · Guardas → se escribe en localStorage de ESTE navegador.
-     Sirve para trabajar y ver los cambios al instante, pero
-     nadie más los ve.
-   · Exportar → te descarga contenido.json con todo lo editado.
-     Para que los cambios sean permanentes y públicos, pega ese
-     JSON dentro de DATOS_GUARDADOS más abajo y vuelve a subir
-     el archivo. Eso ya lo ve todo el mundo.
-   · Importar → carga un contenido.json que hayas exportado antes.
-
-   Si algún día montas backend, cambia guardarTodo() por un POST
-   y cargarGuardado() por un GET a tu API.
+   Este sitio lee su contenido (modelos, promos, agencias, etc.)
+   desde DATOS_GUARDADOS. Para editarlo usa admin.html — es un
+   panel aparte, con clave, donde agregas/quitas/cambias todo con
+   fotos incluidas. Ahí exportas un contenido.json y lo pegas aquí
+   abajo para publicar los cambios.
    ══════════════════════════════════════════════════════════════ */
 
-const LLAVE_DATOS = "automundo_contenido_v1";
-
-/* Pega aquí el JSON exportado para dejar los cambios fijos en el sitio.
+/* Pega aquí el JSON que exportaste desde admin.html.
    Ejemplo:  const DATOS_GUARDADOS = { "CATALOGO":[...], "PROMOS":[...] };  */
 const DATOS_GUARDADOS = null;
-
-const EDITABLES = {
-  CATALOGO:()=>CATALOGO, SUCURSALES:()=>SUCURSALES, AGENCIAS:()=>AGENCIAS,
-  PROMOS:()=>PROMOS, PROMOS_META:()=>PROMOS_META, SERVICIOS_CITA:()=>SERVICIOS_CITA,
-  LANZAMIENTOS:()=>LANZAMIENTOS, CONTACTO:()=>CONTACTO,
-  SEMINUEVOS:()=>SEMINUEVOS, SERVICIOS_GRUPO:()=>SERVICIOS_GRUPO, LOGOS:()=>LOGOS,
-};
 
 function aplicar(d){
   if(!d) return;
@@ -1186,272 +1124,6 @@ function cargarGuardado(){
     const local = JSON.parse(localStorage.getItem(LLAVE_DATOS));
     aplicar(local || DATOS_GUARDADOS);
   }catch{ aplicar(DATOS_GUARDADOS); }
-}
-
-function guardarTodo(){
-  const d = {};
-  Object.keys(EDITABLES).forEach(k => d[k] = EDITABLES[k]());
-  try{
-    localStorage.setItem(LLAVE_DATOS, JSON.stringify(d));
-    avisoPanel("Guardado en este navegador. Usa Exportar para dejarlo fijo en el sitio.");
-  }catch{
-    avisoPanel("No se pudo guardar (¿modo privado?). Usa Exportar para no perder los cambios.", true);
-  }
-  redibujarTodo();
-}
-
-function exportarTodo(){
-  const d = {};
-  Object.keys(EDITABLES).forEach(k => d[k] = EDITABLES[k]());
-  const url = URL.createObjectURL(new Blob([JSON.stringify(d,null,2)],{type:"application/json"}));
-  const a = document.createElement("a");
-  a.href=url; a.download="contenido.json";
-  document.body.appendChild(a); a.click(); a.remove();
-  setTimeout(()=>URL.revokeObjectURL(url),1000);
-  avisoPanel("Descargado contenido.json. Pégalo en DATOS_GUARDADOS para hacerlo permanente.");
-}
-
-function importarTodo(input){
-  const f = input.files[0];
-  if(!f) return;
-  const fr = new FileReader();
-  fr.onload = () => {
-    try{
-      aplicar(JSON.parse(fr.result));
-      guardarTodo();
-      pintarPanel();
-      avisoPanel("Contenido importado.");
-    }catch{ avisoPanel("Ese archivo no es un contenido.json válido.", true); }
-  };
-  fr.readAsText(f);
-}
-
-function restaurar(){
-  if(!confirm("¿Descartar tus cambios y volver al contenido original del archivo?")) return;
-  try{ localStorage.removeItem(LLAVE_DATOS); }catch{}
-  location.reload();
-}
-
-function avisoPanel(txt, malo){
-  const el = document.getElementById("avisoP");
-  if(!el) return;
-  el.textContent = txt;
-  el.style.display = "block";
-  el.style.background = malo ? "#fdecea" : "#eefaf4";
-  el.style.borderColor = malo ? "#f5c6c0" : "#bfe9d6";
-  el.style.color = malo ? "#8a2f26" : "#1d6b4c";
-  clearTimeout(avisoPanel.t);
-  avisoPanel.t = setTimeout(()=>{ el.style.display="none"; }, 4000);
-}
-
-/* ── Redibuja el sitio con los datos actuales ── */
-function redibujarTodo(){
-  document.getElementById("listaAgencias").innerHTML = AGENCIAS.map(tarjetaAgencia).join("");
-  document.getElementById("listaServicios").innerHTML = SERVICIOS_GRUPO.map(tarjetaAgencia).join("");
-  document.getElementById("listaSeminuevos").innerHTML = SEMINUEVOS.map(s=>`
-    <div class="card"><h3 style="font-size:17px">${esc(s.nombre)}</h3>
-      <div class="meta"><span>📍 ${esc(s.dir)}</span><span>🕐 ${esc(s.horario)}</span>
-        <span>📞 ${telFmt(s.tel)}</span></div></div>`).join("");
-  document.getElementById("listaLanzamientos").innerHTML = LANZAMIENTOS.map(l=>
-    `<a class="card" href="${l.url}" target="_blank" rel="noopener">
-      <span class="chip rojo">${esc(l.marca)}</span><h3>${esc(l.nombre)}</h3><p>${esc(l.desc)}</p>
-      <span class="ir">Conocer más →</span></a>`).join("");
-  pintarPromos(); pintarLogos();
-}
-
-/* ── Panel ── */
-let tabActivo = "CATALOGO";
-const TABS = [
-  ["CATALOGO","Modelos"],["SUCURSALES","Sucursales"],["AGENCIAS","Agencias"],
-  ["PROMOS","Promociones"],["SERVICIOS_CITA","Servicios"],["LANZAMIENTOS","Lanzamientos"],
-  ["CONTACTO","Contacto"],
-];
-
-function abrirPanel(){
-  document.getElementById("panel").classList.add("on");
-  document.body.style.overflow="hidden";
-  pintarPanel();
-}
-function cerrarPanel(){
-  document.getElementById("panel").classList.remove("on");
-  document.body.style.overflow="";
-}
-function setTab(t){ tabActivo=t; pintarPanel(); }
-
-function campo(label, valor, onInput, tipo){
-  const v = valor===null||valor===undefined ? "" : String(valor);
-  const control = tipo==="area"
-    ? `<textarea oninput="${onInput}">${esc(v)}</textarea>`
-    : `<input type="text" value="${esc(v)}" oninput="${onInput}">`;
-  return `<label class="p-campo"><span>${label}</span>${control}</label>`;
-}
-
-function pintarPanel(){
-  document.getElementById("panel").innerHTML = `
-    <div class="p-head"><div class="wrap">
-      <div>
-        <b style="font-size:17px;letter-spacing:-.02em">Editor de contenido</b>
-        <p style="font-size:12px;color:var(--suave)">Los cambios se guardan en este navegador</p>
-      </div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <button class="btn btn-p" style="min-height:42px;padding:0 16px" onclick="guardarTodo()">Guardar</button>
-        <button class="btn btn-s" style="min-height:42px;padding:0 16px" onclick="exportarTodo()">Exportar</button>
-        <label class="btn btn-s" style="min-height:42px;padding:0 16px;cursor:pointer">Importar
-          <input type="file" accept="application/json" style="display:none" onchange="importarTodo(this)"></label>
-        <button class="btn btn-s" style="min-height:42px;padding:0 16px" onclick="restaurar()">Restaurar</button>
-        <button class="btn btn-s" style="min-height:42px;padding:0 16px;border:0" onclick="cerrarPanel()">Cerrar ✕</button>
-      </div>
-      <div class="p-tabs" style="width:100%">
-        ${TABS.map(([k,n])=>`<button aria-pressed="${k===tabActivo}" onclick="setTab('${k}')">${n}</button>`).join("")}
-      </div>
-    </div></div>
-
-    <div class="wrap" style="padding-top:20px;padding-bottom:60px">
-      <div id="avisoP" class="p-nota" style="display:none"></div>
-      <div class="p-nota">
-        <b>Para que los cambios los vea todo el mundo:</b> edita aquí, dale Guardar, luego
-        Exportar, y pega el contenido de <code>contenido.json</code> en la constante
-        <code>DATOS_GUARDADOS</code> del archivo. Si solo guardas, los cambios viven
-        únicamente en este navegador.
-      </div>
-      ${cuerpoPanel()}
-    </div>`;
-}
-
-function cuerpoPanel(){
-  if(tabActivo==="CATALOGO") return CATALOGO.map((mk,i)=>`
-    <div class="p-item">
-      <h4>${esc(mk.marca)} <span style="font-weight:400;color:var(--suave)">${mk.modelos.length} modelos</span></h4>
-      <div class="p-grid">
-        ${campo("Marca",mk.marca,`CATALOGO[${i}].marca=this.value`)}
-        ${campo("Color",mk.color,`CATALOGO[${i}].color=this.value`)}
-        ${campo("Sitio",mk.sitio,`CATALOGO[${i}].sitio=this.value`)}
-        ${campo("Agencia",mk.agencia,`CATALOGO[${i}].agencia=this.value`)}
-      </div>
-      <div style="margin-top:14px">
-        ${mk.modelos.map((v,j)=>`
-          <div class="p-item" style="background:var(--papel)">
-            <h4>${esc(v.n)}
-              <button class="p-borrar" onclick="borrarModelo(${i},${j})">Eliminar</button></h4>
-            <div class="p-grid">
-              ${campo("Nombre",v.n,`CATALOGO[${i}].modelos[${j}].n=this.value`)}
-              ${campo("Carrocería",v.carr,`CATALOGO[${i}].modelos[${j}].carr=this.value`)}
-              ${campo("Motorización",v.motor,`CATALOGO[${i}].modelos[${j}].motor=this.value`)}
-              ${campo("Precio (vacío = cotizar)",v.precio,`CATALOGO[${i}].modelos[${j}].precio=this.value?Number(this.value.replace(/[^0-9]/g,'')):null`)}
-              ${campo("Color de silueta",v.tono,`CATALOGO[${i}].modelos[${j}].tono=this.value`)}
-              ${campo("Ruta de ficha",v.u,`CATALOGO[${i}].modelos[${j}].u=this.value`)}
-            </div>
-            ${campo("Descripción",v.d,`CATALOGO[${i}].modelos[${j}].d=this.value`,"area")}
-          </div>`).join("")}
-        <button class="p-add" onclick="agregarModelo(${i})">+ Agregar modelo a ${esc(mk.marca)}</button>
-      </div>
-    </div>`).join("");
-
-  if(tabActivo==="SUCURSALES") return Object.keys(SUCURSALES).map(k=>`
-    <div class="p-item"><h4>${esc(SUCURSALES[k].nombre)}</h4>
-      <div class="p-grid">
-        ${campo("Nombre",SUCURSALES[k].nombre,`SUCURSALES['${k}'].nombre=this.value`)}
-        ${campo("Teléfono",SUCURSALES[k].tel,`SUCURSALES['${k}'].tel=this.value.replace(/[^0-9]/g,'')`)}
-        ${campo("WhatsApp",SUCURSALES[k].wa,`SUCURSALES['${k}'].wa=this.value.replace(/[^0-9]/g,'')`)}
-        ${campo("Link de Maps",SUCURSALES[k].maps,`SUCURSALES['${k}'].maps=this.value`)}
-      </div>
-      ${campo("Dirección",SUCURSALES[k].dir,`SUCURSALES['${k}'].dir=this.value`,"area")}
-    </div>`).join("");
-
-  if(tabActivo==="AGENCIAS") return AGENCIAS.map((a,i)=>`
-    <div class="p-item"><h4>${esc(a.nombre)}
-      <button class="p-borrar" onclick="borrarDe('AGENCIAS',${i})">Eliminar</button></h4>
-      <div class="p-grid">
-        ${campo("Nombre",a.nombre,`AGENCIAS[${i}].nombre=this.value`)}
-        ${campo("Marcas",a.marcas,`AGENCIAS[${i}].marcas=this.value`)}
-        ${campo("Teléfono",a.tel,`AGENCIAS[${i}].tel=this.value.replace(/[^0-9]/g,'')`)}
-        ${campo("WhatsApp",a.wa,`AGENCIAS[${i}].wa=this.value.replace(/[^0-9]/g,'')`)}
-        ${campo("Horario",a.horario,`AGENCIAS[${i}].horario=this.value`)}
-        ${campo("Sitio",a.url,`AGENCIAS[${i}].url=this.value`)}
-      </div>
-      ${campo("Dirección",a.dir,`AGENCIAS[${i}].dir=this.value`,"area")}
-      ${campo("Nota",a.nota,`AGENCIAS[${i}].nota=this.value`,"area")}
-    </div>`).join("") + `<button class="p-add" onclick="agregarA('AGENCIAS')">+ Agregar agencia</button>`;
-
-  if(tabActivo==="PROMOS") return `
-    <div class="p-item"><h4>Ajustes generales</h4>
-      <div class="p-grid">
-        ${campo("Vigencia",PROMOS_META.vigencia,`PROMOS_META.vigencia=this.value`)}
-        ${campo("Banco",PROMOS_META.banco,`PROMOS_META.banco=this.value`)}
-        ${campo("¿Confirmada? (si/no)",PROMOS_META.confirmado?"si":"no",`PROMOS_META.confirmado=this.value.toLowerCase().startsWith('s')`)}
-      </div>
-      ${campo("Letras chicas",PROMOS_META.letras,`PROMOS_META.letras=this.value`,"area")}
-    </div>` + PROMOS.map((p,i)=>`
-    <div class="p-item"><h4>${esc(p.modelo)}
-      <button class="p-borrar" onclick="borrarDe('PROMOS',${i})">Eliminar</button></h4>
-      <div class="p-grid">
-        ${campo("Modelo",p.modelo,`PROMOS[${i}].modelo=this.value`)}
-        ${campo("Beneficio",p.beneficio,`PROMOS[${i}].beneficio=this.value`)}
-        ${campo("Bono",p.bono,`PROMOS[${i}].bono=Number(this.value.replace(/[^0-9]/g,''))||0`)}
-        ${campo("Tasa",p.tasa,`PROMOS[${i}].tasa=this.value`)}
-        ${campo("Plazo",p.plazo,`PROMOS[${i}].plazo=this.value`)}
-        ${campo("CAT",p.cat,`PROMOS[${i}].cat=this.value`)}
-      </div>
-    </div>`).join("") + `<button class="p-add" onclick="agregarA('PROMOS')">+ Agregar promoción</button>`;
-
-  if(tabActivo==="SERVICIOS_CITA") return SERVICIOS_CITA.map((s,i)=>`
-    <div class="p-item"><h4>${esc(s.n)}
-      <button class="p-borrar" onclick="borrarDe('SERVICIOS_CITA',${i})">Eliminar</button></h4>
-      <div class="p-grid">
-        ${campo("Nombre",s.n,`SERVICIOS_CITA[${i}].n=this.value`)}
-        ${campo("Detalle",s.d,`SERVICIOS_CITA[${i}].d=this.value`)}
-        ${campo("Minutos",s.min,`SERVICIOS_CITA[${i}].min=Number(this.value.replace(/[^0-9]/g,''))||30`)}
-        ${campo("¿Exprés? (si/no)",s.rapido?"si":"no",`SERVICIOS_CITA[${i}].rapido=this.value.toLowerCase().startsWith('s')`)}
-      </div>
-    </div>`).join("") + `<button class="p-add" onclick="agregarA('SERVICIOS_CITA')">+ Agregar servicio</button>`;
-
-  if(tabActivo==="LANZAMIENTOS") return LANZAMIENTOS.map((l,i)=>`
-    <div class="p-item"><h4>${esc(l.nombre)}
-      <button class="p-borrar" onclick="borrarDe('LANZAMIENTOS',${i})">Eliminar</button></h4>
-      <div class="p-grid">
-        ${campo("Nombre",l.nombre,`LANZAMIENTOS[${i}].nombre=this.value`)}
-        ${campo("Marca",l.marca,`LANZAMIENTOS[${i}].marca=this.value`)}
-        ${campo("Link",l.url,`LANZAMIENTOS[${i}].url=this.value`)}
-      </div>
-      ${campo("Descripción",l.desc,`LANZAMIENTOS[${i}].desc=this.value`,"area")}
-    </div>`).join("") + `<button class="p-add" onclick="agregarA('LANZAMIENTOS')">+ Agregar lanzamiento</button>`;
-
-  if(tabActivo==="CONTACTO") return `
-    <div class="p-item"><h4>Teléfonos principales</h4>
-      <div class="p-grid">
-        ${campo("Ventas",CONTACTO.ventas,`CONTACTO.ventas=this.value.replace(/[^0-9]/g,'')`)}
-        ${campo("WhatsApp",CONTACTO.whatsapp,`CONTACTO.whatsapp=this.value.replace(/[^0-9]/g,'')`)}
-        ${campo("Servicio",CONTACTO.servicio,`CONTACTO.servicio=this.value.replace(/[^0-9]/g,'')`)}
-        ${campo("Corporativo",CONTACTO.corporativo,`CONTACTO.corporativo=this.value.replace(/[^0-9]/g,'')`)}
-      </div>
-    </div>`;
-  return "";
-}
-
-function borrarModelo(i,j){
-  if(!confirm(`¿Eliminar ${CATALOGO[i].modelos[j].n}?`)) return;
-  CATALOGO[i].modelos.splice(j,1); recalcularModelos(); pintarPanel();
-}
-function agregarModelo(i){
-  CATALOGO[i].modelos.push({n:"Nuevo modelo",carr:"SUV",motor:"Gasolina",precio:null,
-    tono:CATALOGO[i].color,d:"Descripción del modelo.",s:[["","" ]],u:"/"});
-  recalcularModelos(); pintarPanel();
-}
-function borrarDe(lista,i){
-  const L = {AGENCIAS,PROMOS,SERVICIOS_CITA,LANZAMIENTOS}[lista];
-  if(!confirm("¿Eliminar este elemento?")) return;
-  L.splice(i,1); pintarPanel();
-}
-function agregarA(lista){
-  const plantillas = {
-    AGENCIAS:{nombre:"Nueva agencia",marcas:"Marca",dir:"Dirección",tel:"5500000000",
-              wa:"5500000000",horario:"L-V 9:00–19:00",url:"https://",nota:""},
-    PROMOS:{modelo:"Modelo",beneficio:"Beneficio",bono:0,tasa:"0%",plazo:"12 meses",cat:"0%"},
-    SERVICIOS_CITA:{id:"srv"+Date.now(),n:"Nuevo servicio",d:"Detalle",min:30,rapido:false},
-    LANZAMIENTOS:{nombre:"Nuevo lanzamiento",marca:"Marca",url:"https://",desc:"Descripción."},
-  };
-  ({AGENCIAS,PROMOS,SERVICIOS_CITA,LANZAMIENTOS})[lista].push(plantillas[lista]);
-  pintarPanel();
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -1844,15 +1516,23 @@ function ir(id){
   document.getElementById(id).scrollIntoView({behavior:"smooth"});
 }
 document.getElementById("ov").addEventListener("click",e=>{ if(e.target.id==="ov") cerrar(); });
-document.addEventListener("keydown",e=>{
-  if(e.key!=="Escape") return;
-  if(document.getElementById("panel").classList.contains("on")) cerrarPanel();
-  else cerrar();
-});
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") cerrar(); });
 
 /* ══════════════ ARRANQUE ══════════════ */
-cargarGuardado();          // aplica lo que hayas editado y guardado
-redibujarTodo();           // dibuja todas las secciones
+cargarGuardado();          // aplica el contenido publicado en DATOS_GUARDADOS
+document.getElementById("listaAgencias").innerHTML = AGENCIAS.map(tarjetaAgencia).join("");
+document.getElementById("listaServicios").innerHTML = SERVICIOS_GRUPO.map(tarjetaAgencia).join("");
+document.getElementById("listaSeminuevos").innerHTML = SEMINUEVOS.map(s=>`
+  <div class="card"><h3 style="font-size:17px">${esc(s.nombre)}</h3>
+    <div class="meta"><span>📍 ${esc(s.dir)}</span><span>🕐 ${esc(s.horario)}</span>
+      <span>📞 ${telFmt(s.tel)}</span></div></div>`).join("");
+document.getElementById("listaLanzamientos").innerHTML = LANZAMIENTOS.map(l=>
+  `<a class="card" href="${l.url}" target="_blank" rel="noopener">
+    ${l.foto ? `<img src="${l.foto}" alt="${esc(l.nombre)}"
+      style="width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:14px;margin-bottom:14px" loading="lazy">` : ""}
+    <span class="chip rojo">${esc(l.marca)}</span><h3>${esc(l.nombre)}</h3><p>${esc(l.desc)}</p>
+    <span class="ir">Conocer más →</span></a>`).join("");
+pintarPromos(); pintarFiltros(); pintarModelos(); pintarCalc(); pintarLogos();
 document.getElementById("listaValores").innerHTML = VALORES.map(([t,d])=>
   `<div class="valor"><b>${t}</b><p>${d}</p></div>`).join("");
 document.getElementById("listaHitos").innerHTML = HITOS.map(h=>

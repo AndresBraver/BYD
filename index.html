@@ -918,6 +918,8 @@ function silueta(color,carr){
 /* ══════════════ RENDER ══════════════ */
 function tarjetaAgencia(a){
   return `<a class="card" href="${a.url}" target="_blank" rel="noopener">
+    ${a.foto ? `<img src="${a.foto}" alt="${esc(a.nombre)}"
+      style="width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:14px;margin-bottom:14px" loading="lazy">` : ""}
     <span class="chip ${a.destacada?'rojo':''}">${esc(a.marcas)}</span>
     <h3>${esc(a.nombre)}</h3>
     <p>${esc(a.nota||"")}</p>
@@ -987,7 +989,9 @@ function pintarModelos(){
           text-underline-offset:4px">Quitar filtros</button></div>`
     : res.map(v=>`
       <div class="card">
-        ${silueta(v.tono, v.carr)}
+        ${v.foto ? `<img src="${v.foto}" alt="${esc(v.marca)} ${esc(v.n)}"
+          style="width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:14px" loading="lazy">`
+          : silueta(v.tono, v.carr)}
         <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:18px">
           <span class="chip" style="margin:0;background:${v.marcaColor}1a;color:${v.marcaColor}">${v.marca}</span>
           ${v.nuevo?`<span class="chip rojo" style="margin:0">Nuevo</span>`:""}

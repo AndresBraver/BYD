@@ -3,6 +3,12 @@ import { put } from "@vercel/blob";
 
 const LIMITE_BYTES = 4 * 1024 * 1024;
 
+// El Blob público que conectaste se llama "automundo-datos2" y su
+// token de escritura quedó como BLOB2_READ_WRITE_TOKEN. Todo el
+// guardado usa ese token explícitamente para no depender de cuál
+// de los dos Blobs conectados sea el "por defecto".
+const TOKEN = process.env.BLOB2_READ_WRITE_TOKEN;
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
@@ -16,6 +22,12 @@ export default async function handler(req, res) {
   }
   if (req.headers["x-admin-key"] !== process.env.ADMIN_KEY) {
     return res.status(401).json({ error: "Clave incorrecta." });
+  }
+  if (!TOKEN) {
+    return res.status(500).json({
+      error: "Falta la variable BLOB2_READ_WRITE_TOKEN en Vercel. Revisa que el Blob " +
+             "público (automundo-datos2) esté conectado a este proyecto y vuelve a desplegar.",
+    });
   }
 
   let body = req.body;
@@ -40,12 +52,10 @@ export default async function handler(req, res) {
       contentType: "application/json",
       addRandomSuffix: false,
       allowOverwrite: true,
+      token: TOKEN,
     });
     return res.status(200).json({ ok: true, url: blob.url });
   } catch (err) {
-    // Mostramos el motivo real (no un mensaje genérico) para poder
-    // diagnosticarlo directo desde la pantalla del admin, sin tener
-    // que buscar en los logs de Vercel.
     console.error("Error guardando contenido:", err);
     return res.status(500).json({
       error: "No se pudo guardar. Detalle: " + (err?.message || String(err)),

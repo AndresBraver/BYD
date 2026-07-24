@@ -1,10 +1,7 @@
-// POST /api/guardar
-// Guarda el contenido editado en el panel. Requiere el header
-// "x-admin-key" con el mismo valor que la variable de entorno
-// ADMIN_KEY configurada en Vercel (Settings → Environment Variables).
+// POST /api/guardar — publica contenido nuevo (requiere x-admin-key)
 import { put } from "@vercel/blob";
 
-const LIMITE_BYTES = 4 * 1024 * 1024; // 4 MB — margen amplio para fotos en base64
+const LIMITE_BYTES = 4 * 1024 * 1024;
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -12,13 +9,12 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Método no permitido" });
   }
 
-  const clave = req.headers["x-admin-key"];
   if (!process.env.ADMIN_KEY) {
     return res.status(500).json({
-      error: "El sitio no tiene configurada la variable ADMIN_KEY en Vercel todavía.",
+      error: "Falta configurar ADMIN_KEY en Vercel (Settings → Environment Variables).",
     });
   }
-  if (clave !== process.env.ADMIN_KEY) {
+  if (req.headers["x-admin-key"] !== process.env.ADMIN_KEY) {
     return res.status(401).json({ error: "Clave incorrecta." });
   }
 
@@ -33,7 +29,7 @@ export default async function handler(req, res) {
   const texto = JSON.stringify(body);
   if (texto.length > LIMITE_BYTES) {
     return res.status(413).json({
-      error: `El contenido pesa ${Math.round(texto.length / 1024 / 1024 * 10) / 10} MB, ` +
+      error: `El contenido pesa ${Math.round((texto.length / 1024 / 1024) * 10) / 10} MB, ` +
              `y el límite es 4 MB. Comprime o quita algunas fotos.`,
     });
   }
@@ -47,7 +43,12 @@ export default async function handler(req, res) {
     });
     return res.status(200).json({ ok: true, url: blob.url });
   } catch (err) {
+    // Mostramos el motivo real (no un mensaje genérico) para poder
+    // diagnosticarlo directo desde la pantalla del admin, sin tener
+    // que buscar en los logs de Vercel.
     console.error("Error guardando contenido:", err);
-    return res.status(500).json({ error: "No se pudo guardar. Intenta de nuevo." });
+    return res.status(500).json({
+      error: "No se pudo guardar. Detalle: " + (err?.message || String(err)),
+    });
   }
 }

@@ -1,5 +1,5 @@
-// GET  /api/reservas  → lista de horarios ya ocupados (para pintar el calendario)
-// POST /api/reservas  → intenta apartar un horario; si ya estaba, responde 409
+// GET  /api/reservas → lista de horarios ocupados (público)
+// POST /api/reservas → intenta apartar un horario (público, con folio único)
 import { list, put } from "@vercel/blob";
 
 async function leer() {
@@ -38,10 +38,6 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: "Faltan datos de la cita." });
       }
 
-      // Lee-verifica-escribe: no es una transacción atómica de base de
-      // datos real, pero la ventana de choque es de milisegundos y esto
-      // ya evita el 99.9% de los dobles agendados que teníamos antes
-      // (que eran garantizados, por navegador).
       const lista = await leer();
       if (lista.some((r) => r.clave === clave)) {
         return res.status(409).json({ error: "Ese horario ya se acaba de apartar." });
@@ -55,6 +51,8 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Método no permitido" });
   } catch (err) {
     console.error("Error en reservas:", err);
-    return res.status(500).json({ error: "No se pudo procesar la reserva." });
+    return res.status(500).json({
+      error: "No se pudo procesar la reserva. Detalle: " + (err?.message || String(err)),
+    });
   }
 }

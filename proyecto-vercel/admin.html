@@ -829,12 +829,12 @@ function bloqueFoto(valorActual, onCambia, idUnico){
     <div class="foto-botones">
       <label>Subir foto
         <input type="file" accept="image/*" style="display:none"
-          onchange="subirFoto(this, (url,kb)=>{ ${onCambia}(url); document.getElementById('prev_${idUnico}').innerHTML='<img src=\\''+url+'\\' alt=\\'\\'>'; document.getElementById('peso_${idUnico}').textContent = kb+' KB'; document.getElementById('peso_${idUnico}').className = kb>${PESO_AVISO_KB}?'foto-peso pesado':'foto-peso'; })">
+          onchange="subirFoto(this, (url,kb)=>{ (${onCambia})(url); document.getElementById('prev_${idUnico}').innerHTML='<img src=\\''+url+'\\' alt=\\'\\'>'; document.getElementById('peso_${idUnico}').textContent = kb+' KB'; document.getElementById('peso_${idUnico}').className = kb>${PESO_AVISO_KB}?'foto-peso pesado':'foto-peso'; })">
       </label>
       <input type="text" placeholder="o pega una URL de imagen" value="${valorActual && !valorActual.startsWith('data:') ? esc(valorActual) : ''}"
-        oninput="${onCambia}(this.value); document.getElementById('prev_${idUnico}').innerHTML = this.value ? '<img src=\\''+this.value+'\\' alt=\\'\\'>' : '<span>Sin foto<br>(usa silueta)</span>';">
+        oninput="(${onCambia})(this.value); document.getElementById('prev_${idUnico}').innerHTML = this.value ? '<img src=\\''+this.value+'\\' alt=\\'\\'>' : '<span>Sin foto<br>(usa silueta)</span>';">
       <button class="btn btn-s" style="min-height:34px;font-size:12px"
-        onclick="${onCambia}(null); document.getElementById('prev_${idUnico}').innerHTML='<span>Sin foto<br>(usa silueta)</span>'; document.getElementById('peso_${idUnico}').textContent='';">
+        onclick="(${onCambia})(null); document.getElementById('prev_${idUnico}').innerHTML='<span>Sin foto<br>(usa silueta)</span>'; document.getElementById('peso_${idUnico}').textContent='';">
         Quitar foto</button>
       <span class="foto-peso" id="peso_${idUnico}">${kb?kb+' KB':''}</span>
     </div>

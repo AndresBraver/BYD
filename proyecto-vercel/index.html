@@ -305,7 +305,7 @@ footer a{text-decoration:underline;text-underline-offset:3px}
         <span>▸ Aceptamos tu auto a cuenta · valuación sin costo</span>
       </div>
       <div class="btn-row">
-        <a class="btn btn-p" href="https://seminuevosgrupoautomundo.com" target="_blank" rel="noopener">Ver inventario</a>
+        <button class="btn btn-p" onclick="document.getElementById('inventarioSeminuevos').scrollIntoView({behavior:'smooth'})">Ver inventario</button>
       </div>
     </div>
     <div class="card">
@@ -317,10 +317,17 @@ footer a{text-decoration:underline;text-underline-offset:3px}
       </div>
       <p style="margin-top:16px">También hacemos pruebas de manejo de seminuevos. Se agendan por WhatsApp.</p>
       <div class="btn-row">
-        <a class="btn btn-s" href="https://seminuevosgrupoautomundo.com/auto-a-cuenta" target="_blank" rel="noopener">Vende tu auto</a>
+        <a class="btn btn-s" href="${wa(CONTACTO.whatsapp,'Hola, quiero vender mi auto. ¿Me pueden dar una valuación?')}">Vende tu auto</a>
       </div>
     </div>
   </div>
+
+  <h3 id="inventarioSeminuevos" style="font-size:18px;font-weight:620;margin:8px 0 14px;letter-spacing:-.02em;scroll-margin-top:64px">
+    Inventario disponible
+  </h3>
+  <div class="grid g3" id="listaInventarioSeminuevos"></div>
+
+  <h3 style="font-size:18px;font-weight:620;margin:36px 0 14px;letter-spacing:-.02em">Nuestras sucursales</h3>
   <div class="grid g3" id="listaSeminuevos"></div>
 </section>
 
@@ -353,7 +360,7 @@ footer a{text-decoration:underline;text-underline-offset:3px}
   <h3 style="font-size:18px;font-weight:620;margin:36px 0 0;letter-spacing:-.02em">Nuestros valores</h3>
   <div class="valores" id="listaValores"></div>
 
-  <h3 style="font-size:18px;font-weight:620;margin:36px 0 14px;letter-spacing:-.02em">Hitos</h3>
+  <h3 style="font-size:18px;font-weight:620;margin:36px 0 14px;letter-spacing:-.02em">Historia</h3>
   <div class="grid g3" id="listaHitos"></div>
 
   <h3 style="font-size:18px;font-weight:620;margin:40px 0 0;letter-spacing:-.02em">Las marcas que representamos</h3>
@@ -520,7 +527,13 @@ let SERVICIOS_GRUPO = [
 ];
 
 /* ── SUCURSALES DE SEMINUEVOS ── */
+/* Inventario de seminuevos. Vacío por defecto — se llena desde el
+   admin con unidades reales (no inventamos autos aquí). Cada unidad
+   puede llevar varias fotos. */
+let SEMINUEVOS_INVENTARIO = [];
+
 let SEMINUEVOS = [
+
   { nombre:"Seminuevos Interlomas", dir:"Paseo de la Herradura 422, Fracc. Interlomas, C.P. 52760, Huixquilucan, Edo. Méx.",
     tel:"5530003430", horario:"8:00–19:30" },
   { nombre:"Seminuevos Vallejo", dir:"Calzada Vallejo 1059, Nueva Industrial Vallejo, C.P. 07750, GAM, CDMX",
@@ -883,10 +896,29 @@ function silueta(color,carr){
 }
 
 /* ══════════════ RENDER ══════════════ */
+/* Mini galería: imagen principal + miniaturas si hay más de una foto.
+   fallbackHtml se usa cuando no hay ninguna foto (ej. la silueta de un modelo). */
+const idSeguro = s => String(s).replace(/[^a-zA-Z0-9_-]/g, "_");
+function galeria(fotos, alt, idUnico, fallbackHtml){
+  fotos = (fotos && fotos.length) ? fotos : [];
+  if(fotos.length === 0) return fallbackHtml || "";
+  const id = idSeguro(idUnico);
+  const principal = `<img id="img_${id}" src="${fotos[0]}" alt="${esc(alt)}"
+    style="width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:14px" loading="lazy">`;
+  if(fotos.length === 1) return principal;
+  const mini = fotos.map((f,k)=>`
+    <button onclick="document.getElementById('img_${id}').src='${f}'"
+      style="width:38px;height:38px;border-radius:8px;overflow:hidden;padding:0;flex-shrink:0;
+        border:2px solid ${k===0?"var(--tinta)":"transparent"}">
+      <img src="${f}" style="width:100%;height:100%;object-fit:cover;display:block" alt="">
+    </button>`).join("");
+  return `${principal}<div style="display:flex;gap:6px;margin-top:8px;overflow-x:auto">${mini}</div>`;
+}
+
 function tarjetaAgencia(a){
+  const imgs = a.fotos && a.fotos.length ? a.fotos : (a.foto ? [a.foto] : []);
   return `<a class="card" href="${a.url}" target="_blank" rel="noopener">
-    ${a.foto ? `<img src="${a.foto}" alt="${esc(a.nombre)}"
-      style="width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:14px;margin-bottom:14px" loading="lazy">` : ""}
+    ${imgs.length ? `<div style="margin-bottom:14px">${galeria(imgs, a.nombre, "ag_"+idSeguro(a.nombre))}</div>` : ""}
     <span class="chip ${a.destacada?'rojo':''}">${esc(a.marcas)}</span>
     <h3>${esc(a.nombre)}</h3>
     <p>${esc(a.nota||"")}</p>
@@ -956,9 +988,10 @@ function pintarModelos(){
           text-underline-offset:4px">Quitar filtros</button></div>`
     : res.map(v=>`
       <div class="card">
-        ${v.foto ? `<img src="${v.foto}" alt="${esc(v.marca)} ${esc(v.n)}"
-          style="width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:14px" loading="lazy">`
-          : silueta(v.tono, v.carr)}
+        ${galeria(
+          v.fotos && v.fotos.length ? v.fotos : (v.foto ? [v.foto] : []),
+          v.marca+" "+v.n, "m_"+v.id, silueta(v.tono, v.carr)
+        )}
         <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:18px">
           <span class="chip" style="margin:0;background:${v.marcaColor}1a;color:${v.marcaColor}">${v.marca}</span>
           ${v.nuevo?`<span class="chip rojo" style="margin:0">Nuevo</span>`:""}
@@ -982,6 +1015,18 @@ function pintarModelos(){
       </div>`).join("");
 }
 pintarFiltros(); pintarModelos();
+
+/* Resuelve a qué agencia mandar el WhatsApp de la calculadora,
+   según la marca del modelo elegido. Sin modelo elegido (precio
+   manual), usa el contacto general de ventas. */
+function contactoDeCalc(){
+  if(!calc.modeloId) return { nombre:"Ventas", wa:CONTACTO.whatsapp };
+  const m = MODELOS.find(x=>x.id===calc.modeloId);
+  if(!m) return { nombre:"Ventas", wa:CONTACTO.whatsapp };
+  const clave = (MARCA_SUCURSAL[m.marca]||["interlomas"])[0];
+  const s = SUCURSALES[clave];
+  return s ? { nombre:s.nombre, wa:s.wa } : { nombre:"Ventas", wa:CONTACTO.whatsapp };
+}
 
 /* ══════════════════════════════════════════════════════════════
    CALCULADORA DE MENSUALIDAD — amortización francesa
@@ -1009,10 +1054,10 @@ function setCalc(k,v){
 }
 
 function pintarCalc(conservarFoco){
-  const conPrecio = MODELOS.filter(m=>m.precio);
   const enganche = Math.round(calc.precio * calc.pct / 100);
   const pago = mensualidad(calc.precio, enganche, calc.tasa, calc.meses);
   const total = pago * calc.meses + enganche;
+  const suc = contactoDeCalc();
 
   document.getElementById("calcBox").innerHTML = `
     <div style="display:flex;justify-content:space-between;align-items:baseline">
@@ -1025,8 +1070,10 @@ function pintarCalc(conservarFoco){
       <span class="fila"><span class="k">Modelo</span></span>
       <select onchange="setCalc('modeloId',this.value)">
         <option value="">Escribir precio manualmente</option>
-        ${conPrecio.map(m=>`<option value="${m.id}" ${m.id===calc.modeloId?"selected":""}>
-          ${m.marca} ${m.n} — ${mxn(m.precio)}</option>`).join("")}
+        ${CATALOGO.map(mk=>`<optgroup label="${esc(mk.marca)}">
+          ${MODELOS.filter(m=>m.marca===mk.marca).map(m=>`<option value="${m.id}" ${m.id===calc.modeloId?"selected":""}>
+            ${m.n}${m.precio?" — "+mxn(m.precio):""}</option>`).join("")}
+        </optgroup>`).join("")}
       </select></label>
 
     <div class="p-grid" style="margin-bottom:16px">
@@ -1058,8 +1105,8 @@ function pintarCalc(conservarFoco){
     </div>
 
     <a class="btn" style="background:#fff;color:var(--tinta);margin-top:20px"
-       href="${wa(CONTACTO.whatsapp,`Hola, calculé una mensualidad de ${mxn(pago)} a ${calc.meses} meses con ${mxn(enganche)} de enganche. Quiero más información.`)}">
-       Mandar esta cotización</a>`;
+       href="${wa(suc.wa,`Hola, calculé una mensualidad de ${mxn(pago)} a ${calc.meses} meses con ${mxn(enganche)} de enganche${calc.modeloId?' para el '+MODELOS.find(m=>m.id===calc.modeloId).marca+' '+MODELOS.find(m=>m.id===calc.modeloId).n:''}. Quiero más información.`)}">
+       Mandar esta cotización · ${esc(suc.nombre)}</a>`;
 
   if(conservarFoco){
     const el = document.getElementById(conservarFoco===true?"inpPrecio":"inpPrecio");
@@ -1104,6 +1151,7 @@ function aplicar(d){
   if(d.LANZAMIENTOS) LANZAMIENTOS = d.LANZAMIENTOS;
   if(d.CONTACTO) CONTACTO = d.CONTACTO;
   if(d.SEMINUEVOS) SEMINUEVOS = d.SEMINUEVOS;
+  if(d.SEMINUEVOS_INVENTARIO) SEMINUEVOS_INVENTARIO = d.SEMINUEVOS_INVENTARIO;
   if(d.SERVICIOS_GRUPO) SERVICIOS_GRUPO = d.SERVICIOS_GRUPO;
   if(d.LOGOS) LOGOS = d.LOGOS;
   recalcularModelos();
@@ -1560,12 +1608,39 @@ async function iniciarSitio(){
     <div class="card"><h3 style="font-size:17px">${esc(s.nombre)}</h3>
       <div class="meta"><span>📍 ${esc(s.dir)}</span><span>🕐 ${esc(s.horario)}</span>
         <span>📞 ${telFmt(s.tel)}</span></div></div>`).join("");
-  document.getElementById("listaLanzamientos").innerHTML = LANZAMIENTOS.map(l=>
-    `<a class="card" href="${l.url}" target="_blank" rel="noopener">
-      ${l.foto ? `<img src="${l.foto}" alt="${esc(l.nombre)}"
-        style="width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:14px;margin-bottom:14px" loading="lazy">` : ""}
+
+  document.getElementById("listaInventarioSeminuevos").innerHTML =
+    SEMINUEVOS_INVENTARIO.length === 0
+    ? `<div class="card" style="grid-column:1/-1;text-align:center">
+        <p style="margin-bottom:14px">Por el momento no hay unidades publicadas aquí.
+           Pregunta por WhatsApp por el inventario disponible.</p>
+        <a class="btn btn-p" href="${wa(CONTACTO.whatsapp,'Hola, quiero ver el inventario de seminuevos disponible.')}"
+           style="display:inline-flex">Preguntar por WhatsApp</a>
+      </div>`
+    : SEMINUEVOS_INVENTARIO.map((u,ui)=>{
+        const imgs = u.fotos && u.fotos.length ? u.fotos : [];
+        const wapp = (u.sucursal && SUCURSALES[u.sucursal]) ? SUCURSALES[u.sucursal].wa : CONTACTO.whatsapp;
+        return `<div class="card">
+          ${imgs.length ? galeria(imgs, u.marca+" "+u.modelo, "su_"+ui)
+             : `<div style="aspect-ratio:16/10;background:rgba(20,24,29,.05);border-radius:14px;
+                 display:flex;align-items:center;justify-content:center;color:rgba(20,24,29,.3);font-size:13px">
+                 Sin fotos</div>`}
+          <div class="chip" style="margin-top:18px">${esc(u.anio||"")} · ${esc((u.km||0).toLocaleString("es-MX"))} km</div>
+          <h3 style="margin-top:8px">${esc(u.marca)} ${esc(u.modelo)}</h3>
+          ${u.version?`<p style="font-size:13px;color:rgba(20,24,29,.5)">${esc(u.version)}</p>`:""}
+          <div style="font-size:18px;font-weight:600;margin-top:10px" class="num">${u.precio?mxn(u.precio):"Consultar precio"}</div>
+          <div class="btn-row">
+            <a class="btn btn-p" href="${wa(wapp,'Hola, me interesa el '+u.marca+' '+u.modelo+(u.anio?' '+u.anio:'')+' que vi en el sitio.')}">Preguntar por esta unidad</a>
+          </div>
+        </div>`;
+      }).join("");
+  document.getElementById("listaLanzamientos").innerHTML = LANZAMIENTOS.map((l,li)=>{
+    const imgs = l.fotos && l.fotos.length ? l.fotos : (l.foto ? [l.foto] : []);
+    return `<a class="card" href="${l.url}" target="_blank" rel="noopener">
+      ${imgs.length ? `<div style="margin-bottom:14px">${galeria(imgs, l.nombre, "lz_"+li)}</div>` : ""}
       <span class="chip rojo">${esc(l.marca)}</span><h3>${esc(l.nombre)}</h3><p>${esc(l.desc)}</p>
-      <span class="ir">Conocer más →</span></a>`).join("");
+      <span class="ir">Conocer más →</span></a>`;
+  }).join("");
   pintarPromos(); pintarFiltros(); pintarModelos(); pintarCalc(); pintarLogos();
   document.getElementById("listaValores").innerHTML = VALORES.map(([t,d])=>
     `<div class="valor"><b>${t}</b><p>${d}</p></div>`).join("");

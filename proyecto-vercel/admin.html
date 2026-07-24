@@ -94,6 +94,26 @@ main{padding:20px 0 80px}
 .foto-peso{font-size:11px;color:var(--suave)}
 .foto-peso.pesado{color:var(--acento)}
 
+/* Galería de varias fotos */
+.galeria{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.galeria-item{position:relative;width:84px;height:84px;border-radius:10px;overflow:hidden;
+  border:1px solid var(--borde);flex-shrink:0}
+.galeria-item img{width:100%;height:100%;object-fit:cover;display:block}
+.galeria-item button{position:absolute;top:3px;right:3px;width:22px;height:22px;border-radius:99px;
+  background:rgba(20,24,29,.75);color:#fff;font-size:12px;line-height:1;display:flex;
+  align-items:center;justify-content:center;padding:0}
+.galeria-item .portada{position:absolute;bottom:0;left:0;right:0;background:rgba(20,24,29,.7);
+  color:#fff;font-size:9px;text-align:center;padding:2px 0;letter-spacing:.04em}
+.galeria-add{width:84px;height:84px;border-radius:10px;border:1.5px dashed rgba(20,24,29,.28);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;
+  font-size:22px;color:var(--suave);flex-direction:column;gap:2px}
+.galeria-add span{font-size:9px}
+.galeria-url{display:flex;gap:6px;margin-bottom:14px}
+.galeria-url input{flex:1;min-height:40px;padding:0 12px;border-radius:10px;
+  border:1px solid var(--borde);background:var(--papel);font-size:14px}
+.galeria-url button{min-height:40px;padding:0 14px;border-radius:10px;border:1px solid var(--borde);
+  background:#fff;font-size:13px;white-space:nowrap}
+
 /* Ayuda */
 .ayuda{background:#fff;border:1px solid var(--borde);border-radius:18px;padding:20px;
   font-size:13px;color:var(--suave);line-height:1.7;margin-bottom:22px}
@@ -299,6 +319,10 @@ let SEMINUEVOS = [
   { nombre:"Seminuevos Viaducto", dir:"Viaducto Miguel Alemán 55, Col. Buenos Aires, C.P. 06780, Cuauhtémoc, CDMX",
     tel:"5530672300", horario:"8:00–20:00" },
 ];
+
+/* Inventario de unidades seminuevas. Vacío por defecto — se llena
+   con autos reales desde este panel, con fotos incluidas. */
+let SEMINUEVOS_INVENTARIO = [];
 
 /* ══════════════════════════════════════════════════════════════
    SUCURSALES — cada marca se atiende en una agencia distinta.
@@ -684,6 +708,7 @@ const EDITABLES = {
   PROMOS:()=>PROMOS, PROMOS_META:()=>PROMOS_META, SERVICIOS_CITA:()=>SERVICIOS_CITA,
   LANZAMIENTOS:()=>LANZAMIENTOS, CONTACTO:()=>CONTACTO,
   SEMINUEVOS:()=>SEMINUEVOS, SERVICIOS_GRUPO:()=>SERVICIOS_GRUPO, LOGOS:()=>LOGOS,
+  SEMINUEVOS_INVENTARIO:()=>SEMINUEVOS_INVENTARIO,
 };
 
 function aplicar(d){
@@ -697,6 +722,7 @@ function aplicar(d){
   if(d.LANZAMIENTOS) LANZAMIENTOS = d.LANZAMIENTOS;
   if(d.CONTACTO) CONTACTO = d.CONTACTO;
   if(d.SEMINUEVOS) SEMINUEVOS = d.SEMINUEVOS;
+  if(d.SEMINUEVOS_INVENTARIO) SEMINUEVOS_INVENTARIO = d.SEMINUEVOS_INVENTARIO;
   if(d.SERVICIOS_GRUPO) SERVICIOS_GRUPO = d.SERVICIOS_GRUPO;
   if(d.LOGOS) LOGOS = d.LOGOS;
   recalcularModelos();
@@ -841,6 +867,37 @@ function bloqueFoto(valorActual, onCambia, idUnico){
   </div>`;
 }
 
+/* ══════════════════════════════════════════════════════════════
+   GALERÍA DE VARIAS FOTOS
+   agregarCb: string tipo "(v)=>{ (X.fotos=X.fotos||[]).push(v); }"
+   quitarCb:  string tipo "(k)=>{ X.fotos.splice(k,1); }"
+   ══════════════════════════════════════════════════════════════ */
+function galeriaFotos(fotos, agregarCb, quitarCb, idUnico){
+  fotos = fotos || [];
+  return `
+  <div class="galeria" id="gal_${idUnico}">
+    ${fotos.map((f,k)=>`
+      <div class="galeria-item">
+        <img src="${f}" alt="">
+        ${k===0?'<div class="portada">PORTADA</div>':''}
+        <button onclick="(${quitarCb})(${k}); pintarPanel();" aria-label="Quitar foto">✕</button>
+      </div>`).join("")}
+    <label class="galeria-add">
+      <span style="font-size:20px">+</span><span>Foto</span>
+      <input type="file" accept="image/*" style="display:none"
+        onchange="subirFoto(this, (url,kb)=>{ (${agregarCb})(url); pintarPanel(); })">
+    </label>
+  </div>
+  <div class="galeria-url">
+    <input type="text" placeholder="o pega una URL de imagen y toca Agregar" id="url_${idUnico}">
+    <button class="btn btn-s" onclick="
+      const el=document.getElementById('url_${idUnico}');
+      if(el.value.trim()){ (${agregarCb})(el.value.trim()); pintarPanel(); }
+    ">Agregar</button>
+  </div>
+  ${fotos.length===0?'<p style="font-size:12px;color:var(--suave);margin:-6px 0 14px">Sin fotos — el sitio dibuja una silueta de color.</p>':''}`;
+}
+
 function campo(label, valor, onInput, tipo){
   const v = valor===null||valor===undefined ? "" : String(valor);
   const control = tipo==="area"
@@ -911,7 +968,12 @@ function panelCatalogo(){
             <div><b>${esc(v.n)||"(sin nombre)"}</b><span>${esc(v.carr||"")} · ${esc(v.motor||"")}</span></div>
             <button class="btn btn-r" style="min-height:34px" onclick="borrarModelo(${i},${j})">Eliminar</button>
           </div>
-          ${bloqueFoto(v.foto, `(v)=>CATALOGO[${i}].modelos[${j}].foto=v`, `m_${i}_${j}`)}
+          ${galeriaFotos(
+            v.fotos || (v.foto ? [v.foto] : []),
+            `(v)=>{ (CATALOGO[${i}].modelos[${j}].fotos=CATALOGO[${i}].modelos[${j}].fotos||[]).push(v); }`,
+            `(k)=>{ CATALOGO[${i}].modelos[${j}].fotos.splice(k,1); }`,
+            `m_${i}_${j}`
+          )}
           <div class="grid">
             ${campo("Nombre",v.n,`CATALOGO[${i}].modelos[${j}].n=this.value`)}
             ${campo("Carrocería",v.carr,`CATALOGO[${i}].modelos[${j}].carr=this.value`)}
@@ -978,7 +1040,12 @@ function panelAgencias(){
     <div class="item">
       <div class="item-head"><b>${esc(a.nombre)||"(nueva agencia)"}</b>
         <button class="btn btn-r" style="min-height:34px" onclick="borrarDe('AGENCIAS',${i})">Eliminar</button></div>
-      ${bloqueFoto(a.foto, `(v)=>AGENCIAS[${i}].foto=v`, `ag_${i}`)}
+      ${galeriaFotos(
+        a.fotos || (a.foto ? [a.foto] : []),
+        `(v)=>{ (AGENCIAS[${i}].fotos=AGENCIAS[${i}].fotos||[]).push(v); }`,
+        `(k)=>{ AGENCIAS[${i}].fotos.splice(k,1); }`,
+        `ag_${i}`
+      )}
       <div class="grid">
         ${campo("Nombre",a.nombre,`AGENCIAS[${i}].nombre=this.value`)}
         ${campo("Marcas",a.marcas,`AGENCIAS[${i}].marcas=this.value`)}
@@ -1036,7 +1103,12 @@ function panelLanzamientos(){
     <div class="item">
       <div class="item-head"><b>${esc(l.nombre)||"(nuevo lanzamiento)"}</b>
         <button class="btn btn-r" style="min-height:34px" onclick="borrarDe('LANZAMIENTOS',${i})">Eliminar</button></div>
-      ${bloqueFoto(l.foto, `(v)=>LANZAMIENTOS[${i}].foto=v`, `lz_${i}`)}
+      ${galeriaFotos(
+        l.fotos || (l.foto ? [l.foto] : []),
+        `(v)=>{ (LANZAMIENTOS[${i}].fotos=LANZAMIENTOS[${i}].fotos||[]).push(v); }`,
+        `(k)=>{ LANZAMIENTOS[${i}].fotos.splice(k,1); }`,
+        `lz_${i}`
+      )}
       <div class="grid">
         ${campo("Nombre",l.nombre,`LANZAMIENTOS[${i}].nombre=this.value`)}
         ${campo("Marca",l.marca,`LANZAMIENTOS[${i}].marca=this.value`)}
@@ -1049,7 +1121,7 @@ function panelLanzamientos(){
 
 /* ── Seminuevos ── */
 function panelSeminuevos(){
-  return SEMINUEVOS.map((s,i)=>`
+  const sucursales = SEMINUEVOS.map((s,i)=>`
     <div class="item">
       <div class="item-head"><b>${esc(s.nombre)||"(nueva sucursal)"}</b>
         <button class="btn btn-r" style="min-height:34px" onclick="borrarDe('SEMINUEVOS',${i})">Eliminar</button></div>
@@ -1061,6 +1133,46 @@ function panelSeminuevos(){
       ${campo("Dirección",s.dir,`SEMINUEVOS[${i}].dir=this.value`,"area")}
     </div>`).join("")
   + `<button class="add" onclick="agregarA('SEMINUEVOS')">+ Agregar sucursal de seminuevos</button>`;
+
+  const inventario = `<h4 style="font-size:16px;font-weight:640;margin:28px 0 14px">Inventario de unidades</h4>` +
+  SEMINUEVOS_INVENTARIO.map((u,i)=>`
+    <div class="item">
+      <div class="item-head"><b>${esc(u.marca||"")} ${esc(u.modelo)||"(nueva unidad)"}</b>
+        <button class="btn btn-r" style="min-height:34px" onclick="borrarInventario(${i})">Eliminar</button></div>
+      ${galeriaFotos(
+        u.fotos || [],
+        `(v)=>{ (SEMINUEVOS_INVENTARIO[${i}].fotos=SEMINUEVOS_INVENTARIO[${i}].fotos||[]).push(v); }`,
+        `(k)=>{ SEMINUEVOS_INVENTARIO[${i}].fotos.splice(k,1); }`,
+        `su_${i}`
+      )}
+      <div class="grid">
+        ${campo("Marca",u.marca,`SEMINUEVOS_INVENTARIO[${i}].marca=this.value`)}
+        ${campo("Modelo",u.modelo,`SEMINUEVOS_INVENTARIO[${i}].modelo=this.value`)}
+        ${campo("Versión (opcional)",u.version,`SEMINUEVOS_INVENTARIO[${i}].version=this.value`)}
+        ${campo("Año",u.anio,`SEMINUEVOS_INVENTARIO[${i}].anio=Number(this.value.replace(/[^0-9]/g,''))||null`)}
+        ${campo("Kilometraje",u.km,`SEMINUEVOS_INVENTARIO[${i}].km=Number(this.value.replace(/[^0-9]/g,''))||0`)}
+        ${campo("Precio (vacío = consultar)",u.precio,`SEMINUEVOS_INVENTARIO[${i}].precio=this.value?Number(this.value.replace(/[^0-9]/g,'')):null`)}
+      </div>
+      <label class="campo"><span>Sucursal que la atiende</span>
+        <select onchange="SEMINUEVOS_INVENTARIO[${i}].sucursal=this.value">
+          <option value="">General</option>
+          ${Object.keys(SUCURSALES).map(k=>`<option value="${k}" ${u.sucursal===k?"selected":""}>${esc(SUCURSALES[k].nombre)}</option>`).join("")}
+        </select></label>
+    </div>`).join("")
+  + `<button class="add" onclick="agregarInventario()">+ Agregar unidad al inventario</button>`;
+
+  return `<div class="ayuda">
+    <b>Inventario:</b> estas unidades son las que aparecen en el sitio. No hay datos de ejemplo —
+    agrega solo autos reales que sí tengas disponibles, con sus fotos.
+  </div>` + sucursales + inventario;
+}
+function agregarInventario(){
+  SEMINUEVOS_INVENTARIO.push({marca:"",modelo:"",version:"",anio:null,km:0,precio:null,sucursal:"",fotos:[]});
+  pintar();
+}
+function borrarInventario(i){
+  if(!confirm("¿Eliminar esta unidad del inventario?")) return;
+  SEMINUEVOS_INVENTARIO.splice(i,1); pintar();
 }
 
 /* ── Logos ── */

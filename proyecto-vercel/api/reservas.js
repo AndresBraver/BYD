@@ -2,11 +2,11 @@
 // POST /api/reservas → intenta apartar un horario (público, con folio único)
 import { list, put } from "@vercel/blob";
 
-const TOKEN = process.env.BLOB2_READ_WRITE_TOKEN;
+const STORE_ID = process.env.BLOB2_STORE_ID;
 
 async function leer() {
-  if (!TOKEN) return [];
-  const { blobs } = await list({ prefix: "reservas.json", limit: 1, token: TOKEN });
+  if (!STORE_ID) return [];
+  const { blobs } = await list({ prefix: "reservas.json", limit: 1, storeId: STORE_ID });
   const blob = blobs.find((b) => b.pathname === "reservas.json");
   if (!blob) return [];
   const r = await fetch(blob.url, { cache: "no-store" });
@@ -20,7 +20,7 @@ async function escribir(lista) {
     contentType: "application/json",
     addRandomSuffix: false,
     allowOverwrite: true,
-    token: TOKEN,
+    storeId: STORE_ID,
   });
 }
 
@@ -33,10 +33,8 @@ export default async function handler(req, res) {
     }
 
     if (req.method === "POST") {
-      if (!TOKEN) {
-        return res.status(500).json({
-          error: "Falta la variable BLOB2_READ_WRITE_TOKEN en Vercel.",
-        });
+      if (!STORE_ID) {
+        return res.status(500).json({ error: "Falta la variable BLOB2_STORE_ID en Vercel." });
       }
       let body = req.body;
       if (typeof body === "string") {

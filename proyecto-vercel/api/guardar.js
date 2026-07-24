@@ -3,11 +3,10 @@ import { put } from "@vercel/blob";
 
 const LIMITE_BYTES = 4 * 1024 * 1024;
 
-// El Blob público que conectaste se llama "automundo-datos2" y su
-// token de escritura quedó como BLOB2_READ_WRITE_TOKEN. Todo el
-// guardado usa ese token explícitamente para no depender de cuál
-// de los dos Blobs conectados sea el "por defecto".
-const TOKEN = process.env.BLOB2_READ_WRITE_TOKEN;
+// Usamos el ID del store (BLOB2_STORE_ID) en vez de un token copiado a
+// mano. Vercel autentica automáticamente por detrás porque el proyecto
+// ya está conectado al Blob (OIDC) — no hay texto largo que pegar mal.
+const STORE_ID = process.env.BLOB2_STORE_ID;
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -23,10 +22,10 @@ export default async function handler(req, res) {
   if (req.headers["x-admin-key"] !== process.env.ADMIN_KEY) {
     return res.status(401).json({ error: "Clave incorrecta." });
   }
-  if (!TOKEN) {
+  if (!STORE_ID) {
     return res.status(500).json({
-      error: "Falta la variable BLOB2_READ_WRITE_TOKEN en Vercel. Revisa que el Blob " +
-             "público (automundo-datos2) esté conectado a este proyecto y vuelve a desplegar.",
+      error: "Falta la variable BLOB2_STORE_ID en Vercel. Revisa que el Blob público " +
+             "(automundo-datos2) esté conectado a este proyecto y vuelve a desplegar.",
     });
   }
 
@@ -52,7 +51,7 @@ export default async function handler(req, res) {
       contentType: "application/json",
       addRandomSuffix: false,
       allowOverwrite: true,
-      token: TOKEN,
+      storeId: STORE_ID,
     });
     return res.status(200).json({ ok: true, url: blob.url });
   } catch (err) {

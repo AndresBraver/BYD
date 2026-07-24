@@ -1,10 +1,11 @@
 // GET /api/contenido — contenido publicado del sitio (público, sin clave)
 import { list } from "@vercel/blob";
 
-// Con dos Blobs conectados al proyecto, hay que decirle a la librería
-// a cuál escribir/leer. BLOB2_... es el que Vercel creó al conectar
-// el store público (automundo-datos2).
-const TOKEN = process.env.BLOB2_READ_WRITE_TOKEN;
+// En vez de copiar el token largo a mano (fácil de corromper al pegarlo
+// en el iPad), usamos el ID del store — Vercel autentica solo por
+// detrás para proyectos conectados (OIDC). BLOB2_STORE_ID ya está
+// bien guardado en tus variables de entorno.
+const STORE_ID = process.env.BLOB2_STORE_ID;
 
 export default async function handler(req, res) {
   if (req.method !== "GET") {
@@ -12,12 +13,12 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Método no permitido" });
   }
 
-  if (!TOKEN) {
+  if (!STORE_ID) {
     return res.status(200).json(null); // el sitio sigue con su respaldo
   }
 
   try {
-    const { blobs } = await list({ prefix: "contenido.json", limit: 1, token: TOKEN });
+    const { blobs } = await list({ prefix: "contenido.json", limit: 1, storeId: STORE_ID });
     const blob = blobs.find((b) => b.pathname === "contenido.json");
     if (!blob) return res.status(200).json(null);
 
